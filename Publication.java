@@ -30,6 +30,12 @@ public class Publication {
 	public void setAnnee(int annee) {
 		this.annee = annee;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Publication [titre=" + titre + ", annee=" + annee + "]";
+	}
 	
 	
 	
