@@ -1,4 +1,4 @@
-import Perso.*;
+import perso.*;
 
 public class HelloPersonnes{
 
@@ -6,13 +6,19 @@ public class HelloPersonnes{
 	public static void main(String[] args){
 	
 		Personne aurel = new Personne("Leloup", 20);
-		Etudiant julien = new Etudiant("Baladier", 21, 4);
-		Enseignant ernesto = new Enseignant("Ernesto", 37, 30);
+		Personne julien = new Etudiant("Baladier", 21, 4);
+		Personne ernesto = new Enseignant("Ernesto", 37, 30);
 		
-		System.out.println(aurel);
-		System.out.println(julien);
-		System.out.println(ernesto);
 		
+		Personne tab[]=new Personne[3];
+		
+		tab[0]=aurel;
+		tab[1]=julien;
+		tab[2]=ernesto;
+		
+		for (int i = 0; i < tab.length; i++) {
+			System.out.println(tab[i].toString());
+		}
 		
 	
 	}
