@@ -1,26 +1,20 @@
 import perso.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EnseignantChercheur extends Enseignant implements IChercheur  {
 
-	private Publication tabPublication[] = new Publication[10];
+	private ArrayList<Publication> publicationList;
 	
 	public EnseignantChercheur(String nom, int age, int heures) {
 		super(nom, age, heures);
-		// TODO Auto-generated constructor stub
+		publicationList = new ArrayList<Publication>();
 	}
 	
 	public void ajouterPublication(Publication p) {
 		
-		int i = 0;
-		while ((tabPublication[i]!=null)&&(i<10)){
-			i++;
-		}
-		if (i<10){
-			tabPublication[i]=p;
-		}
-		else{
-			System.out.println("Tableau de publication déjà rempli");
-		}
+		publicationList.add(p);
 		
 	}
 
@@ -29,8 +23,8 @@ public class EnseignantChercheur extends Enseignant implements IChercheur  {
 		
 		String listePublication = new String();
 		
-		for (int i = 0; i<10; i++){
-			listePublication.concat(" "+tabPublication[i].toString()+" ");
+		for (Publication p: publicationList){
+			listePublication.concat(" "+p.toString()+" ");
 		}
 		
 		return listePublication;
