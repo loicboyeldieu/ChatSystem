@@ -1,0 +1,132 @@
+La mémoire Rom (pour les programmes et les données) : 0x0000 -> 0x01FF
+La mémoire RAM : 0x0200 -> 0x03FF
+
+LE=0 : lecture
+LE=1 : ecriture
+
+MO : 1 octet
+	0 16 BITS
+
+
+
+SP : stack pointer
+PC : Program counter
+RI :
+Le registre d'instruction contient les instructions en cours d'éxecution:
+il fournit un groupe de bit (code opération, opérandes) au décodeur qui décode celui-ci est transmit à l'unité de controle et enfin ce dernier génére les signaux pour activer les dispositifs concernés.
+Il intéagit avec le registre de donnée, les décodeurs,l'unité de contrôle de l'UAL et l'unité de contrôle
+
+COP (Code OPération) / SCO (Sous Code Opération)
+8 bits du COP/SCO
+8 bits servant à indiquer le mode d'adressage et les registres cible et source (cf Chapitre 6.2).
+
+GPR (General Purpose Registers)
+
+registre : Rx ← Ry : valeur d'un registre dans un autre registre
+immédiat : mettre une valeur dans un registre en donnant directement la valeur
+
+Addresse du registre
+direct Rx ← M[imm16] : donné directement
+indirect : en donnant un registre contennant cette adresse
+
+InA = 0 Mot (16b)
+InA = 1 Octet (8b) 
+
+InB = 0 Registre ou Immediat
+InB = 1 Direct ou indirect
+
+Lors de l'échange d'un octet en lecture (sens bus vers coeur), le bit de fort poids de l'octet est étendu pour obtenir un mot sur 16 bits.
+
+Une instruction est codée sur 16 bits :
+
+COP|SCO|A|B
+
+SCO est directement connecté à l'UAL et le controle.
+Il peut aussi forcer les flags. Pour ça il faut mettre "par SCO"
+
+
+
+
+MOV : 0x0213 le contenu de R3 va dans R1
+
+MOVM :0x0300 deux mots de 16 bits, [mot1]<-mot2
+		BR attente sur BG
+		[PC]->Rmp8 attente sur DA
+		PC <- PC+2
+		[PC]->Rmp9 attente sur DA
+		On teste IndA : il nous dit si mot de 8 ou 16 bits
+		[Rmp8]<-Rmp9 attente sur DA
+		PC = PC+2 libérer le bus aller à fetch
+
+
+B* : 0x2* pour 16 bits ou 0x1* pour 8 bits // c'est un branchement conditionnel, la condition est donnée par SCO
+	si cond(SCO) 
+		si 16 bits
+			PC ← imm16
+
+		si 8 bits
+			PC ← PC + ExtSign16(imm8)  
+
+
+
+
+
+
+
+GPIO
+
+
+ Il s'agit d'un dispositif périphérique (en périphérie du cœur processeur) qui permet la communication entre un cœur microprocesseur et l'extérieur de son micro-contrôleur via les broches du boîtier du composant.
+
+Les broches d'un port d'E/S peuvent être reliées, par exemple, à des LED pour afficher un niveau logique, ou à des interrupteurs pour acquérir un niveau logique 0/5V. Ainsi chaque broche doit être configurée indépendamment des autres soit en entrée (interrupteurs etc.) soit en sortie (LEDS etc.).
+
+Dans le cas du STM32 les ports de 32 bits sont contrôlés principalement par quatre registres de 32 bits:
+
+    GPIO_CRL 
+    GPIO_CRH (Control Register Low/ High) :indique si E/S 
+
+    GPIO_ODR (Output Data Register) : permet d'imposer un niveau logique (1 ou 0) aux broches orientées en sorties par GPIO_CRL/H, les broches 									orientées en entrées ne sont pas affecté par leur bit respectif de GPIO_ODR
+    GPIO_IDR (Input Data Register) : permet de lire le niveau logique des broches, quelles soient orientées en sortie ou en entrée.
+
+C'est au cœur processeur de réaliser la configuration des broches et de communiquer avec le GPIO en faisant des accès en lecture ou en écriture aux registres internes au port d'E/S via les bus de données (DataIn et DataOut) et le bus d'adresse (Adr). 
+
+
+Dans notre cas : GPIO de 8 bits simplifiée du GPIO du STM32.
+ Composé de deux registres pouvant être chargés à partir d'une connexion 8 bits (Din) : 
+ 	-CR (Control Register) en haut à droite
+ 	-ODR (Output Data Register). en bas à gauche
+
+Buffer 3 états : 
+    si T vaut '1', le symbole peut se résumer à un simple fil entre I et O
+    si T vaut '0' , alors on peut effacer le symbole complètement car sa sortie est déconnectée.
+      __
+I--->|__|------->
+      ^
+      |
+T-----|
+
+	  76543210
+CR 	  00001111
+
+ODR   00000000
+	
+
+
+
+Les interruptions 
+
+
+ 	ORG 0 
+ 	WORD 0x0400 ; initialisation SP (premier mot suivant le dernier mot de la ram) 
+ 	WORD debut ; initialisation PC 
+ 	WORD TabIT ; initialisation TabIT (Début Table Handler IT dans Registre R12) 
+ 	
+ TabIT: WORD errIT ; ou HandlerIT0 
+ 		WORD errIT ; ou HandlerIT1 
+ 		WORD errIT ; ou HandlerIT2 	
+ 		WORD errIT ; ou HandlerIT3 	
+ 		WORD errIT ; ou HandlerIT4 
+ 		WORD errIT ; ou HandlerIT5 
+ 		WORD errIT ; ou HandlerIT6 
+ 		WORD errIT ; ou HandlerIT7 
+ errIT: B    errIT ; pour bloquer le programme si une IT imprévue est levée
