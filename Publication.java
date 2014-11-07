@@ -1,4 +1,3 @@
-
 public class Publication {
 
 	private String titre;
@@ -32,7 +31,6 @@ public class Publication {
 	}
 
 
-	@Override
 	public String toString() {
 		return "Publication [titre=" + titre + ", annee=" + annee + "]";
 	}
