@@ -20,6 +20,11 @@ public class HelloPersonnes{
 			System.out.println(tab[i].toString());
 		}
 		
+		// Polymorphisme : oui Personne/Etudiant/Enseignant
+		// Liaison dynamique ? Oui
+		// Surcharge? Oui
+	    // Redéfinition partielle ou totale? Totale car on a pas utilisé super()
+		
 	
 	}
 

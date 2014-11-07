@@ -1,4 +1,4 @@
-package Perso;
+package perso;
 
 public class Etudiant extends Personne{
 
