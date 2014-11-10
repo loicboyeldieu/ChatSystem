@@ -18,7 +18,7 @@ public class CommunicaSystem {
 			FileReader frB2A=new FileReader("B2A.txt");
 			
 			BufferedReader brA2B=new BufferedReader(frA2B);
-			BufferedReader brB2A=new BufferedReader(brA2B);
+			BufferedReader brB2A=new BufferedReader(frB2A);
 			
 			BufferedWriter bwA2B=new BufferedWriter(fwA2B);
 			BufferedWriter bwB2A=new BufferedWriter(fwB2A);

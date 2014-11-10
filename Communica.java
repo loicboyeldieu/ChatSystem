@@ -88,6 +88,7 @@ public class Communica extends JFrame implements ActionListener {
 				String text=textToSend.getText();
 				try {
 					writer.write(text);
+					writer.flush();
 					writer.close();
 				} catch (IOException e) {
 					e.printStackTrace();
