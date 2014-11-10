@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -7,6 +6,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,7 +26,6 @@ public class Communica extends JFrame implements ActionListener {
 	private JTextArea textRec;
 	private JTextArea textToSend;
 	
-	private String text;
 	
 	
 	public static final int WIDTH=300;
@@ -58,10 +57,15 @@ public class Communica extends JFrame implements ActionListener {
 	private void initComponents(){
 		
 		this.addWindowListener(new WindowAdapter() {
+			
 			public void windowsClosing(WindowEvent e){
+			
 				System.exit(0);
+				Communica.this.dispose();
 			}
 		});
+		
+		
 		
 		this.setSize(WIDTH, HEIGHT);
 		this.setVisible(true);
@@ -81,7 +85,14 @@ public class Communica extends JFrame implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				text=textToSend.getText();
+				String text=textToSend.getText();
+				try {
+					writer.write(text);
+					writer.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 			}
 		});
 		
@@ -89,7 +100,20 @@ public class Communica extends JFrame implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (text!=null) textRec.setText(text);
+				
+				try{
+					String ligne;
+					StringBuilder sb=new StringBuilder();
+					while ((ligne = reader.readLine()) != null)
+					{
+						sb.append(ligne);
+					}
+					reader.close();
+					textRec.setText(sb.toString());
+				} catch (IOException ex){
+					ex.printStackTrace();
+				}
+				
 			}
 		});
 	}
