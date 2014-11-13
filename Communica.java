@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 
+
 public class Communica extends JFrame implements ActionListener {
 
 	private BufferedWriter writer;
