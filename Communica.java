@@ -18,14 +18,14 @@ import javax.swing.JTextArea;
 
 public class Communica extends JFrame implements ActionListener {
 
-	private BufferedWriter writer;
+	protected BufferedWriter writer;
 	private BufferedReader reader;
-	private JButton bReceive;
-	private JButton bSend;
-	private JLabel lmessrec;
-	private JLabel lmesssend;
-	private JTextArea textRec;
-	private JTextArea textToSend;
+	protected JButton bReceive;
+	protected JButton bSend;
+	protected JLabel lmessrec;
+	protected JLabel lmesssend;
+	protected JTextArea textRec;
+	protected JTextArea textToSend;
 	
 	
 	
@@ -34,8 +34,8 @@ public class Communica extends JFrame implements ActionListener {
 	
 
 	public Communica(BufferedWriter writer, BufferedReader reader){
+		
 		super("Communica System");
-
 		this.writer = writer;
 		this.reader = reader;
 		
@@ -54,7 +54,7 @@ public class Communica extends JFrame implements ActionListener {
 	}
 
 	
-	private void initComponents(){
+	public void initComponents(){
 		
 		this.addWindowListener(new WindowAdapter() {
 			

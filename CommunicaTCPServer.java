@@ -45,7 +45,9 @@ public class CommunicaTCPServer {
 		try{
 			OutputStreamWriter out =new OutputStreamWriter(client.getOutputStream());
 			InputStreamReader in=new InputStreamReader(client.getInputStream());
-			Communica communicaServer=new Communica(new BufferedWriter(out), new BufferedReader(in));
+			//Communica communicaServer=new Communica(new BufferedWriter(out), new BufferedReader(in));
+			ListenSocket ls=new ListenSocket(new BufferedReader(in));
+			CommunicaThread communicaThread=new CommunicaThread(ls, new BufferedWriter(out));
 		} catch (IOException e){
 			e.printStackTrace();
 		}

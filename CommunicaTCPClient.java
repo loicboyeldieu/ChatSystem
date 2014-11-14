@@ -56,8 +56,11 @@ public class CommunicaTCPClient {
 		InputStreamReader reader=new InputStreamReader(tcpClient.getInputStream());
 		
 		
-		Communica communicaClient = new Communica(new BufferedWriter(writer),new BufferedReader(reader));
+		//Communica communicaClient = new Communica(new BufferedWriter(writer),new BufferedReader(reader));
 		
+		ListenSocket ls = new ListenSocket(new BufferedReader(reader));
+		
+		CommunicaThread communicaThread = new CommunicaThread(ls, new BufferedWriter(writer));
 		
 	}
 
