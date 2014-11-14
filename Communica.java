@@ -33,8 +33,7 @@ public class Communica extends JFrame implements ActionListener {
 	public static final int HEIGHT=200;
 	
 
-	public Communica(BufferedWriter writer, BufferedReader reader)
-			throws HeadlessException {
+	public Communica(BufferedWriter writer, BufferedReader reader){
 		super("Communica System");
 
 		this.writer = writer;
@@ -85,15 +84,17 @@ public class Communica extends JFrame implements ActionListener {
 		bSend.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0){
 				String text=textToSend.getText();
-				try {
-					writer.write(text);
-					writer.flush();
-					writer.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				
+					try {
+						writer.write(text);
+						writer.flush();
+						writer.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				
 				
 			}
 		});

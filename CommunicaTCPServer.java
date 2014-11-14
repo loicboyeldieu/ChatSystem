@@ -6,16 +6,19 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
+
+
 
 
 public class CommunicaTCPServer {
+	public static final int NUM_PORT=12350;
 	
 	private ServerSocket serverSocket ;
+	private int port;
 	
-	public CommunicaTCPServer(){
+	public CommunicaTCPServer(int port){
 		try {
-			int port=12457;
+			this.port=port;
 			serverSocket=new ServerSocket(port);
 			System.out.println("Serveur TCP écoutant sur le port : "+port);
 			
@@ -37,7 +40,7 @@ public class CommunicaTCPServer {
 	
 	
 	public static void main(String args[]){
-		CommunicaTCPServer tcpServer=new CommunicaTCPServer();
+		CommunicaTCPServer tcpServer=new CommunicaTCPServer(NUM_PORT);
 		Socket client=tcpServer.getSocketClient();
 		try{
 			OutputStreamWriter out =new OutputStreamWriter(client.getOutputStream());

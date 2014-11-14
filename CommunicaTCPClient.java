@@ -15,11 +15,13 @@ import com.sun.xml.internal.ws.message.stream.OutboundStreamHeader;
 public class CommunicaTCPClient {
 
 	private Socket socket;
+	private int port;
 
-	public CommunicaTCPClient() {
+	public CommunicaTCPClient(int port) {
 
 		try {
-			socket =new Socket(InetAddress.getLocalHost(), 12457);
+			this.port=port;
+			socket =new Socket(InetAddress.getLocalHost(), CommunicaTCPServer.NUM_PORT);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -47,7 +49,8 @@ public class CommunicaTCPClient {
 	}
 	
 	public static void main(String[] args) {
-		CommunicaTCPClient tcpClient=new CommunicaTCPClient();
+		CommunicaTCPClient tcpClient=new CommunicaTCPClient(12347);
+		
 		
 		OutputStreamWriter writer=new OutputStreamWriter(tcpClient.getOutputStream());
 		InputStreamReader reader=new InputStreamReader(tcpClient.getInputStream());
