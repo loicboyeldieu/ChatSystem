@@ -43,7 +43,7 @@ public class UDPSender {
 		
 		socketSender=new DatagramSocket();
 		
-		socketSender.send(new DatagramPacket(toSend, toSend.length,remoteAddress,ChatSystem.NUM_PORT));
+		socketSender.send(new DatagramPacket(toSend, toSend.length,remoteAddress,ChatNI.NUM_PORT));
 		
 		socketSender.close();
 		} catch (Exception e){

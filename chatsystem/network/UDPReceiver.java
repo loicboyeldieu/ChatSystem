@@ -6,11 +6,14 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
 import chatsystem.ChatSystem;
+import chatsystem.chatsystemTDa2.Hello;
 import chatsystem.chatsystemTDa2.Message;
 
 
 
-public class UDPReceiver {
+public class UDPReceiver extends Thread {
+	
+	
 
 	
 	//_____________________________Attributs__________________________________//
@@ -21,9 +24,14 @@ public class UDPReceiver {
 			
 	//____________________________Constructors________________________________//
 	//________________________________________________________________________//
-	public UDPReceiver(DatagramSocket socket, DatagramPacket packet){
-		this.setPacketReceiver(packet);
-		this.socketReceiver = socket;
+	public UDPReceiver(DatagramPacket packet){
+		try{
+			this.packetReceiver=packet;
+			this.socketReceiver= new DatagramSocket(ChatNI.NUM_PORT);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
 	}
 			
 	//__________________________Getters & setters ____________________________//
@@ -48,22 +56,50 @@ public class UDPReceiver {
 	//________________________________________________________________________//
 	//________________________________________________________________________//
 			
+	@Override
+	public void run() {
+		super.run();
+		System.out.println("La réception des messages a commencé");
 		
+		while(true)
+		{
+			try{
+				System.out.println("en attente");
+				this.socketReceiver.receive(this.packetReceiver);
+				System.out.println("reçu");
+				ByteArrayInputStream bais = new ByteArrayInputStream(this.packetReceiver.getData());
+				ObjectInputStream ois=new ObjectInputStream(bais);
+				Message messageReceived = (Message)ois.readObject();
+				System.out.println(messageReceived);
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		}
+	}
 
+	
+	
+	
+	
 	public static void main(String[] args){	
 	
-		DatagramSocket socketReceiver;
 		try {
-			
-			socketReceiver = new DatagramSocket(ChatSystem.NUM_PORT);
-			byte[] buffer = new byte[150];
+			byte[] buffer = new byte[ChatNI.MAX_SIZE_BUFFER];
 			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+			UDPReceiver udpReceiver=new UDPReceiver(packet);
+			
 			System.out.println("J'attend un packet");
-			socketReceiver.receive(packet);
+			udpReceiver.getSocketReceiver().receive(packet);
 			System.out.println("Packet reçu");
+			
+			
 			ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
 			ObjectInputStream ois=new ObjectInputStream(bais);
 			Message messageReceived = (Message)ois.readObject();
+			
+			if (messageReceived instanceof Hello) System.out.println("je suis un hello");
 			System.out.println(messageReceived);
 			
 
@@ -73,4 +109,6 @@ public class UDPReceiver {
 		
 
 	}
+
+
 }
