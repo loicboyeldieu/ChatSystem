@@ -5,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-import chatsystem.ChatSystem;
 import chatsystem.chatsystemTDa2.Hello;
 import chatsystem.chatsystemTDa2.Message;
 
@@ -21,7 +20,10 @@ public class UDPReceiver extends Thread {
 			
 	private DatagramSocket socketReceiver;
 	private DatagramPacket packetReceiver;
+	private ChatNI ni;
 			
+
+
 	//____________________________Constructors________________________________//
 	//________________________________________________________________________//
 	public UDPReceiver(DatagramPacket packet){
@@ -52,6 +54,14 @@ public class UDPReceiver extends Thread {
 	public void setSocketReceiver(DatagramSocket socketReceiver) {
 		this.socketReceiver = socketReceiver;
 	}
+	
+	public ChatNI getNi() {
+		return ni;
+	}
+
+	public void setNi(ChatNI ni) {
+		this.ni = ni;
+	}
 		
 	//________________________________________________________________________//
 	//________________________________________________________________________//
@@ -64,13 +74,10 @@ public class UDPReceiver extends Thread {
 		while(true)
 		{
 			try{
-				System.out.println("en attente");
+				System.out.println("UDPReceiver : en attente");
 				this.socketReceiver.receive(this.packetReceiver);
-				System.out.println("reçu");
-				ByteArrayInputStream bais = new ByteArrayInputStream(this.packetReceiver.getData());
-				ObjectInputStream ois=new ObjectInputStream(bais);
-				Message messageReceived = (Message)ois.readObject();
-				System.out.println(messageReceived);
+				System.out.println("UDPReceiver :reçu");
+				new MessageHandler(this.packetReceiver).handle();
 				
 			}catch(Exception e){
 				e.printStackTrace();

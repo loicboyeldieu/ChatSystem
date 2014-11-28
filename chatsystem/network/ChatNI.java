@@ -39,7 +39,7 @@ public class ChatNI implements ToRemote{
 			
 			
 			udpSender.send(buffer, InetAddress.getLocalHost());
-			System.out.println("DONE SENDING");
+			System.out.println("ChatNI :fini d'envoyé");
 			
 		} catch (Exception e){
 			e.printStackTrace();
@@ -95,7 +95,6 @@ public class ChatNI implements ToRemote{
 
 	public static void main(String[] args) {
 		
-		DatagramSocket socket;
 		try {
 			byte[] buffer = new byte[ChatNI.MAX_SIZE_BUFFER];
 			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);

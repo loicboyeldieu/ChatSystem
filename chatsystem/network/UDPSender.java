@@ -4,8 +4,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-import chatsystem.ChatSystem;
-
 public class UDPSender {
 
 	//_____________________________Attributs__________________________________//
@@ -13,7 +11,9 @@ public class UDPSender {
 		
 
 	private DatagramSocket socketSender;
+	private ChatNI ni;
 		
+
 	//____________________________Constructors________________________________//
 	//________________________________________________________________________//
 	public UDPSender(DatagramSocket socket){
@@ -22,7 +22,15 @@ public class UDPSender {
 		
 	//__________________________Getters & setters ____________________________//
 	//________________________________________________________________________//
-	
+
+	public ChatNI getNi() {
+		return ni;
+	}
+
+	public void setNi(ChatNI ni) {
+		this.ni = ni;
+	}
+
 
 
 	public DatagramSocket getSocketSender() {
@@ -62,7 +70,6 @@ public class UDPSender {
 			String message ="salut";
 			udpSender.send(message.getBytes(), InetAddress.getLocalHost());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
