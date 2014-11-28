@@ -26,84 +26,74 @@ public class Communica extends JFrame implements ActionListener {
 	protected JLabel lmesssend;
 	protected JTextArea textRec;
 	protected JTextArea textToSend;
-	
-	
-	
+
+
+
 	public static final int WIDTH=300;
 	public static final int HEIGHT=200;
-	
+
 
 	public Communica(BufferedWriter writer, BufferedReader reader){
-		
+
 		super("Communica System");
 		this.writer = writer;
 		this.reader = reader;
-		
+
 		this.lmessrec=new JLabel("received message");
 		this.lmesssend=new JLabel("message to send");
-		
+
 		this.bReceive=new JButton("receive");
 		this.bSend=new JButton("send");
-		
+
 		this.textRec=new JTextArea();
 		this.textRec.setEditable(false);
-		
+
 		this.textToSend=new JTextArea();
-		
+
 		initComponents();
 	}
 
-	
+
 	public void initComponents(){
-		
+
 		this.addWindowListener(new WindowAdapter() {
-			
+
 			public void windowsClosing(WindowEvent e){
-			
+
 				System.exit(0);
 				Communica.this.dispose();
 			}
 		});
-		
-		
-		
+
+
+
 		this.setSize(WIDTH, HEIGHT);
 		this.setVisible(true);
-		
+
 		JPanel panel=(JPanel) getContentPane();
-		
+
 		panel.setLayout(new GridLayout(3,3));
-		
+
 		panel.add(lmesssend);
 		panel.add(textToSend);
 		panel.add(bSend);
 		panel.add(bReceive);
 		panel.add(lmessrec);
 		panel.add(textRec);
-		
-		bSend.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0){
-				String text=textToSend.getText();
-				
-					try {
-						writer.write(text);
-						writer.flush();
-						writer.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				
-				
-			}
-		});
-		
-		bReceive.addActionListener(new ActionListener() {
-			
+
+		setActionSend(bSend);
+		setActionSend(bReceive);
+
+	}
+
+
+	public void setActionReceive(JButton b)
+	{
+		b.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				try{
 					String ligne;
 					StringBuilder sb=new StringBuilder();
@@ -116,9 +106,32 @@ public class Communica extends JFrame implements ActionListener {
 				} catch (IOException ex){
 					ex.printStackTrace();
 				}
-				
+
 			}
 		});
+
+	}
+
+	public void setActionSend(JButton b)
+	{
+		b.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0){
+				String text=textToSend.getText();
+
+				try {
+					writer.write(text);
+					writer.flush();
+					writer.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+
+			}
+		});
+
 	}
 
 

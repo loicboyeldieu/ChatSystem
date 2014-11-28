@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 
 
 public class ListenSocket extends Thread {
@@ -33,8 +34,19 @@ public class ListenSocket extends Thread {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		super.run();
+		try{
+			String ligne;
+			StringBuilder sb=new StringBuilder();
+			while ((ligne = reader.readLine()) != null)
+			{
+				sb.append(ligne);
+			}
+			reader.close();
+			lastLine=sb.toString();
+		} catch (IOException ex){
+			ex.printStackTrace();
+		}
 	}
 	
 	

@@ -11,7 +11,7 @@ import java.net.Socket;
 
 
 public class CommunicaTCPServer {
-	public static final int NUM_PORT=12350;
+	public static final int NUM_PORT=12353;
 	
 	private ServerSocket serverSocket ;
 	private int port;
