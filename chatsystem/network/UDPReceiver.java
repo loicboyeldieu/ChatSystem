@@ -1,7 +1,12 @@
-import java.io.IOException;
+package chatsystem.network;
+
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.SocketException;
+
+import chatsystem.ChatSystem;
+import chatsystem.chatsystemTDa2.Message;
 
 
 
@@ -49,18 +54,20 @@ public class UDPReceiver {
 	
 		DatagramSocket socketReceiver;
 		try {
-			socketReceiver = new DatagramSocket(UDPSender.NUM_PORT);
-			byte[] buffer = new byte[10];
+			
+			socketReceiver = new DatagramSocket(ChatSystem.NUM_PORT);
+			byte[] buffer = new byte[150];
 			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+			System.out.println("J'attend un packet");
 			socketReceiver.receive(packet);
-			byte[] buffer2 = packet.getData(); 
-			String strBuffer2 = new String(buffer2);
-			System.out.println(strBuffer2);
-		} catch (SocketException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Packet reçu");
+			ByteArrayInputStream bais = new ByteArrayInputStream(buffer);
+			ObjectInputStream ois=new ObjectInputStream(bais);
+			Message messageReceived = (Message)ois.readObject();
+			System.out.println(messageReceived);
+			
+
+		} catch (Exception e){
 			e.printStackTrace();
 		}
 		
