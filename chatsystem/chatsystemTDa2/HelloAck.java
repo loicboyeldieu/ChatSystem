@@ -18,6 +18,13 @@ public class HelloAck extends Message
 		this.nickname = nickname;
 	}
 
+	@Override
+	public String toString() {
+		return "HelloAck [nickname=" + nickname + "]";
+	}
+	
+	
+
 
 
 }

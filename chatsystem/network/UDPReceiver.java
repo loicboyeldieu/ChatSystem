@@ -20,7 +20,9 @@ public class UDPReceiver extends Thread {
 			
 	private DatagramSocket socketReceiver;
 	private DatagramPacket packetReceiver;
+	private ChatNI ni;
 			
+
 
 
 	//____________________________Constructors________________________________//
@@ -54,6 +56,15 @@ public class UDPReceiver extends Thread {
 		this.socketReceiver = socketReceiver;
 	}
 	
+	public ChatNI getNi() {
+		return ni;
+	}
+
+	public void setNi(ChatNI ni) {
+		this.ni = ni;
+	}
+
+	
 
 
 		
@@ -68,13 +79,12 @@ public class UDPReceiver extends Thread {
 		while(true)
 		{
 			try{
-				System.out.println("UDPReceiver : en attente");
 				this.socketReceiver.receive(this.packetReceiver);
-				System.out.println("UDPReceiver :reçu");
-				new MessageHandler(this.packetReceiver).handle();
+				new MessageHandler(this.packetReceiver,this.ni).handle();
 				
 			}catch(Exception e){
 				e.printStackTrace();
+				System.exit(-1);
 			}
 			
 		}
