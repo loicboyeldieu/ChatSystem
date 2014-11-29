@@ -1,4 +1,4 @@
-package chatsystemTDa2;
+package chatsystem.chatsystemTDa2;
 
 public class Goodbye extends Message
 {
@@ -6,11 +6,24 @@ public class Goodbye extends Message
 
    private String nickname;
 
+   
+   
    public Goodbye(String nickname){
           this.nickname = nickname;
    }
 
+   
+   
    public String getNickname(){
           return this.nickname;
    }
+
+
+
+@Override
+public String toString() {
+	return "Goodbye [nickname=" + nickname + "]";
+}
+   
+   
 }

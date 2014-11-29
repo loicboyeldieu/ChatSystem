@@ -1,4 +1,4 @@
-package chatsystemTDa2;
+package chatsystem.chatsystemTDa2;
 
 /** One text message, with UID for ack system. */
 public class Send extends Message
@@ -17,4 +17,9 @@ public class Send extends Message
 
 	public String getMessage() {return message;}
 	public int getID()         {return id;}
+
+	@Override
+	public String toString() {
+		return "Send [message=" + message + ", id=" + id + "]";
+	}
 }

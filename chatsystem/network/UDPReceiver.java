@@ -20,7 +20,6 @@ public class UDPReceiver extends Thread {
 			
 	private DatagramSocket socketReceiver;
 	private DatagramPacket packetReceiver;
-	private ChatNI ni;
 			
 
 
@@ -55,13 +54,8 @@ public class UDPReceiver extends Thread {
 		this.socketReceiver = socketReceiver;
 	}
 	
-	public ChatNI getNi() {
-		return ni;
-	}
 
-	public void setNi(ChatNI ni) {
-		this.ni = ni;
-	}
+
 		
 	//________________________________________________________________________//
 	//________________________________________________________________________//

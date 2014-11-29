@@ -11,7 +11,6 @@ public class UDPSender {
 		
 
 	private DatagramSocket socketSender;
-	private ChatNI ni;
 		
 
 	//____________________________Constructors________________________________//
@@ -23,15 +22,6 @@ public class UDPSender {
 	//__________________________Getters & setters ____________________________//
 	//________________________________________________________________________//
 
-	public ChatNI getNi() {
-		return ni;
-	}
-
-	public void setNi(ChatNI ni) {
-		this.ni = ni;
-	}
-
-
 
 	public DatagramSocket getSocketSender() {
 		return socketSender;
@@ -40,6 +30,11 @@ public class UDPSender {
 	public void setSocketSender(DatagramSocket socketSender) {
 		this.socketSender = socketSender;
 	}
+	
+
+	
+	
+	
 	
 	//____________________________Methods________________________________//
 	//________________________________________________________________________//

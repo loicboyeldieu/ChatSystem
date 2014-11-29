@@ -1,4 +1,4 @@
-package chatsystemTDa2;
+package chatsystem.chatsystemTDa2;
 
 public class SendAck extends Message
 {
@@ -18,6 +18,11 @@ public class SendAck extends Message
 
 	public void setId_message(int id_message) {
 		this.id_message = id_message;
+	}
+
+	@Override
+	public String toString() {
+		return "SendAck [id_message=" + id_message + "]";
 	}
 
 }

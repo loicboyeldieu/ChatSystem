@@ -1,5 +1,5 @@
 
-package chatsystemTDa2;
+package chatsystem.chatsystemTDa2;
 
 import java.io.Serializable;
 

@@ -99,6 +99,7 @@ public class ChatNI implements ToRemote{
 			byte[] buffer = new byte[ChatNI.MAX_SIZE_BUFFER];
 			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 			ChatNI ni= new ChatNI(new UDPReceiver(packet), new UDPSender(new DatagramSocket()));
+			
 			ni.sendHello("Poulet");
 			ni.sendHello("Bebe");
 		} catch (SocketException e) {
@@ -108,6 +109,26 @@ public class ChatNI implements ToRemote{
 		
 		
 
+	}
+
+
+	public UDPReceiver getUdpReceiver() {
+		return udpReceiver;
+	}
+
+
+	public void setUdpReceiver(UDPReceiver udpReceiver) {
+		this.udpReceiver = udpReceiver;
+	}
+
+
+	public UDPSender getUdpSender() {
+		return udpSender;
+	}
+
+
+	public void setUdpSender(UDPSender udpSender) {
+		this.udpSender = udpSender;
 	}
 
 
