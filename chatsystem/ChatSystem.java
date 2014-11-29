@@ -11,6 +11,8 @@ import chatsystem.network.UDPSender;
 
 public class ChatSystem {
 	
+	public static final String NOM="Chat System";
+	
 	private ChatNI ni;
 	private ChatController controller;
 	

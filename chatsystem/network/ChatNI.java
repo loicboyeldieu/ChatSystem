@@ -18,7 +18,7 @@ import chatsystem.chatsystemTDa2.SendAck;
 public class ChatNI implements ToRemote,FromRemote{
 	
 	// Constant relatives to the network
-	public static final int MAX_SIZE_BUFFER=500;
+	public static final int MAX_SIZE_BUFFER=512;
 	public static final int NUM_PORT = 12057;
 	
 

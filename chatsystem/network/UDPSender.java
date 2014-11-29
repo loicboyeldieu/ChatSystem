@@ -41,9 +41,6 @@ public class UDPSender {
 	}
 
 	
-	
-	
-	
 	//____________________________Methods________________________________//
 	//________________________________________________________________________//
 	
@@ -54,7 +51,10 @@ public class UDPSender {
 		
 		socketSender=new DatagramSocket();
 		
-		socketSender.send(new DatagramPacket(toSend, toSend.length,remoteAddress,ChatNI.NUM_PORT));
+		
+		DatagramPacket packet=new DatagramPacket(toSend, toSend.length,remoteAddress,ChatNI.NUM_PORT);
+		//TODO mettre le champ TTL à 0 !
+		socketSender.send(packet);
 		
 		socketSender.close();
 		} catch (Exception e){
