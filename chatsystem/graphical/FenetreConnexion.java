@@ -2,6 +2,8 @@ package chatsystem.graphical;
 
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -20,11 +22,15 @@ public class FenetreConnexion extends JFrame {
 	private static final long serialVersionUID = 6780578387145020970L;
 	
 	public static final int WIDTH=400;
-	public static final int HEIGHT=300;
+	public static final int HEIGHT=100;
 
 	private JLabel connexionLabel;
 	private JTextField connexionArea;
 	private JButton connexionButton;
+	
+	private static String valeur;
+	
+	private ChatGUI gui;
 	
 	public FenetreConnexion(){
 		super(ChatSystem.NOM);
@@ -33,6 +39,8 @@ public class FenetreConnexion extends JFrame {
 		connexionArea=new JTextField("",15);
 		this.setSize(WIDTH, HEIGHT);
 		this.setVisible(true);
+		
+		
 		JPanel panel=(JPanel) getContentPane();
 		
 		SpringLayout layout=new SpringLayout();
@@ -54,6 +62,19 @@ public class FenetreConnexion extends JFrame {
 	    //
 	    layout.putConstraint(SpringLayout.NORTH, connexionButton, 15, SpringLayout.SOUTH, connexionLabel);
 	    
+	    
+	    
+	    connexionButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				valeur=connexionArea.getText();
+				FenetreConnexion.this.gui.connect();
+				closeWindows();
+				
+			}
+		});
+	    
 		this.addWindowListener(new WindowAdapter() {
 
 			public void windowsClosing(WindowEvent e){
@@ -66,9 +87,28 @@ public class FenetreConnexion extends JFrame {
 	}
 	
 	
+	public void closeWindows(){
+		FenetreConnexion.this.dispose();
+	}
+	
+	public static String getNickname(){
+		return valeur;
+	}
+	
+	
 	public static void main(String[] args) {
-		new FenetreConnexion();
+		//new FenetreConnexion(null);
 
+	}
+
+
+	public ChatGUI getGui() {
+		return gui;
+	}
+
+
+	public void setGui(ChatGUI gui) {
+		this.gui = gui;
 	}
 
 }

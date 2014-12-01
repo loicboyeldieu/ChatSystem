@@ -16,6 +16,7 @@ public class ChatController {
 	
 	
 
+	//Constructors
 	public ChatController(ChatNI ni) {
 		this.userList = new ArrayList<User>();
 		this.ni=ni;
@@ -37,6 +38,7 @@ public class ChatController {
 	}
 	
 
+	//from NI
 	public void processHelloAck(User u){
 		this.addNewToList(u);
 		this.printList();
@@ -58,14 +60,32 @@ public class ChatController {
 		
 	}
 	
+	//from GUI
 	
+	
+	public void processConnect(String nickname){
+		
+		try {
+			this.localUser=new User(nickname, InetAddress.getLocalHost());
+		} catch (UnknownHostException e) {
+			this.localUser=new User(nickname, null);
+		} finally {
+			System.out.println(localUser);
+		}
+	}
+	
+	
+	
+	
+	
+	//Useful functions
 	public void printList(){
 		for (User u:userList){
 			System.out.println(u);
 		}
 	}
 	
-	public void addNewToList(User u){
+	private void addNewToList(User u){
 		int i;
 		boolean appartient = false;
 		for(i=0; i<userList.size(); i++){
