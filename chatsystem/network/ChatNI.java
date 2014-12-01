@@ -9,11 +9,11 @@ import java.net.SocketException;
 
 import chatsystem.ChatController;
 import chatsystem.User;
-import chatsystem.chatsystemTDa2.Goodbye;
-import chatsystem.chatsystemTDa2.Hello;
-import chatsystem.chatsystemTDa2.HelloAck;
-import chatsystem.chatsystemTDa2.Send;
-import chatsystem.chatsystemTDa2.SendAck;
+import chatsystemTDa2.Goodbye;
+import chatsystemTDa2.Hello;
+import chatsystemTDa2.HelloAck;
+import chatsystemTDa2.Send;
+import chatsystemTDa2.SendAck;
 
 public class ChatNI implements ToRemote,FromRemote{
 	

@@ -1,8 +1,8 @@
-package chatsystem.chatsystemTDa2;
+package chatsystemTDa2;
 
-public class HelloAck extends Message
+public class Hello extends Message
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	private String nickname;
 
@@ -14,17 +14,16 @@ public class HelloAck extends Message
 		this.nickname = nickname;
 	}
 
-	public HelloAck(String nickname) {
+	public Hello(String nickname) {
 		this.nickname = nickname;
 	}
 
 	@Override
 	public String toString() {
-		return "HelloAck [nickname=" + nickname + "]";
+		return "Hello [nickname=" + nickname + "]";
 	}
 	
 	
-
 
 
 }

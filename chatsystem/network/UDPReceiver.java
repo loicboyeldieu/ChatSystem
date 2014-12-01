@@ -5,8 +5,8 @@ import java.io.ObjectInputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-import chatsystem.chatsystemTDa2.Hello;
-import chatsystem.chatsystemTDa2.Message;
+import chatsystemTDa2.Hello;
+import chatsystemTDa2.Message;
 
 
 

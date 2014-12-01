@@ -1,4 +1,4 @@
-package chatsystem.chatsystemTDa2;
+package chatsystemTDa2;
 
 public class SendAck extends Message
 {

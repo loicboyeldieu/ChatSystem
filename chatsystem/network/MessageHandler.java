@@ -6,9 +6,9 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 
 import chatsystem.User;
-import chatsystem.chatsystemTDa2.Hello;
-import chatsystem.chatsystemTDa2.HelloAck;
-import chatsystem.chatsystemTDa2.Message;
+import chatsystemTDa2.Hello;
+import chatsystemTDa2.HelloAck;
+import chatsystemTDa2.Message;
 
 public class MessageHandler {
 	
