@@ -1,6 +1,7 @@
 package chatsystem;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import chatsystem.network.ChatNI;
@@ -37,12 +38,12 @@ public class ChatController {
 	
 
 	public void performHelloAck(User u){
-		this.userList.add(u);
+		this.addNewToList(u);
 		this.printList();
 	}
 	
 	public void performHello(User u){
-		this.userList.add(u);
+		this.addNewToList(u);
 		this.ni.sendHelloACK(u, localUser);
 	}
 	
@@ -52,9 +53,37 @@ public class ChatController {
 		}
 	}
 	
+	public void addNewToList(User u){
+		int i;
+		boolean appartient = false;
+		for(i=0; i<userList.size(); i++){
+			if (userList.get(i).compareTo(u)==0){ 
+				appartient=true;
+			}
+		}
+		if (!appartient) userList.add(u); 
+	}
+	
 	
 	
 	public static void main(String[] args) {
+		ArrayList<User> list= new ArrayList<User>();
+		try {
+			User Julien = new User("jul", InetAddress.getLocalHost());
+			User Aurel = new User("aurel", InetAddress.getLocalHost());
+			ChatController cc = new ChatController(null);
+			
+			System.out.println("Ajout de Julien \n");
+			cc.addNewToList(Julien);
+			cc.printList();
+			System.out.println("Ajout de Aurel \n");
+			cc.addNewToList(Aurel);
+			cc.printList();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 	}
 
