@@ -22,7 +22,7 @@ public class ChatController {
 		ni.setController(this);
 		try{
 			localUser=new User("User", InetAddress.getLocalHost());
-			ni.sendHello(localUser.getName());
+			//ni.sendHello(localUser.getName());
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -33,7 +33,7 @@ public class ChatController {
 		this.userList = new ArrayList<User>();
 		this.ni=ni;
 		this.localUser=u;
-		ni.sendHello(localUser.getName());
+		//ni.sendHello(localUser.getName());
 	}
 	
 

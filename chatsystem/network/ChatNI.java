@@ -20,6 +20,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	// Constant relatives to the network
 	public static final int MAX_SIZE_BUFFER=512;
 	public static final int NUM_PORT = 12058;
+	public static final byte[] BROADCAST =new byte[] {(byte)255,(byte)255,(byte)255,(byte)255};
 	
 
 	
@@ -79,8 +80,7 @@ public class ChatNI implements ToRemote,FromRemote{
 		try {
 			Hello helloToSend=new Hello(nickname);
 			byte[] buffer=objectToByteArray(helloToSend);
-			 InetAddress broadcast=InetAddress.getByAddress(new byte[] 
-						{(byte)255,(byte)255,(byte)255,(byte)255});
+			 InetAddress broadcast=InetAddress.getByAddress(BROADCAST);
 			udpSender.send(buffer, broadcast);
 			
 			System.out.println("ChatNI :Hello envoyé");
@@ -201,7 +201,7 @@ public class ChatNI implements ToRemote,FromRemote{
 			ChatController controller=new ChatController(ni);
 			int id=22;
 			String msg="salut";
-			ni.sendHello("juju");
+			//ni.sendHello("juju");
 			
 		} catch (SocketException e) {
 			e.printStackTrace();
