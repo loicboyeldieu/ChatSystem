@@ -10,7 +10,7 @@ import chatsystemTDa2.Hello;
 import chatsystemTDa2.HelloAck;
 import chatsystemTDa2.Message;
 
-public class MessageHandler extends Thread{
+public class MessageHandler {
 	
 	private ChatNI ni;
 	
@@ -27,11 +27,7 @@ public class MessageHandler extends Thread{
 	
 
 	
-	@Override
-	public void run() {
-		super.run();
-		this.handle();
-	}
+
 
 
 
