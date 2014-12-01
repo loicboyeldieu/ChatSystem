@@ -10,8 +10,8 @@ public interface ToRemote {
 	
 	public void sendHelloACK(User remote,User local);
 	
-	public void sendSend(String msg,int id);
+	public void sendSend(String msg,int id,User remote);
 	
-	public void sendSendAck(int id);
+	public void sendSendAck(int id,User remote);
 
 }

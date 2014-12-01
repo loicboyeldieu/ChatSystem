@@ -96,7 +96,8 @@ public class ChatNI implements ToRemote,FromRemote{
 		try {
 			Goodbye goodbye=new Goodbye(nickname);
 			byte[] buffer=objectToByteArray(goodbye);
-			udpSender.send(buffer, InetAddress.getLocalHost());
+			InetAddress adress=InetAddress.getByAddress(BROADCAST);
+			udpSender.send(buffer, adress);
 			System.out.println("ChatNI :Goodbye envoyé");
 			
 		} catch (Exception e){
@@ -106,11 +107,12 @@ public class ChatNI implements ToRemote,FromRemote{
 	}
 	
 	@Override
-	public void sendSend(String msg,int id){
+	public void sendSend(String msg,int id,User remote){
 		try {
 			Send send=new Send(msg,id);
 			byte[] buffer=objectToByteArray(send);
-			udpSender.send(buffer, InetAddress.getLocalHost());
+			InetAddress adress=remote.getAddress();
+			udpSender.send(buffer, adress);
 			System.out.println("ChatNI :Send envoyé");
 			
 		} catch (Exception e){
@@ -143,12 +145,12 @@ public class ChatNI implements ToRemote,FromRemote{
 
 
 	@Override
-	public void sendSendAck(int id) {
+	public void sendSendAck(int id,User remote) {
 		try{
 			SendAck sendack=new SendAck(id);
 			byte[] buffer=objectToByteArray(sendack);
 			udpSender.send(buffer, InetAddress.getLocalHost());
-			System.out.println("DONE SENDING");
+			System.out.println("Chat  NI : SendSendAck envoyé");
 			
 			
 			
@@ -165,15 +167,20 @@ public class ChatNI implements ToRemote,FromRemote{
 	@Override
 	public void onHelloReceived(User u) {
 		System.out.println("J'ai reçu un hello de"+u.getName());
-		controller.performHello(u);
+		controller.processHello(u);
 	}
 
 
 
 	@Override
 	public void onHelloAckReceived(User u) {
-		controller.performHelloAck(u);
+		controller.processHelloAck(u);
 		
+	}
+	
+	@Override
+	public void onGoodbyeReceived(User u){
+		controller.processGoodbye(u);
 	}
 
 	
@@ -201,7 +208,8 @@ public class ChatNI implements ToRemote,FromRemote{
 			ChatController controller=new ChatController(ni);
 			int id=22;
 			String msg="salut";
-			//ni.sendHello("juju");
+			ni.sendHello("juju");
+			controller.printList();
 			
 		} catch (SocketException e) {
 			e.printStackTrace();

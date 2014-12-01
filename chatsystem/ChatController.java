@@ -19,7 +19,7 @@ public class ChatController {
 	public ChatController(ChatNI ni) {
 		this.userList = new ArrayList<User>();
 		this.ni=ni;
-		ni.setController(this);
+		//ni.setController(this);
 		try{
 			localUser=new User("User", InetAddress.getLocalHost());
 			//ni.sendHello(localUser.getName());
@@ -37,15 +37,27 @@ public class ChatController {
 	}
 	
 
-	public void performHelloAck(User u){
+	public void processHelloAck(User u){
 		this.addNewToList(u);
 		this.printList();
 	}
 	
-	public void performHello(User u){
+	public void processHello(User u){
 		this.addNewToList(u);
 		this.ni.sendHelloACK(u, localUser);
 	}
+	
+	public void processGoodbye(User u) {
+		for (User us : userList) 
+		{
+			if (us.compareTo(u)==0){
+				userList.remove(us);
+				break;
+			}
+		}
+		
+	}
+	
 	
 	public void printList(){
 		for (User u:userList){
@@ -67,24 +79,36 @@ public class ChatController {
 	
 	
 	public static void main(String[] args) {
-		ArrayList<User> list= new ArrayList<User>();
+		
 		try {
-			User Julien = new User("jul", InetAddress.getLocalHost());
-			User Aurel = new User("aurel", InetAddress.getLocalHost());
-			ChatController cc = new ChatController(null);
+						
+			byte [] bytes1={(byte)192,(byte)2,(byte)10,(byte)1};
+			byte [] bytes2={(byte)193,(byte)3,(byte)10,(byte)1};
+
+			User julien = new User("jul", InetAddress.getLocalHost());
+			User aurel = new User("aurel", InetAddress.getByAddress(bytes1));
+			User lolo= new User("lolo",InetAddress.getByAddress(bytes2));
 			
-			System.out.println("Ajout de Julien \n");
-			cc.addNewToList(Julien);
-			cc.printList();
-			System.out.println("Ajout de Aurel \n");
-			cc.addNewToList(Aurel);
-			cc.printList();
+			ChatController controller=new ChatController(null);
+			
+			controller.addNewToList(aurel);
+			controller.addNewToList(julien);
+			controller.addNewToList(lolo);
+			
+			controller.printList();
+			
+			
+			controller.processGoodbye(lolo);
+			
+			controller.printList();
+			
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
 	}
+
+
 
 }

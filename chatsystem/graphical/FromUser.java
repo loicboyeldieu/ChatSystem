@@ -1,7 +1,5 @@
 package chatsystem.graphical;
 
-public class ChatGUI {
-
-
+public interface FromUser {
 
 }
