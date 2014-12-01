@@ -10,7 +10,7 @@ import chatsystemTDa2.Hello;
 import chatsystemTDa2.HelloAck;
 import chatsystemTDa2.Message;
 
-public class MessageHandler {
+public class MessageHandler extends Thread{
 	
 	private ChatNI ni;
 	
@@ -22,8 +22,21 @@ public class MessageHandler {
 		this.packetReceiver = packetReceiver;
 		this.ni=ni;
 	}
+	
+	
+	
 
 	
+	@Override
+	public void run() {
+		super.run();
+		this.handle();
+	}
+
+
+
+
+
 	public void handle() {
 		try{
 			ByteArrayInputStream bais = new ByteArrayInputStream(this.packetReceiver.getData());
