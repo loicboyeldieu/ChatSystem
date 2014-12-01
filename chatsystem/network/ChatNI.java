@@ -164,6 +164,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	
 	@Override
 	public void onHelloReceived(User u) {
+		System.out.println("J'ai reçu un hello de"+u.getName());
 		controller.performHello(u);
 	}
 
@@ -200,6 +201,7 @@ public class ChatNI implements ToRemote,FromRemote{
 			ChatController controller=new ChatController(ni);
 			int id=22;
 			String msg="salut";
+			ni.sendHello("juju");
 			
 		} catch (SocketException e) {
 			e.printStackTrace();
