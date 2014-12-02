@@ -1,5 +1,8 @@
 package chatsystem.graphical;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -8,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
+import javax.swing.border.EmptyBorder;
 
 import chatsystem.ChatSystem;
 
@@ -18,7 +22,7 @@ public class FenetreChat extends JFrame {
 	public static final int WIDTH=1000;
 	public static final int HEIGHT=700;
 
-	private JButton send;
+	private JButton disconnectButton;
 	
 	private JTextField messageTextField;
 	
@@ -29,35 +33,49 @@ public class FenetreChat extends JFrame {
 	
 	public FenetreChat(ChatGUI gui) {
 		super(ChatSystem.NOM);
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		this.gui=gui;
 		this.setVisible(true);
 		this.setSize(WIDTH,HEIGHT);
 		
 		JPanel panel=(JPanel) getContentPane();
+		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panel.setLayout(new BorderLayout(0,0));
 		
-		send=new JButton("send");
+		
+		disconnectButton=new JButton("disconnect");
+		disconnectButton.setBounds(670, 900, JButton.HEIGHT, JButton.WIDTH);
+		
+		
 		//messageTextField=new JTextField();
 		
-		panel.add(send);
-		panel.add(messageTextField);
-		
-		SpringLayout layout=new SpringLayout();
-		panel.setLayout(layout);
+		panel.add(disconnectButton);
+		//panel.add(messageTextField);
 		
 		
-		
-
-		
-		this.addWindowListener(new WindowAdapter() {
-
-			public void windowsClosing(WindowEvent e){
-
-				System.exit(0);
-				FenetreChat.this.dispose();
+		disconnectButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				FenetreChat.this.gui.disconnect();
+				
 			}
 		});
+		
+		
 
 	}
+	
+	
+	public static void main(String[] args) {
+
+					FenetreTest frame = new FenetreTest();
+					frame.setVisible(true);
+				
+			}
+
 
 
 

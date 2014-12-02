@@ -11,8 +11,9 @@ public class ChatGUI implements FromUser{
 	private FenetreConnexion fenetreConnexion;
 	private FenetreChat fenetreChat;
 	
-	public ChatGUI(FenetreConnexion connexion,FenetreChat chat){
-		
+	public ChatGUI(FenetreConnexion connexion){
+		fenetreConnexion=connexion;
+		fenetreConnexion.setGui(this);
 	}
 
 	public ChatController getController() {
@@ -37,8 +38,7 @@ public class ChatGUI implements FromUser{
 
 	@Override
 	public void disconnect() {
-		// TODO Auto-generated method stub
-		
+		this.controller.processDisconnect();
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class ChatGUI implements FromUser{
 		this.fenetreChat=new FenetreChat(this);
 		String nickname=FenetreConnexion.getNickname();
 		if (nickname.compareTo("")==0) nickname="anonymous";
-		System.out.println(nickname);
+		System.out.println("Bonjour "+nickname);
 		this.controller.processConnect(nickname);
 		
 	}
@@ -57,8 +57,8 @@ public class ChatGUI implements FromUser{
 	public static void main(String[] args) {
 		
 		FenetreConnexion f=new FenetreConnexion();
-		ChatGUI gui=new ChatGUI(f,null);
-		f.setGui(gui);
+		ChatGUI gui=new ChatGUI(f);
+		
 		ChatController controller=new ChatController(null);
 		gui.setController(controller);
 		

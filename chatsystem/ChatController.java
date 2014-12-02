@@ -30,12 +30,7 @@ public class ChatController {
 		
 	}
 	
-	public ChatController(ChatNI ni,User u) {
-		this.userList = new ArrayList<User>();
-		this.ni=ni;
-		this.localUser=u;
-		//ni.sendHello(localUser.getName());
-	}
+
 	
 
 	//from NI
@@ -72,6 +67,14 @@ public class ChatController {
 		} finally {
 			System.out.println(localUser);
 		}
+		
+		
+		this.ni.sendHello(nickname);
+	}
+	
+	public void processDisconnect() {
+		this.ni.sendGoodbye(this.localUser.getName());
+		
 	}
 	
 	
@@ -128,6 +131,11 @@ public class ChatController {
 		
 		
 	}
+
+
+
+
+
 
 
 

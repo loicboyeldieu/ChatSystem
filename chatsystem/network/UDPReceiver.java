@@ -9,6 +9,8 @@ import chatsystemTDa2.Hello;
 import chatsystemTDa2.Message;
 
 
+// j.B : Je le baiserai mon MAC 14:30 2/12/14
+
 
 public class UDPReceiver extends Thread {
 	
@@ -80,8 +82,8 @@ public class UDPReceiver extends Thread {
 		{
 			try{
 				this.socketReceiver.receive(this.packetReceiver);
-				new MessageHandler(this.packetReceiver,this.ni).handle();
 				
+				new MessageHandler(this.packetReceiver,this.ni).handle();
 			}catch(Exception e){
 				e.printStackTrace();
 				System.exit(-1);

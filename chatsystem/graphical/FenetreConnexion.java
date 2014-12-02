@@ -110,5 +110,7 @@ public class FenetreConnexion extends JFrame {
 	public void setGui(ChatGUI gui) {
 		this.gui = gui;
 	}
+	
+	
 
 }
