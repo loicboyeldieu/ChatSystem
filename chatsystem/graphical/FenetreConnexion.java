@@ -29,7 +29,6 @@ public class FenetreConnexion extends JFrame {
 	private JButton connexionButton;
 	
 	private static String valeur;
-	
 	private ChatGUI gui;
 	
 	public FenetreConnexion(){
@@ -37,8 +36,6 @@ public class FenetreConnexion extends JFrame {
 		connexionLabel=new JLabel("Your nickname here : ");
 		connexionButton=new JButton("Connect");
 		connexionArea=new JTextField("",15);
-		this.setSize(WIDTH, HEIGHT);
-		this.setVisible(true);
 		
 		
 		JPanel panel=(JPanel) getContentPane();
@@ -49,6 +46,7 @@ public class FenetreConnexion extends JFrame {
 		panel.add(connexionLabel);
 		panel.add(connexionArea);
 		panel.add(connexionButton);
+		
 		
 		// Adjust constraints for the label so it's at (5,5).
 	    layout.putConstraint(SpringLayout.WEST, connexionLabel, 5, SpringLayout.WEST, panel);
@@ -62,7 +60,9 @@ public class FenetreConnexion extends JFrame {
 	    //
 	    layout.putConstraint(SpringLayout.NORTH, connexionButton, 15, SpringLayout.SOUTH, connexionLabel);
 	    
-	    
+	    this.pack();
+	    this.setSize(WIDTH, HEIGHT);
+		this.setVisible(true);
 	    
 	    connexionButton.addActionListener(new ActionListener() {
 			
@@ -76,16 +76,12 @@ public class FenetreConnexion extends JFrame {
 		});
 	    
 		this.addWindowListener(new WindowAdapter() {
-
 			public void windowsClosing(WindowEvent e){
-
 				System.exit(0);
-				FenetreConnexion.this.dispose();
 			}
 		});
 	
 	}
-	
 	
 	public void closeWindows(){
 		FenetreConnexion.this.dispose();
@@ -97,7 +93,7 @@ public class FenetreConnexion extends JFrame {
 	
 	
 	public static void main(String[] args) {
-		//new FenetreConnexion(null);
+		new FenetreConnexion();
 
 	}
 
