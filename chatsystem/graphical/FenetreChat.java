@@ -31,6 +31,8 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	private JLabel etiquette;
 	private JLabel labelListe;
 	private JButton deconnexionButton;
+	private JLabel conversation;
+
 	
 	private ChatGUI gui;
 	
@@ -41,11 +43,11 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		super(ChatSystem.NOM);
 		this.gui=gui;
 		
-		
+		this.setResizable(false);
 		
 		// Création du panneau
 		JPanel panneau = new JPanel();
-		setBounds(0,0,WIDTH,HEIGHT);
+		setBounds(150,100,WIDTH,HEIGHT);
 		// Background de la fenetre
 		panneau.setBackground(new Color(255,255,255));
 		panneau.setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -64,6 +66,17 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		leftPane.setBounds(0, 0, 200, HEIGHT-20);
 		leftPane.setLayout(null);
 		pane.add(leftPane);
+		
+		
+		JPanel rightPane = new JPanel();
+		rightPane.setBackground(new Color(240,240,240));
+		rightPane.setBounds(leftPane.getWidth(),0,WIDTH-leftPane.getWidth(),HEIGHT);
+		rightPane.setLayout(null);
+		pane.add(rightPane);
+		
+		messageTextField = new JTextField();
+		messageTextField.setBounds(0,HEIGHT-120, rightPane.getWidth(), 100);
+		rightPane.add(messageTextField);
 		
 		// Label de la liste
 		String choix[] = {"Martin","Loic","Juju","John de Toulouse","Claire"};
@@ -89,15 +102,22 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		deconnexionButton.setBounds(0, leftPane.getHeight()-heightButton, leftPane.getWidth(), heightButton);
 		leftPane.add(deconnexionButton);
 		
+		// conversation
+		conversation = new JLabel("<html><p style='color:black;'>Lolo : Salut </p></br><p> Juju : ça va ?<p></html>");
+		conversation.setBounds(0,0, rightPane.getWidth(), 40);
+		rightPane.add(conversation);
+		
+		
+		
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		disconnectButton.addActionListener(new ActionListener() {	
+		/*disconnectButton.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				FenetreChat.this.gui.disconnect();	
 			}
-		});
+		});*/
 		
 		
 
