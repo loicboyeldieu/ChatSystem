@@ -2,10 +2,9 @@ package chatsystem.network;
 
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketException;
+import java.net.InterfaceAddress;
+import java.net.NetworkInterface;
 
 import chatsystem.ChatController;
 import chatsystem.User;
@@ -19,7 +18,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	
 	// Constant relatives to the network
 	public static final int MAX_SIZE_BUFFER=512;
-	public static final int NUM_PORT = 12043;
+	public static final int NUM_PORT = 12044;
 	public static final byte[] BROADCAST =new byte[] {(byte)255,(byte)255,(byte)255,(byte)255};
 	
 
@@ -37,6 +36,10 @@ public class ChatNI implements ToRemote,FromRemote{
 		this.udpSender = udpSender;
 		this.udpReceiver.setNi(this);
 		this.udpSender.setNi(this);
+	}
+	
+	public ChatNI(){
+		
 	}
 	
 	
@@ -80,7 +83,8 @@ public class ChatNI implements ToRemote,FromRemote{
 		try {
 			Hello helloToSend=new Hello(nickname);
 			byte[] buffer=objectToByteArray(helloToSend);
-			 InetAddress broadcast=InetAddress.getByAddress(BROADCAST);
+			 //InetAddress broadcast=InetAddress.getByAddress(BROADCAST);
+			InetAddress broadcast=this.getBroadcastAdress();
 			udpSender.send(buffer, broadcast);
 			
 			System.out.println("ChatNI :Hello envoyé");
@@ -96,8 +100,9 @@ public class ChatNI implements ToRemote,FromRemote{
 		try {
 			Goodbye goodbye=new Goodbye(nickname);
 			byte[] buffer=objectToByteArray(goodbye);
-			InetAddress adress=InetAddress.getByAddress(BROADCAST);
-			udpSender.send(buffer, adress);
+			//InetAddress broadcast=InetAddress.getByAddress(BROADCAST);
+			InetAddress broadcast=this.getBroadcastAdress();
+			udpSender.send(buffer, broadcast);
 			System.out.println("ChatNI :Goodbye envoyé");
 			
 		} catch (Exception e){
@@ -197,26 +202,37 @@ public class ChatNI implements ToRemote,FromRemote{
 		}
 		return null;
 	}
+	
+	
+	private InetAddress getBroadcastAdress(){
+			InetAddress localHost;
+			try {
+				localHost = InetAddress.getLocalHost();
+				NetworkInterface networkInterface = NetworkInterface.getByInetAddress(localHost);
+				
+				for (InterfaceAddress address : networkInterface.getInterfaceAddresses()) {
+					if (address.getBroadcast()!=null) return address.getBroadcast();
+					
+					
+				}
+				
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
+		return null;
+	}
 
 
 	public static void main(String[] args) {
 		
-		try {
-			byte[] buffer = new byte[ChatNI.MAX_SIZE_BUFFER];
-			DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-			ChatNI ni= new ChatNI(new UDPReceiver(packet), new UDPSender(new DatagramSocket()));
-			ChatController controller=new ChatController(ni);
-			int id=22;
-			String msg="salut";
-			ni.sendHello("juju");
-			controller.printList();
-			
-		} catch (SocketException e) {
-			e.printStackTrace();
-		}
-		
-		
-		
+		ChatNI ni=new ChatNI();
+		InetAddress address=ni.getBroadcastAdress();
+		System.out.println(address);
+
 
 	}
 

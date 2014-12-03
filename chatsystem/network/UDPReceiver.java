@@ -2,6 +2,7 @@ package chatsystem.network;
 
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
+import java.lang.Thread.State;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
@@ -94,8 +95,7 @@ public class UDPReceiver extends Thread {
 
 	
 	
-	
-	
+
 	public static void main(String[] args){	
 	
 		try {

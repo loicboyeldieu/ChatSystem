@@ -36,8 +36,6 @@ public class ChatSystem {
 			ChatController controller=new ChatController(ni);
 			ChatGUI gui= new ChatGUI(new FenetreConnexion());
 			gui.setController(controller);
-			ni.setController(controller);
-			
 			
 		} catch (Exception e){
 			e.printStackTrace();

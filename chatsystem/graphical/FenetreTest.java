@@ -38,7 +38,7 @@ public class FenetreTest extends JFrame {
 	 */
 	public FenetreTest() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(200, 200, 600, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -58,7 +58,7 @@ public class FenetreTest extends JFrame {
 		panel.add(btnNewButton);
 		
 		JList list = new JList();
-		list.setBounds(0, 0, 132, 226);
+		list.setBounds(-5, 0, 149, 226);
 		panel.add(list);
 		
 		JButton btnNewButton_1 = new JButton("New button");

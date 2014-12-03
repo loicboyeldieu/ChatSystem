@@ -2,7 +2,7 @@ package chatsystem;
 
 import java.net.InetAddress;
 
-public class User implements Comparable<User> {
+public class User {
 
 
 	private String name;
@@ -51,9 +51,11 @@ public class User implements Comparable<User> {
 	}
 
 
-	@Override
-	public int compareTo(User o) {
-		return this.getAddress().toString().compareTo(o.getAddress().toString());
+	public boolean equals(User u) {
+		return this.address.equals(u.getAddress());
 	}
+	
+
+
 
 }

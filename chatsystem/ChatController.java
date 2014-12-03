@@ -20,14 +20,12 @@ public class ChatController {
 	public ChatController(ChatNI ni) {
 		this.userList = new ArrayList<User>();
 		this.ni=ni;
-		//ni.setController(this);
-		try{
-			localUser=new User("User", InetAddress.getLocalHost());
-			//ni.sendHello(localUser.getName());
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-		
+		ni.setController(this);
+
+	}
+	
+	public ChatController(){
+		this.userList = new ArrayList<User>();
 	}
 	
 
@@ -40,14 +38,20 @@ public class ChatController {
 	}
 	
 	public void processHello(User u){
-		this.addNewToList(u);
-		this.ni.sendHelloACK(u, localUser);
+		System.out.println(u);
+		System.out.println();
+		if (!u.equals(u))
+		{
+			this.addNewToList(u);
+			this.ni.sendHelloACK(u, localUser);
+		}
+	
 	}
 	
 	public void processGoodbye(User u) {
 		for (User us : userList) 
 		{
-			if (us.compareTo(u)==0){
+			if (us.equals(u)){
 				userList.remove(us);
 				break;
 			}
@@ -92,7 +96,7 @@ public class ChatController {
 		int i;
 		boolean appartient = false;
 		for(i=0; i<userList.size(); i++){
-			if (userList.get(i).compareTo(u)==0){ 
+			if (userList.get(i).equals(u)){ 
 				appartient=true;
 			}
 		}
@@ -109,10 +113,10 @@ public class ChatController {
 			byte [] bytes2={(byte)193,(byte)3,(byte)10,(byte)1};
 
 			User julien = new User("jul", InetAddress.getLocalHost());
-			User aurel = new User("aurel", InetAddress.getByAddress(bytes1));
+			User aurel = new User("aurel", InetAddress.getLocalHost());
 			User lolo= new User("lolo",InetAddress.getByAddress(bytes2));
 			
-			ChatController controller=new ChatController(null);
+			ChatController controller=new ChatController();
 			
 			controller.addNewToList(aurel);
 			controller.addNewToList(julien);
@@ -121,9 +125,9 @@ public class ChatController {
 			controller.printList();
 			
 			
-			controller.processGoodbye(lolo);
+			//controller.processGoodbye(lolo);
 			
-			controller.printList();
+			//controller.printList();
 			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
