@@ -18,7 +18,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	
 	// Constant relatives to the network
 	public static final int MAX_SIZE_BUFFER=512;
-	public static final int NUM_PORT = 12046;
+	public static final int NUM_PORT = 12040;
 	public static final byte[] BROADCAST =new byte[] {(byte)255,(byte)255,(byte)255,(byte)255};
 	
 
@@ -171,7 +171,6 @@ public class ChatNI implements ToRemote,FromRemote{
 	
 	@Override
 	public void onHelloReceived(User u) {
-		System.out.println("J'ai reçu un hello de"+u.getName());
 		controller.processHello(u);
 	}
 
