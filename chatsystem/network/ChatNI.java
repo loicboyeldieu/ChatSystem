@@ -19,7 +19,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	
 	// Constant relatives to the network
 	public static final int MAX_SIZE_BUFFER=512;
-	public static final int NUM_PORT = 12044;
+	public static final int NUM_PORT = 12043;
 	public static final byte[] BROADCAST =new byte[] {(byte)255,(byte)255,(byte)255,(byte)255};
 	
 

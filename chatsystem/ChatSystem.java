@@ -32,10 +32,12 @@ public class ChatSystem {
 		byte[] buffer = new byte[ChatNI.MAX_SIZE_BUFFER];
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 		try{
-			
-			ChatGUI gui= new ChatGUI(new FenetreConnexion());
 			ChatNI ni= new ChatNI(new UDPReceiver(packet), new UDPSender(new DatagramSocket()));
 			ChatController controller=new ChatController(ni);
+			ChatGUI gui= new ChatGUI(new FenetreConnexion());
+			gui.setController(controller);
+			ni.setController(controller);
+			
 			
 		} catch (Exception e){
 			e.printStackTrace();
