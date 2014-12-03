@@ -98,7 +98,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		leftPane.add(liste);
 			
 		// Button deconnexion
-		deconnexionButton = new JButton("Deconnexion");
+		deconnexionButton = new JButton("Disconnect");
 		deconnexionButton.setBounds(0, leftPane.getHeight()-heightButton, leftPane.getWidth(), heightButton);
 		leftPane.add(deconnexionButton);
 		
