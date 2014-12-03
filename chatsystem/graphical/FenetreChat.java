@@ -102,6 +102,18 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		deconnexionButton.setBounds(0, leftPane.getHeight()-heightButton, leftPane.getWidth(), heightButton);
 		leftPane.add(deconnexionButton);
 		
+		deconnexionButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				FenetreChat.this.gui.disconnect();
+				FenetreChat.this.dispose();
+				new FenetreConnexion().setGui(FenetreChat.this.gui);
+				
+			}
+		});
+		
+		
 		// conversation
 		conversation = new JLabel("<html><p style='color:black;'>Lolo : Salut </p></br><p> Juju : ça va ?<p></html>");
 		conversation.setBounds(0,0, rightPane.getWidth(), 40);
