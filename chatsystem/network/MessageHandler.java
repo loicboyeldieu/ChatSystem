@@ -6,9 +6,12 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 
 import chatsystem.User;
+import chatsystemTDa2.Goodbye;
 import chatsystemTDa2.Hello;
 import chatsystemTDa2.HelloAck;
 import chatsystemTDa2.Message;
+import chatsystemTDa2.Send;
+import chatsystemTDa2.SendAck;
 
 public class MessageHandler {
 	
@@ -25,12 +28,6 @@ public class MessageHandler {
 	
 	
 	
-
-	
-
-
-
-
 
 
 	public void handle() {
@@ -52,6 +49,14 @@ public class MessageHandler {
 				HelloAck helloAck=(HelloAck)messageReceived;
 				u=new User(helloAck.getNickname(), address);
 				ni.onHelloAckReceived(u);
+			} else if(messageReceived instanceof Goodbye){
+				Goodbye goodbye=(Goodbye)messageReceived;
+				u=new User(goodbye.getNickname(), address);
+				ni.onGoodbyeReceived(u);
+			} else if (messageReceived instanceof Send){
+				
+			}else if (messageReceived instanceof SendAck){
+				
 			}
 
 			

@@ -2,21 +2,24 @@ package chatsystem.graphical;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener; 
+import javax.swing.event.ListSelectionListener;
 
 import chatsystem.ChatSystem;
+import chatsystem.User;
 
 public class FenetreChat extends JFrame implements ListSelectionListener{
 
@@ -25,13 +28,21 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	public static final int WIDTH=1000;
 	public static final int HEIGHT=600;
 
-	private JButton disconnectButton;
+	private JButton disconnectButton,sendButton;
 	private JTextField messageTextField;
 	private JList liste;
 	private JLabel etiquette;
 	private JLabel labelListe;
 	private JButton deconnexionButton;
-	private JLabel conversation;
+	private JList conversation;
+	private JScrollPane listScrollPane = new JScrollPane();
+	
+	private User selectedValue;
+	
+	final DefaultListModel<User> model=new DefaultListModel<User>();
+	
+	final DefaultListModel<MessageDisplay>modelConversation=new DefaultListModel<MessageDisplay>();
+	
 
 	
 	private ChatGUI gui;
@@ -79,7 +90,9 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		rightPane.add(messageTextField);
 		
 		// Label de la liste
-		String choix[] = {"Martin","Loic","Juju","John de Toulouse","Claire"};
+		
+		
+		
 		
 		this.labelListe = new JLabel("<html><p style='width:150px; text-align:center; color : white; font-size:10px;'>List of connected users</p></html>");
 		labelListe.setBounds(0, 0, leftPane.getWidth(), heightLabelList);
@@ -89,12 +102,15 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		
 		//this.etiquette = new JLabel("Aucune séléction");
 		
-		//liste.addListSelectionListener(this);
+		
+		
 		
 		// création de la liste
-		this.liste = new JList(choix);
+		this.liste = new JList<User>(model);
+
 		liste.setBounds(0, labelListe.getHeight(), 200, HEIGHT-heightLabelList-heightButton-20);
-		liste.setBackground(new Color(46,204,113));	
+		liste.setBackground(new Color(46,204,113));
+		liste.addListSelectionListener(this);
 		leftPane.add(liste);
 			
 		// Button deconnexion
@@ -114,40 +130,73 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		});
 		
 		
-		// conversation
-		conversation = new JLabel("<html><p style='color:black;'>Lolo : Salut </p></br><p> Juju : ça va ?<p></html>");
-		conversation.setBounds(0,0, rightPane.getWidth(), 40);
-		rightPane.add(conversation);
+		sendButton = new JButton("Send");
+		sendButton.setBounds(200,HEIGHT-150,100,50);
+		rightPane.add(sendButton);
 		
+		sendButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String message =messageTextField.getText();
+				FenetreChat.this.gui.sendMessage(message);
+				
+			}
+		});
+		
+		// conversation
+		conversation = new JList<MessageDisplay>(modelConversation);
+		conversation.setBounds(0,0, rightPane.getWidth(), 400);
+		conversation.setEnabled(false);
+		UIManager.put("Label.disabledForeground", Color.BLACK);
+		rightPane.add(conversation);
 		
 		
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		/*disconnectButton.addActionListener(new ActionListener() {	
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				FenetreChat.this.gui.disconnect();	
-			}
-		});*/
-		
-		
 
 	}
 	
+	public void addtoList(User u) {
+		this.model.addElement(u);
+		System.out.println(this.model.toString());
+	}
+	
+	public void removefromList(User u){
+		this.model.removeElement(u);
+	}
+
+	
+	public User getValue(){
+		return this.selectedValue;
+	}
+	
+	
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		// TODO Auto-generated method stub
-		etiquette.setText((String)liste.getSelectedValue());
+		this.selectedValue=(User)liste.getSelectedValue();
+		this.gui.selectUser();
+	}
+	
+	
+	public void addMessage(MessageDisplay messageDisplay){
+		this.modelConversation.addElement(messageDisplay);
 	}
 	
 	
 	public static void main(String[] args) {
-
-					FenetreChat frame = new FenetreChat(null);
-					frame.setVisible(true);
+		try{
+			FenetreChat frame = new FenetreChat(null);
+			frame.setVisible(true);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+				
 				
 			}
+
+
 
 
 	

@@ -4,23 +4,31 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import chatsystem.graphical.ChatGUI;
 import chatsystem.network.ChatNI;
 
 public class ChatController {
 
 	private ChatNI ni;
+	private ChatGUI gui;
 	
 	private ArrayList<User> userList;
 	
 	private User localUser;
 	
+	private User remoteUser;
+	
+	private static int id;
+	
 	
 
 	//Constructors
-	public ChatController(ChatNI ni) {
+	public ChatController(ChatNI ni,ChatGUI gui) {
 		this.userList = new ArrayList<User>();
 		this.ni=ni;
+		this.gui=gui;
 		ni.setController(this);
+		gui.setController(this);
 
 	}
 	
@@ -33,30 +41,29 @@ public class ChatController {
 
 	//from NI
 	public void processHelloAck(User u){
-		this.addNewToList(u);
-		this.printList();
+		gui.addToConnectedUserList(u);
 	}
 	
 	public void processHello(User u){
-		System.out.println(u);
-		System.out.println();
-		if (!u.equals(u))
+		if (!u.equals(localUser))
 		{
-			this.addNewToList(u);
+			gui.addToConnectedUserList(u);
 			this.ni.sendHelloACK(u, localUser);
 		}
 	
 	}
 	
 	public void processGoodbye(User u) {
-		for (User us : userList) 
-		{
-			if (us.equals(u)){
-				userList.remove(us);
-				break;
-			}
+		if (!u.equals(localUser)){
+			this.gui.removeUser(u);
 		}
+	
 		
+	}
+	
+	public void processSend(User u,int id, String message){
+		
+		this.gui.displayMessage(u,localUser,message);
 	}
 	
 	//from GUI
@@ -69,16 +76,28 @@ public class ChatController {
 		} catch (UnknownHostException e) {
 			this.localUser=new User(nickname, null);
 		} finally {
-			System.out.println(localUser);
+			System.out.println("Bienvenue  "+localUser);
 		}
 		
 		
-		this.ni.sendHello(nickname);
+//		this.ni.sendHello(nickname);
+//		this.ni.startReception();
 	}
 	
 	public void processDisconnect() {
 		this.ni.sendGoodbye(this.localUser.getName());
 		
+	}
+	
+	
+	public void onSelectedUser(User u){
+		this.remoteUser=u;
+		System.out.println("Destinataire : "+u);
+	}
+	
+	
+	public void performSend(String message){
+		this.ni.sendSend(message, id, remoteUser);
 	}
 	
 	

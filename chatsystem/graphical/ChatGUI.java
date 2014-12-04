@@ -26,14 +26,13 @@ public class ChatGUI implements FromUser{
 
 	@Override
 	public void selectUser() {
-		// TODO Auto-generated method stub
+		this.controller.onSelectedUser(fenetreChat.getValue());
 
 	}
 
 	@Override
 	public void sendMessage(String message) {
-		// TODO Auto-generated method stub
-		
+		controller.performSend(message);
 	}
 
 	@Override
@@ -47,10 +46,25 @@ public class ChatGUI implements FromUser{
 		this.fenetreChat=new FenetreChat(this);
 		String nickname=FenetreConnexion.getNickname();
 		if (nickname.compareTo("")==0) nickname="anonymous";
-		System.out.println("Bonjour "+nickname);
 		this.controller.processConnect(nickname);
 		
 	}
+	
+	
+	public void addToConnectedUserList(User u){
+		this.fenetreChat.addtoList(u);
+	}
+	
+	public void removeUser(User u){
+		this.fenetreChat.removefromList(u);
+	}
+	
+
+	public void displayMessage(User fromUser, User toUser, String message) {
+		fenetreChat.addMessage(new MessageDisplay(fromUser, toUser, message));
+		
+	}
+
 
 
 	
@@ -59,12 +73,13 @@ public class ChatGUI implements FromUser{
 		FenetreConnexion f=new FenetreConnexion();
 		ChatGUI gui=new ChatGUI(f);
 		
-		ChatController controller=new ChatController(null);
-		gui.setController(controller);
+		//ChatController controller=new ChatController(null);
+		//gui.setController(controller);
 		
 		//FenetreChat f2=new FenetreChat(gui);
 
 	}
+
 
 	
 	

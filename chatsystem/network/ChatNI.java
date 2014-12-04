@@ -18,7 +18,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	
 	// Constant relatives to the network
 	public static final int MAX_SIZE_BUFFER=512;
-	public static final int NUM_PORT = 12040;
+	public static final int NUM_PORT = 16050;
 	public static final byte[] BROADCAST =new byte[] {(byte)255,(byte)255,(byte)255,(byte)255};
 	
 
@@ -32,7 +32,6 @@ public class ChatNI implements ToRemote,FromRemote{
 	//Constructors
 	public ChatNI(UDPReceiver udpReceiver, UDPSender udpSender) {
 		this.udpReceiver = udpReceiver;
-		udpReceiver.start();
 		this.udpSender = udpSender;
 		this.udpReceiver.setNi(this);
 		this.udpSender.setNi(this);
@@ -87,7 +86,7 @@ public class ChatNI implements ToRemote,FromRemote{
 			InetAddress broadcast=this.getBroadcastAdress();
 			udpSender.send(buffer, broadcast);
 			
-			System.out.println("ChatNI :Hello envoyÃ©");
+			System.out.println("ChatNI :Hello envoyé");
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -103,7 +102,7 @@ public class ChatNI implements ToRemote,FromRemote{
 			//InetAddress broadcast=InetAddress.getByAddress(BROADCAST);
 			InetAddress broadcast=this.getBroadcastAdress();
 			udpSender.send(buffer, broadcast);
-			System.out.println("ChatNI :Goodbye envoyÃ©");
+			System.out.println("ChatNI :Goodbye envoyé");
 			
 		} catch (Exception e){
 			e.printStackTrace();
@@ -118,7 +117,7 @@ public class ChatNI implements ToRemote,FromRemote{
 			byte[] buffer=objectToByteArray(send);
 			InetAddress adress=remote.getAddress();
 			udpSender.send(buffer, adress);
-			System.out.println("ChatNI :Send envoyÃ©");
+			System.out.println("ChatNI :Send envoyé");
 			
 		} catch (Exception e){
 			e.printStackTrace();
@@ -136,7 +135,7 @@ public class ChatNI implements ToRemote,FromRemote{
 			byte[] buffer=objectToByteArray(helloack);
 			
 			udpSender.send(buffer, remoteUser.getAddress());
-			System.out.println("ChatNI :Hello ACK envoyÃ©");
+			System.out.println("ChatNI :Hello ACK envoyé");
 			
 			
 			
@@ -169,6 +168,11 @@ public class ChatNI implements ToRemote,FromRemote{
 
 	//FromRemote Methods
 	
+	
+	public void startReception(){
+		udpReceiver.start();
+	}
+	
 	@Override
 	public void onHelloReceived(User u) {
 		controller.processHello(u);
@@ -185,6 +189,18 @@ public class ChatNI implements ToRemote,FromRemote{
 	@Override
 	public void onGoodbyeReceived(User u){
 		controller.processGoodbye(u);
+	}
+	
+	
+	@Override
+	public void onSendReceived(User u,String message, int id) {
+		controller.processSend(u, id, message);
+	}
+
+	@Override
+	public void onSendAckReceived(User u, int id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
@@ -212,12 +228,10 @@ public class ChatNI implements ToRemote,FromRemote{
 				for (InterfaceAddress address : networkInterface.getInterfaceAddresses()) {
 					if (address.getBroadcast()!=null) return address.getBroadcast();
 					
-					
 				}
 				
 				
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		
@@ -234,6 +248,8 @@ public class ChatNI implements ToRemote,FromRemote{
 
 
 	}
+
+
 
 
 

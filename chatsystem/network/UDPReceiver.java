@@ -77,7 +77,7 @@ public class UDPReceiver extends Thread {
 	@Override
 	public void run() {
 		super.run();
-		System.out.println("La rÃ©ception des messages a commencÃ©");
+		System.out.println("La réception des messages a commencé");
 		
 		while(true)
 		{

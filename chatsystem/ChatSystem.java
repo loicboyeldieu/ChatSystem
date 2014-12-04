@@ -2,6 +2,8 @@ package chatsystem;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.util.Scanner;
 
 import chatsystem.graphical.ChatGUI;
 import chatsystem.graphical.FenetreConnexion;
@@ -30,12 +32,31 @@ public class ChatSystem {
 	public static void main(String[] args) {
 		
 		byte[] buffer = new byte[ChatNI.MAX_SIZE_BUFFER];
+		byte [] bytes1={(byte)192,(byte)2,(byte)10,(byte)1};
+		byte [] bytes2={(byte)193,(byte)3,(byte)10,(byte)1};
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 		try{
 			ChatNI ni= new ChatNI(new UDPReceiver(packet), new UDPSender(new DatagramSocket()));
-			ChatController controller=new ChatController(ni);
 			ChatGUI gui= new ChatGUI(new FenetreConnexion());
-			gui.setController(controller);
+			ChatController controller=new ChatController(ni,gui);
+			
+			
+			
+			User julien = new User("jul", InetAddress.getLocalHost());
+			User aurel = new User("aurel", InetAddress.getByAddress(bytes1));
+			User lolo= new User("lolo",InetAddress.getByAddress(bytes2));
+			
+			Scanner sc = new Scanner(System.in);
+			sc.nextLine();
+			controller.processHello(aurel);
+			controller.processHello(julien);
+			controller.processHello(lolo);
+			sc.nextLine();
+			controller.processSend(aurel, 0, "salut poupée");
+			controller.processSend(lolo, 0, "Coucou");
+			controller.processSend(julien, 0, "salut bébé");
+
+		
 			
 		} catch (Exception e){
 			e.printStackTrace();
