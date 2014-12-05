@@ -64,6 +64,7 @@ public class ChatController {
 	public void processSend(User u,int id, String message){
 		
 		this.gui.displayMessage(u,localUser,message);
+		this.ni.sendSendAck(id, u);
 	}
 	
 	//from GUI

@@ -39,9 +39,9 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	
 	private User selectedValue;
 	
-	final DefaultListModel<User> model=new DefaultListModel<User>();
+	final DefaultListModel model=new DefaultListModel();
 	
-	final DefaultListModel<MessageDisplay>modelConversation=new DefaultListModel<MessageDisplay>();
+	final DefaultListModel modelConversation=new DefaultListModel();
 	
 
 	
@@ -106,7 +106,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		
 		
 		// création de la liste
-		this.liste = new JList<User>(model);
+		this.liste = new JList(model);
 
 		liste.setBounds(0, labelListe.getHeight(), 200, HEIGHT-heightLabelList-heightButton-20);
 		liste.setBackground(new Color(46,204,113));
@@ -145,7 +145,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		});
 		
 		// conversation
-		conversation = new JList<MessageDisplay>(modelConversation);
+		conversation = new JList(modelConversation);
 		conversation.setBounds(0,0, rightPane.getWidth(), 400);
 		conversation.setEnabled(false);
 		UIManager.put("Label.disabledForeground", Color.BLACK);

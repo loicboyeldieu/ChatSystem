@@ -48,13 +48,7 @@ public class ChatSystem {
 			
 			Scanner sc = new Scanner(System.in);
 			sc.nextLine();
-			controller.processHello(aurel);
-			controller.processHello(julien);
-			controller.processHello(lolo);
-			sc.nextLine();
-			controller.processSend(aurel, 0, "salut poupée");
-			controller.processSend(lolo, 0, "Coucou");
-			controller.processSend(julien, 0, "salut bébé");
+			
 
 		
 			
