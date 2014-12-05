@@ -2,6 +2,7 @@ package chatsystem.graphical;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,7 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -29,13 +31,14 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	public static final int HEIGHT=600;
 
 	private JButton disconnectButton,sendButton;
-	private JTextField messageTextField;
+	private JTextArea messageTextArea;
 	private JList liste;
-	private JLabel etiquette;
 	private JLabel labelListe;
 	private JButton deconnexionButton;
 	private JList conversation;
 	private JScrollPane listScrollPane = new JScrollPane();
+	private JLabel nomUser;
+	
 	
 	private User selectedValue;
 	
@@ -43,23 +46,30 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	
 	final DefaultListModel modelConversation=new DefaultListModel();
 	
-
-	
 	private ChatGUI gui;
 	
-	public int heightLabelList = 40;
-	public int heightButton = 30;
+	
+	
 	
 	public FenetreChat(ChatGUI gui) {
 		super(ChatSystem.NOM);
 		this.gui=gui;
+		
+		// Variables
+		int heightLabelList = 40;
+		int heightButton = 50;
+		int heightBar = 20;
+		int heightBienvenue = 20;
+		int heightTextArea = 50;
+		int widthLeftPane = 250;
 		
 		this.setResizable(false);
 		
 		// Création du panneau
 		JPanel panneau = new JPanel();
 		setBounds(150,100,WIDTH,HEIGHT);
-		// Background de la fenetre
+		
+		// Panel de la fenetre
 		panneau.setBackground(new Color(255,255,255));
 		panneau.setBorder(new EmptyBorder(0, 0, 0, 0));
 		panneau.setLayout(new BorderLayout(0,0));
@@ -68,55 +78,82 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		
 		JPanel pane = new JPanel();
 		pane.setBackground(new Color(240,240,240));
+		pane.setBounds(0, 0, WIDTH, HEIGHT);
 		panneau.add(pane, BorderLayout.CENTER);
 		pane.setLayout(null);
 		
+		//********* LEFT PANEL ********//
 		
 		JPanel leftPane = new JPanel();
 		leftPane.setBackground(new Color(50,50,50));
-		leftPane.setBounds(0, 0, 200, HEIGHT-20);
-		leftPane.setLayout(null);
+		leftPane.setBounds(0, 0, widthLeftPane, HEIGHT-heightBar);
+		leftPane.setLayout(new BorderLayout());
 		pane.add(leftPane);
 		
-		
-		JPanel rightPane = new JPanel();
-		rightPane.setBackground(new Color(240,240,240));
-		rightPane.setBounds(leftPane.getWidth(),0,WIDTH-leftPane.getWidth(),HEIGHT);
-		rightPane.setLayout(null);
-		pane.add(rightPane);
-		
-		messageTextField = new JTextField();
-		messageTextField.setBounds(0,HEIGHT-120, rightPane.getWidth(), 100);
-		rightPane.add(messageTextField);
-		
-		// Label de la liste
-		
-		
-		
-		
-		this.labelListe = new JLabel("<html><p style='width:150px; text-align:center; color : white; font-size:10px;'>List of connected users</p></html>");
-		labelListe.setBounds(0, 0, leftPane.getWidth(), heightLabelList);
-		labelListe.setBackground(Color.RED);
-		leftPane.add(labelListe);
-		
-		
-		//this.etiquette = new JLabel("Aucune séléction");
-		
-		
-		
-		
+		//Label de la liste
+		this.labelListe = new JLabel("<html><p style='width:200px; text-align:center; color : white; font-size:10px;'>List of connected users</p></html>");
+		labelListe.setSize(leftPane.getWidth(), heightLabelList);
+		leftPane.add(labelListe,BorderLayout.NORTH);
+			
+			
 		// création de la liste
 		this.liste = new JList(model);
-
-		liste.setBounds(0, labelListe.getHeight(), 200, HEIGHT-heightLabelList-heightButton-20);
-		liste.setBackground(new Color(46,204,113));
+		liste.setBounds(0, labelListe.getHeight(), leftPane.getWidth(), HEIGHT-heightBar-labelListe.getHeight());
+		liste.setBackground(new Color(189, 195, 199));
 		liste.addListSelectionListener(this);
-		leftPane.add(liste);
-			
+		leftPane.add(liste, BorderLayout.CENTER);
+		
+		
 		// Button deconnexion
 		deconnexionButton = new JButton("Disconnect");
-		deconnexionButton.setBounds(0, leftPane.getHeight()-heightButton, leftPane.getWidth(), heightButton);
-		leftPane.add(deconnexionButton);
+		leftPane.add(deconnexionButton, BorderLayout.SOUTH);
+	
+		
+		//********* RIGHT PANEL ********//
+		
+		JPanel rightPane = new JPanel();
+		rightPane.setBackground(new Color(192, 57, 43));
+		rightPane.setBounds(leftPane.getWidth(),0,WIDTH-leftPane.getWidth(),HEIGHT-heightBar);
+		rightPane.setLayout(new BorderLayout());
+		pane.add(rightPane);
+		
+		nomUser = new JLabel("<html><p style='width:auto; text-align:center; color : white; font-size:10px;'>Welcome ??? to the chat System</p></html>");
+		nomUser.setBounds(leftPane.getWidth(), 0, HEIGHT-leftPane.getWidth(), 0);
+		rightPane.add(nomUser, BorderLayout.NORTH);
+		
+		
+		//conversation
+		conversation = new JList(modelConversation);
+		conversation.setBounds(0,0, rightPane.getWidth(), 100);
+		conversation.setBackground(new Color(220, 225, 227));
+		conversation.setEnabled(false);
+		UIManager.put("Label.disabledForeground", Color.BLACK);
+		rightPane.add(conversation, BorderLayout.CENTER);
+		
+		//BottomPanel est contenu dans Right Panel et comporte le textfield et le bouton Send
+		JPanel bottomPane = new JPanel();
+		bottomPane.setBackground(Color.WHITE);
+		bottomPane.setLayout(new BorderLayout());
+		rightPane.add(bottomPane, BorderLayout.SOUTH);
+		
+		messageTextArea = new JTextArea("Type text here",3, 3);
+		messageTextArea.setBounds(0,HEIGHT-heightBar-heightTextArea, rightPane.getWidth(), heightTextArea);
+		bottomPane.add(messageTextArea, BorderLayout.WEST);
+		
+		sendButton = new JButton("Send");
+		sendButton.setBounds(200,HEIGHT-150,100,50);
+		bottomPane.add(sendButton, BorderLayout.EAST);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		deconnexionButton.addActionListener(new ActionListener() {
 			
@@ -130,26 +167,19 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		});
 		
 		
-		sendButton = new JButton("Send");
-		sendButton.setBounds(200,HEIGHT-150,100,50);
-		rightPane.add(sendButton);
+		
 		
 		sendButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String message =messageTextField.getText();
+				String message =messageTextArea.getText();
 				FenetreChat.this.gui.sendMessage(message);
 				
 			}
 		});
 		
-		// conversation
-		conversation = new JList(modelConversation);
-		conversation.setBounds(0,0, rightPane.getWidth(), 400);
-		conversation.setEnabled(false);
-		UIManager.put("Label.disabledForeground", Color.BLACK);
-		rightPane.add(conversation);
+		
 		
 		
 		this.setVisible(true);
