@@ -14,7 +14,7 @@ public class ChatController {
 	
 	private ArrayList<User> userList;
 	
-	private User localUser;
+	private static User localUser;
 	
 	private User remoteUser;
 	
@@ -66,8 +66,10 @@ public class ChatController {
 	
 	public void processSend(User u,int id, String message){
 		
-		this.gui.displayMessage(u,localUser,message);
-		this.ni.sendSendAck(id, u);
+			this.gui.displayMessage(u,localUser,message);
+			this.ni.sendSendAck(id, u);
+
+		
 	}
 	
 	//from GUI
@@ -101,14 +103,25 @@ public class ChatController {
 	
 	
 	public void performSend(String message){
-		this.ni.sendSend(message, id, remoteUser);
-		this.gui.displayMessage(localUser, remoteUser, message);
+		if (remoteUser!=null){
+			this.ni.sendSend(message, id, remoteUser);
+			this.gui.displayMessage(localUser, remoteUser, message);
+		}
+
 	}
 	
 	
 	
 	
 	
+	public static User getLocalUser() {
+		return localUser;
+	}
+
+	public void setLocalUser(User localUser) {
+		this.localUser = localUser;
+	}
+
 	//Useful functions
 	public void printList(){
 		for (User u:userList){

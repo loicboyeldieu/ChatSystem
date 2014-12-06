@@ -45,10 +45,12 @@ public class ChatGUI implements FromUser{
 	@Override
 	public void connect() {
 		System.out.println("Gui :connect");
-		this.fenetreChat=new FenetreChat(this);
 		String nickname=FenetreConnect.getNickname();
 		if (nickname.compareTo("")==0) nickname="anonymous";
 		this.controller.processConnect(nickname);
+		this.fenetreChat=new FenetreChat(this);
+
+		
 		
 	}
 	
@@ -67,6 +69,9 @@ public class ChatGUI implements FromUser{
 		
 	}
 	
+	public User whoAmI(){
+		return controller.getLocalUser();
+	}
 
 
 

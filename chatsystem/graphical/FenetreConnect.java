@@ -36,7 +36,6 @@ public class FenetreConnect extends JFrame {
 		super(ChatSystem.NOM);
 		
 		setBounds(400,300,WIDTH,HEIGHT);
-		
 		welcomeLabel=new JLabel("<html><p style='color:white; font-family:Calibri; font-size : 14px; margin-left:10px;'>Bienvenue sur le Chat System<p></html>");
 		connexionLabel = new JLabel("<html><p style='color:white; font-family:Calibri; font-size : 12px; margin-left:10px;'>Choisissez un pseudo<p></html>");
 		connexionButton=new JButton("Connect");

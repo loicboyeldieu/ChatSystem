@@ -55,7 +55,9 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		super(ChatSystem.NOM);
 		this.gui=gui;
 		
-		
+		if (gui==null){
+			System.out.println("gui null");
+		}
 		
 		
 		
@@ -109,7 +111,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		paneCenter.setLayout(new BorderLayout());
 		pane.add(paneCenter, BorderLayout.CENTER);
 		
-		nomUser = new JLabel("<html><p style='color:white; font-family:Calibri; font-size : 14px; margin-left:30px;'>Welcome " + FenetreConnexion.getNickname() + " to chat System<p></html>");
+		nomUser = new JLabel("<html><p style='color:white; font-family:Calibri; font-size : 14px; margin-left:30px;'>Welcome " + gui.whoAmI().getName() + " to chat System<p></html>");
 		nomUser.setPreferredSize(new Dimension(250,40));
 		paneCenter.add(nomUser, BorderLayout.NORTH);
 		
