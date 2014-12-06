@@ -6,6 +6,7 @@ import java.net.InetAddress;
 import java.util.Scanner;
 
 import chatsystem.graphical.ChatGUI;
+import chatsystem.graphical.FenetreConnect;
 import chatsystem.graphical.FenetreConnexion;
 import chatsystem.network.ChatNI;
 import chatsystem.network.UDPReceiver;
@@ -37,7 +38,7 @@ public class ChatSystem {
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 		try{
 			ChatNI ni= new ChatNI(new UDPReceiver(packet), new UDPSender(new DatagramSocket()));
-			ChatGUI gui= new ChatGUI(new FenetreConnexion());
+			ChatGUI gui= new ChatGUI(new FenetreConnect());
 			ChatController controller=new ChatController(ni,gui);
 			
 			

@@ -8,12 +8,12 @@ public class ChatGUI implements FromUser{
 	
 	private ChatController controller;
 	
-	private FenetreConnexion fenetreConnexion;
+	private FenetreConnect fenetreConnect;
 	private FenetreChat fenetreChat;
 	
-	public ChatGUI(FenetreConnexion connexion){
-		fenetreConnexion=connexion;
-		fenetreConnexion.setGui(this);
+	public ChatGUI(FenetreConnect connexion){
+		fenetreConnect=connexion;
+		fenetreConnect.setGui(this);
 	}
 
 	public ChatController getController() {
@@ -70,7 +70,7 @@ public class ChatGUI implements FromUser{
 	
 	public static void main(String[] args) {
 		
-		FenetreConnexion f=new FenetreConnexion();
+		FenetreConnect f=new FenetreConnect();
 		ChatGUI gui=new ChatGUI(f);
 		
 		//ChatController controller=new ChatController(null);
