@@ -177,7 +177,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 			public void actionPerformed(ActionEvent arg0) {
 				FenetreChat.this.gui.disconnect();
 				FenetreChat.this.dispose();
-				new FenetreConnexion().setGui(FenetreChat.this.gui);
+				new FenetreConnect().setGui(FenetreChat.this.gui);
 				
 			}
 		});
@@ -211,7 +211,13 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	}
 	
 	public void removefromList(User u){
-		this.model.removeElement(u);
+		User user;
+		for (int i=0;i<model.getSize();i++){
+			user=(User)model.get(i);
+			if (user.equals(u)){
+				model.remove(i);
+			}
+		}
 	}
 
 	
@@ -229,6 +235,10 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	
 	public void addMessage(MessageDisplay messageDisplay){
 		this.modelConversation.addElement(messageDisplay);
+	}
+	
+	public void addMessage(Notification notification){
+		this.modelConversation.addElement(notification);
 	}
 	
 	

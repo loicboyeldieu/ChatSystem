@@ -9,6 +9,7 @@ import chatsystem.User;
 
 public class MessageDisplay {
 	
+	
 	private User fromUser;
 	private User toUser;
 	private String content;
@@ -19,6 +20,7 @@ public class MessageDisplay {
 		this.toUser = toUser;
 		this.content = content;
 	}
+	
 	
 	
 	public String toString(){

@@ -69,6 +69,10 @@ public class ChatGUI implements FromUser{
 		
 	}
 	
+	public void displayNotification(User user,boolean goodbye){
+		fenetreChat.addMessage(new Notification(user, goodbye));
+	}
+	
 	public User whoAmI(){
 		return controller.getLocalUser();
 	}

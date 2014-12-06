@@ -51,6 +51,7 @@ public class ChatController {
 			gui.addToConnectedUserList(u);
 			this.addNewToList(u);
 			this.ni.sendHelloACK(u, localUser);
+			gui.displayNotification(u, false);
 		}
 	
 	}
@@ -59,6 +60,7 @@ public class ChatController {
 		if (!u.equals(localUser)){
 			this.gui.removeUser(u);
 			this.userList.remove(u);
+			this.gui.displayNotification(u, true);
 		}
 	
 		
