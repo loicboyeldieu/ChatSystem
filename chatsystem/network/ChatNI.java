@@ -168,11 +168,7 @@ public class ChatNI implements ToRemote,FromRemote{
 		byte[] buffer=objectToByteArray(fileRequest);
 		
 		udpSender.send(buffer, remote.getAddress());
-		try {
-			udpSender.send(buffer, InetAddress.getLocalHost());
-		} catch (Exception e){
-			e.printStackTrace();
-		}
+
 		
 	}
 	
