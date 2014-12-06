@@ -11,11 +11,13 @@ import java.net.Socket;
 public class TCPServer extends Thread{
 	
 	private ServerSocket listenSocket;
+	private String name;
 
 	private File location;
 	
-	public TCPServer(File location){
+	public TCPServer(File location,String name){
 		this.location=location;
+		this.name=name;
 		try{
 			listenSocket = new ServerSocket(ChatNI.NUM_PORT);
 		}catch (Exception e){
@@ -40,7 +42,9 @@ public class TCPServer extends Thread{
 		    is = clientSocket.getInputStream();
 	        bufferSize = clientSocket.getReceiveBufferSize();
 	        //fos = new FileOutputStream("D:/GROS DESIGN/resultat");
-	        fos=new FileOutputStream(location);
+	        String path=location.getAbsolutePath()+name;
+	        File file=new File(path);
+	        fos=new FileOutputStream(file);
 	        bos = new BufferedOutputStream(fos);
 	        byte[] bytes = new byte[bufferSize];
 
@@ -65,7 +69,7 @@ public class TCPServer extends Thread{
 	
 	public static void main(String[] args) {
 		try {
-			TCPServer tcpServer = new TCPServer(new File("C:/"));
+			TCPServer tcpServer = new TCPServer(new File("D:/"),"cle.txt");
 			tcpServer.start();
 			System.out.println("Thread principal : server démarré");
 			TCPClient tcpClient = new TCPClient(InetAddress.getLocalHost(), new File("D:/cléssha1.txt"));

@@ -64,7 +64,7 @@ public class ChatGUI implements FromUser{
 	@Override
 	public void acceptFile(String name,File file) {
 		controller.performResponse(name,true);
-		controller.performReceivingFile(file);
+		controller.performReceivingFile(file,name);
 	}
 
 	@Override

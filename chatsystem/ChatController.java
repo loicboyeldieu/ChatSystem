@@ -129,7 +129,10 @@ public class ChatController {
 	}
 	
 	public void performFileRequest(String name){
-		ni.sendFileRequest(remoteUser, name);
+		if (remoteUser!=null){
+			ni.sendFileRequest(remoteUser, name);
+		}
+		
 	}
 	
 	public void performResponse(String name,boolean response){
@@ -140,8 +143,8 @@ public class ChatController {
 		
 	}
 	
-	public void performReceivingFile(File location){
-		ni.prepareTCPServer(location);
+	public void performReceivingFile(File location,String name){
+		ni.prepareTCPServer(location,name);
 	}
 	
 	

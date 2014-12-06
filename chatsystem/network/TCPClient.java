@@ -30,6 +30,7 @@ public class TCPClient extends Thread {
 		        System.out.println("File is too large.");
 		    } else {
 		    	byte[] bytes = new byte[(int) length];
+
 		    	FileInputStream fis = new FileInputStream(file);
 		        BufferedInputStream bis = new BufferedInputStream(fis);
 		        BufferedOutputStream out = new BufferedOutputStream(socket.getOutputStream());

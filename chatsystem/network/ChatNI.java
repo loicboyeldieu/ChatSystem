@@ -182,7 +182,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	
 	@Override
 	public void sendFile(File file,User remote) {
-		new TCPClient(remote.getAddress(), file);
+		new TCPClient(remote.getAddress(), file).start();
 	}
 	
 	//FromRemote Methods
@@ -240,8 +240,8 @@ public class ChatNI implements ToRemote,FromRemote{
 		controller.processFileAccepted(u);
 	}
 	
-	public void prepareTCPServer(File location){
-		new TCPServer(location).start();
+	public void prepareTCPServer(File location,String name){
+		new TCPServer(location,name).start();
 	}
 	
 
