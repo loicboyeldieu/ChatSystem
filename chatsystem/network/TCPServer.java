@@ -42,7 +42,7 @@ public class TCPServer extends Thread{
 		    is = clientSocket.getInputStream();
 	        bufferSize = clientSocket.getReceiveBufferSize();
 	        //fos = new FileOutputStream("D:/GROS DESIGN/resultat");
-	        String path=location.getAbsolutePath()+name;
+	        String path=location.getAbsolutePath()+"/"+name;
 	        File file=new File(path);
 	        fos=new FileOutputStream(file);
 	        bos = new BufferedOutputStream(fos);
