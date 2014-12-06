@@ -1,5 +1,7 @@
 package chatsystem.graphical;
 
+import java.net.InetAddress;
+
 import chatsystem.ChatController;
 import chatsystem.User;
 
@@ -44,7 +46,7 @@ public class ChatGUI implements FromUser{
 	public void connect() {
 		System.out.println("Gui :connect");
 		this.fenetreChat=new FenetreChat(this);
-		String nickname=FenetreConnexion.getNickname();
+		String nickname=FenetreConnect.getNickname();
 		if (nickname.compareTo("")==0) nickname="anonymous";
 		this.controller.processConnect(nickname);
 		
@@ -64,6 +66,8 @@ public class ChatGUI implements FromUser{
 		fenetreChat.addMessage(new MessageDisplay(fromUser, toUser, message));
 		
 	}
+	
+
 
 
 
