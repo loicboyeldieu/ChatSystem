@@ -8,6 +8,8 @@ import java.net.NetworkInterface;
 
 import chatsystem.ChatController;
 import chatsystem.User;
+import chatsystemTDa2.FileRequest;
+import chatsystemTDa2.FileResponse;
 import chatsystemTDa2.Goodbye;
 import chatsystemTDa2.Hello;
 import chatsystemTDa2.HelloAck;
@@ -150,23 +152,45 @@ public class ChatNI implements ToRemote,FromRemote{
 
 	@Override
 	public void sendSendAck(int id,User remote) {
-		try{
+		
 			SendAck sendack=new SendAck(id);
 			byte[] buffer=objectToByteArray(sendack);
-			udpSender.send(buffer, InetAddress.getLocalHost());
+			udpSender.send(buffer, remote.getAddress());
 			System.out.println("Chat  NI : SendSendAck envoyé");
-
-
-
-		}catch (Exception e){
+	}
+	
+	@Override
+	public void sendFileRequest(User remote, String name) {
+		FileRequest fileRequest=new FileRequest(name);
+		byte[] buffer=objectToByteArray(fileRequest);
+		
+		//udpSender.send(buffer, remote.getAddress());
+		try {
+			udpSender.send(buffer, InetAddress.getLocalHost());
+		} catch (Exception e){
 			e.printStackTrace();
 		}
-
-
+		
 	}
+	
+	@Override
+	public void sendFileResponse(User remote, String name, boolean response) {
+		FileResponse fileResponse=new FileResponse(response, name);
+		byte[] buffer=objectToByteArray(fileResponse);
+		//udpSender.send(buffer, remote.getAddress());
+		try {
+			udpSender.send(buffer, InetAddress.getLocalHost());
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	
 
 
 	//FromRemote Methods
+
+
 
 
 	public void startReception(){
@@ -202,7 +226,20 @@ public class ChatNI implements ToRemote,FromRemote{
 		// TODO Auto-generated method stub
 
 	}
+	
+	
+	@Override
+	public void onFileRequestReceived(User u, String name) {
+		controller.processFileRequest(u,name);
+		
+	}
+	
+	
 
+	@Override
+	public void onFileAccepted(User u) {
+		controller.processFileAccepted(u);
+	}
 
 	//private Methods
 	private byte[] objectToByteArray(Object o){
@@ -265,6 +302,8 @@ public class ChatNI implements ToRemote,FromRemote{
 
 
 	}
+
+
 
 
 

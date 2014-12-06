@@ -13,5 +13,9 @@ public interface ToRemote {
 	public void sendSend(String msg,int id,User remote);
 	
 	public void sendSendAck(int id,User remote);
+	
+	public void sendFileRequest(User remote,String name);
+	
+	public void sendFileResponse(User remote,String name,boolean response);
 
 }

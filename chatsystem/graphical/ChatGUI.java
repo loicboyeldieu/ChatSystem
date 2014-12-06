@@ -1,6 +1,8 @@
 package chatsystem.graphical;
 
-import java.net.InetAddress;
+import java.io.File;
+
+import javax.swing.JOptionPane;
 
 import chatsystem.ChatController;
 import chatsystem.User;
@@ -51,10 +53,33 @@ public class ChatGUI implements FromUser{
 		this.fenetreChat=new FenetreChat(this);
 
 		
-		
+	}
+	
+	@Override
+	public void sendFile(String name) {
+		controller.performFileRequest(name);
 	}
 	
 	
+	
+	
+	@Override
+	public void acceptFile(String name) {
+		controller.performResponse(name,true);
+	}
+
+	@Override
+	public void declineFile(String name) {
+		controller.performResponse(name,false);
+	}
+	
+	
+
+	@Override
+	public void selectFile(File file) {
+		controller.setFiletoSend(file);
+	}
+
 	public void addToConnectedUserList(User u){
 		this.fenetreChat.addtoList(u);
 	}
@@ -73,8 +98,17 @@ public class ChatGUI implements FromUser{
 		fenetreChat.addMessage(new Notification(user, goodbye));
 	}
 	
+	public void displayFileRequest(User u,String name){
+		
+		if (u==null){
+			u=ChatController.getLocalUser();
+		}
+		
+		fenetreChat.displayDialog(u.getName(),name);
+	}
+	
 	public User whoAmI(){
-		return controller.getLocalUser();
+		return ChatController.getLocalUser();
 	}
 
 
@@ -92,6 +126,8 @@ public class ChatGUI implements FromUser{
 		//FenetreChat f2=new FenetreChat(gui);
 
 	}
+
+
 
 
 	

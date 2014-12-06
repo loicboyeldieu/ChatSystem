@@ -6,6 +6,8 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 
 import chatsystem.User;
+import chatsystemTDa2.FileRequest;
+import chatsystemTDa2.FileResponse;
 import chatsystemTDa2.Goodbye;
 import chatsystemTDa2.Hello;
 import chatsystemTDa2.HelloAck;
@@ -59,6 +61,15 @@ public class MessageHandler {
 				ni.onSendReceived(u, send.getMessage(),send.getID());
 			}else if (messageReceived instanceof SendAck){
 				
+			} else if (messageReceived instanceof FileRequest){
+				FileRequest fileRequest=(FileRequest)messageReceived;
+				u=ni.whoIsIt(address);
+				ni.onFileRequestReceived(u,fileRequest.getName());
+			} else if (messageReceived instanceof FileResponse){
+				FileResponse fileResponse=(FileResponse)messageReceived;
+				if (fileResponse.getResponse()){
+					ni.onFileAccepted(u=ni.whoIsIt(address));
+				}
 			}
 
 			

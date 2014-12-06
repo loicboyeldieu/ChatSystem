@@ -1,5 +1,6 @@
 package chatsystem;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -17,6 +18,9 @@ public class ChatController {
 	private static User localUser;
 	
 	private User remoteUser;
+	
+	private User waitingUser;
+	private File filetoSend;
 	
 	private static int id;
 	
@@ -74,9 +78,21 @@ public class ChatController {
 		
 	}
 	
+	public void processFileRequest(User u,String name){
+		waitingUser=u;
+		this.gui.displayFileRequest(u,name);
+	}
+	
+	public void processFileAccepted(User u){
+		System.out.println("coucou");
+	}
+	
+	
 	//from GUI
 	
 	
+
+
 	public void processConnect(String nickname){
 		
 		try {
@@ -112,6 +128,14 @@ public class ChatController {
 
 	}
 	
+	public void performFileRequest(String name){
+		ni.sendFileRequest(remoteUser, name);
+	}
+	
+	public void performResponse(String name,boolean response){
+		ni.sendFileResponse(waitingUser,name,response);
+	}
+	
 	
 	
 	
@@ -120,8 +144,14 @@ public class ChatController {
 		return localUser;
 	}
 
-	public void setLocalUser(User localUser) {
-		this.localUser = localUser;
+
+	
+	public File getFiletoSend() {
+		return filetoSend;
+	}
+
+	public void setFiletoSend(File filetoSend) {
+		this.filetoSend = filetoSend;
 	}
 
 	//Useful functions

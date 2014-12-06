@@ -6,14 +6,16 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.io.File;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -36,56 +38,59 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	private JTextArea messageTextArea;
 	private JList liste,conversation;
 	private JLabel labelListe,nomUser;
-	private JScrollPane listScrollPane = new JScrollPane();
-	
-	
-	
+
+	final JFileChooser fc = new JFileChooser();
+
+
+
 	private User selectedValue;
-	
+
+	final JDialog dialog=new JDialog();
+
 	final DefaultListModel model=new DefaultListModel();
-	
+
 	final DefaultListModel modelConversation=new DefaultListModel();
-	
+
 	private ChatGUI gui;
-	
-	
-	
-	
+
+
+
+
 	public FenetreChat(ChatGUI gui) {
 		super(ChatSystem.NOM);
 		this.gui=gui;
-		
+
 		if (gui==null){
 			System.out.println("gui null");
 		}
-		
-		
-		
-		
+
+
+
+
 		// Création du panneau
 		JPanel panneau = new JPanel();
 		setBounds(150,100,WIDTH,HEIGHT);
-	
+
 		// Panel de la fenetre
 		panneau.setBackground(new Color(255,255,255));
 		panneau.setBorder(new EmptyBorder(0, 0, 0, 0));
 		panneau.setLayout(new BorderLayout(0,0));
 		setContentPane(panneau);
-		
+
 		JPanel pane = new JPanel();
 		pane.setBackground(new Color(240,240,240));
 		pane.setBounds(0, 0, WIDTH, HEIGHT);
 		panneau.add(pane, BorderLayout.CENTER);
 		pane.setLayout(new BorderLayout(0,0));
-		
-		
+
+
 		JPanel paneGauche = new JPanel();
 		paneGauche.setBackground(new Color(52, 73, 94));
 		paneGauche.setPreferredSize(new Dimension(250,700));
 		paneGauche.setLayout(new BorderLayout());
 		pane.add(paneGauche, BorderLayout.WEST);
-		
-		
+
+
 		//Label de la liste
 		this.labelListe = new JLabel("<html><p style='color:white; font-family:Calibri; font-size : 14px; margin-left:30px;'>List of connected users<p></html>");
 		labelListe.setPreferredSize(new Dimension(250,40));
@@ -97,25 +102,25 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		liste.setBackground(new Color(52, 152, 219));
 		liste.addListSelectionListener(this);
 		paneGauche.add(scrollPaneList, BorderLayout.CENTER);
-		
+
 		// Button deconnexion
 		deconnexionButton = new JButton("<html><p style='color:black; font-family:Calibri; font-size : 12px;'>Disconnect<p></html>");
 		deconnexionButton.setPreferredSize(new Dimension(200,40));
 		paneGauche.add(deconnexionButton, BorderLayout.SOUTH);
-		
-		
+
+
 		// PANEL BLEU AU CENTRE
 		JPanel paneCenter = new JPanel();
 		paneCenter.setBackground(new Color(230, 126, 34));
 		paneCenter.setPreferredSize(new Dimension(900,700));
 		paneCenter.setLayout(new BorderLayout());
 		pane.add(paneCenter, BorderLayout.CENTER);
-		
+
 		nomUser = new JLabel("<html><p style='color:white; font-family:Calibri; font-size : 14px; margin-left:30px;'>Welcome " + gui.whoAmI().getName() + " to chat System<p></html>");
 		nomUser.setPreferredSize(new Dimension(250,40));
 		paneCenter.add(nomUser, BorderLayout.NORTH);
-		
-		
+
+
 		//conversation
 		conversation = new JList(modelConversation);
 		JScrollPane scrollPaneConversation = new JScrollPane(conversation);
@@ -123,93 +128,113 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		conversation.setEnabled(false);
 		UIManager.put("Label.disabledForeground", Color.BLACK);
 		paneCenter.add(scrollPaneConversation, BorderLayout.CENTER);
-		
+
 		//BottomPanel est contenu dans Right Panel et comporte le textfield et le bouton Send
 		JPanel bottomPane = new JPanel();
 		bottomPane.setBackground(new Color(52, 73, 94));
 		bottomPane.setLayout(new BorderLayout());
 		paneCenter.add(bottomPane, BorderLayout.SOUTH);
-		
-		
+
+
 		messageTextArea = new JTextArea();
 		messageTextArea.setMargin(new Insets(10, 10, 10, 10));
 		JScrollPane scrollPane = new JScrollPane(messageTextArea);
 		scrollPane.setPreferredSize(new Dimension(200,40));
 		bottomPane.add(scrollPane, BorderLayout.CENTER);
-		
+
 		JPanel sendPane = new JPanel();
 		sendPane.setLayout(new BorderLayout());
 		sendPane.setBackground(new Color(236, 240, 241));
 		bottomPane.add(sendPane, BorderLayout.EAST);
-		
+
 		sendButton = new JButton("<html><p style='color:black; font-family:Calibri; font-size : 12px;'>Send<p></html>");
 		sendButton.setPreferredSize(new Dimension(100,40));
 		sendPane.add(sendButton, BorderLayout.CENTER);
-		
+
 		sendFileButton = new JButton("<html><p style='color:black; font-family:Calibri; font-size : 12px;'>Send File<p></html>");
 		sendPane.add(sendFileButton, BorderLayout.NORTH);
-		
-		
 
-//		byte [] bytes1={(byte)192,(byte)2,(byte)10,(byte)1};
-//
-//		// TEST SCROLL LIST
-//		int i=0;
-//		for (i=0; i<50;i++){
-//			User A=null;
-//			try {
-//				A = new User("toto"+i,InetAddress.getByAddress(bytes1));
-//			} catch (UnknownHostException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			this.addtoList(A);
-//		}
-		
-		
-		
-		
-		
-		
+
+
+		//		byte [] bytes1={(byte)192,(byte)2,(byte)10,(byte)1};
+		//
+		//		// TEST SCROLL LIST
+		//		int i=0;
+		//		for (i=0; i<50;i++){
+		//			User A=null;
+		//			try {
+		//				A = new User("toto"+i,InetAddress.getByAddress(bytes1));
+		//			} catch (UnknownHostException e) {
+		//				// TODO Auto-generated catch block
+		//				e.printStackTrace();
+		//			}
+		//			this.addtoList(A);
+		//		}
+
+
+
+
+
+
 		deconnexionButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				FenetreChat.this.gui.disconnect();
 				FenetreChat.this.dispose();
 				new FenetreConnect().setGui(FenetreChat.this.gui);
-				
+
 			}
 		});
-		
-		
-		
-		
+
+
+
+
 		sendButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String message =messageTextArea.getText();
 				messageTextArea.setText("");
 				FenetreChat.this.gui.sendMessage(message);
-				
+
 			}
 		});
-		
-		
-		
-		
+
+
+		sendFileButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					int returnVal = fc.showOpenDialog(FenetreChat.this);
+
+					if (returnVal == JFileChooser.APPROVE_OPTION){
+						File file = fc.getSelectedFile();
+						System.out.println("Fichier choisi : "+file);
+						System.out.println(file.getName());
+						FenetreChat.this.gui.sendFile(file.getName());
+					}
+				} catch (Exception e){
+					e.printStackTrace();
+				}
+
+			}
+		});
+
+
+
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
 	}
-	
+
 	public void addtoList(User u) {
 		this.model.addElement(u);
 		System.out.println(this.model.toString());
 	}
-	
+
 	public void removefromList(User u){
 		User user;
 		for (int i=0;i<model.getSize();i++){
@@ -220,47 +245,67 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		}
 	}
 
-	
+
 	public User getValue(){
 		return this.selectedValue;
 	}
-	
-	
+
+
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		this.selectedValue=(User)liste.getSelectedValue();
 		this.gui.selectUser();
 	}
-	
-	
+
+
 	public void addMessage(MessageDisplay messageDisplay){
 		this.modelConversation.addElement(messageDisplay);
 	}
-	
+
 	public void addMessage(Notification notification){
 		this.modelConversation.addElement(notification);
 	}
-	
-	
+
+	public void displayDialog(String username,String name){
+		Object[] options = {"Yes","No"};
+		
+		int n = JOptionPane.showOptionDialog(this,
+				"Would you like to receive : "+name+" from "+username+"?",
+				"A file is coming",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE,
+				null,     //do not use a custom Icon
+				options,  //the titles of buttons
+				options[0]); //default button title
+
+		if(n==0){
+			gui.acceptFile(name);
+		} else{
+			gui.declineFile(name);
+		}
+
+	}
+
+
 	public static void main(String[] args) {
 		try{
-			
+
 			FenetreChat frame = new FenetreChat(null);
-			
-			
-			
+
+
+
 			frame.setVisible(true);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-				
-				
-			}
+
+
+	}
 
 
 
 
-	
+
 
 
 

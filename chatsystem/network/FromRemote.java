@@ -13,5 +13,9 @@ public interface FromRemote {
 	public void onSendReceived(User u,String message,int id);
 	
 	public void onSendAckReceived(User u,int id);
+	
+	public void onFileRequestReceived(User u, String name);
+	
+	public void onFileAccepted(User u);
 
 }
