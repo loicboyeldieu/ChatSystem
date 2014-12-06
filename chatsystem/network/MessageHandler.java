@@ -54,7 +54,9 @@ public class MessageHandler {
 				u=new User(goodbye.getNickname(), address);
 				ni.onGoodbyeReceived(u);
 			} else if (messageReceived instanceof Send){
-				
+				Send send=(Send)messageReceived;
+				u=ni.whoIsIt(address);
+				ni.onSendReceived(u, send.getMessage(),send.getID());
 			}else if (messageReceived instanceof SendAck){
 				
 			}

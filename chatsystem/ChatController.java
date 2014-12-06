@@ -42,12 +42,14 @@ public class ChatController {
 	//from NI
 	public void processHelloAck(User u){
 		gui.addToConnectedUserList(u);
+		this.addNewToList(u);
 	}
 	
 	public void processHello(User u){
 		if (!u.equals(localUser))
 		{
 			gui.addToConnectedUserList(u);
+			this.addNewToList(u);
 			this.ni.sendHelloACK(u, localUser);
 		}
 	
@@ -56,6 +58,7 @@ public class ChatController {
 	public void processGoodbye(User u) {
 		if (!u.equals(localUser)){
 			this.gui.removeUser(u);
+			this.userList.remove(u);
 		}
 	
 		
@@ -81,8 +84,8 @@ public class ChatController {
 		}
 		
 		
-//		this.ni.sendHello(nickname);
-//		this.ni.startReception();
+		this.ni.sendHello(nickname);
+		this.ni.startReception();
 	}
 	
 	public void processDisconnect() {
@@ -121,6 +124,17 @@ public class ChatController {
 			}
 		}
 		if (!appartient) userList.add(u); 
+	}
+	
+	public User getUserFromIp(InetAddress address){
+		for (User u:userList){
+			if (u.getAddress().equals(address)){
+				return u;
+			}
+		}
+		
+		
+		return null;
 	}
 	
 	

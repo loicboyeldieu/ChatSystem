@@ -15,14 +15,14 @@ import chatsystemTDa2.Send;
 import chatsystemTDa2.SendAck;
 
 public class ChatNI implements ToRemote,FromRemote{
-	
+
 	// Constant relatives to the network
 	public static final int MAX_SIZE_BUFFER=512;
 	public static final int NUM_PORT = 16050;
 	public static final byte[] BROADCAST =new byte[] {(byte)255,(byte)255,(byte)255,(byte)255};
-	
 
-	
+
+
 	//Fields
 	private UDPReceiver udpReceiver;
 	private UDPSender udpSender;
@@ -36,14 +36,14 @@ public class ChatNI implements ToRemote,FromRemote{
 		this.udpReceiver.setNi(this);
 		this.udpSender.setNi(this);
 	}
-	
+
 	public ChatNI(){
-		
+
 	}
-	
-	
+
+
 	//Getters and Setters
-	
+
 	public UDPReceiver getUdpReceiver() {
 		return udpReceiver;
 	}
@@ -62,7 +62,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	public void setUdpSender(UDPSender udpSender) {
 		this.udpSender = udpSender;
 	}
-	
+
 	public ChatController getController() {
 		return controller;
 	}
@@ -71,9 +71,9 @@ public class ChatNI implements ToRemote,FromRemote{
 	public void setController(ChatController controller) {
 		this.controller = controller;
 	}
-	
-	
-	
+
+
+
 
 
 	//ToRemote Methods
@@ -82,17 +82,17 @@ public class ChatNI implements ToRemote,FromRemote{
 		try {
 			Hello helloToSend=new Hello(nickname);
 			byte[] buffer=objectToByteArray(helloToSend);
-			 //InetAddress broadcast=InetAddress.getByAddress(BROADCAST);
+			//InetAddress broadcast=InetAddress.getByAddress(BROADCAST);
 			InetAddress broadcast=this.getBroadcastAdress();
 			udpSender.send(buffer, broadcast);
-			
+
 			System.out.println("ChatNI :Hello envoyé");
 		} catch (Exception e){
 			e.printStackTrace();
 		}
 
 	}
-	
+
 
 	@Override
 	public void sendGoodbye(String nickname){
@@ -103,13 +103,13 @@ public class ChatNI implements ToRemote,FromRemote{
 			InetAddress broadcast=this.getBroadcastAdress();
 			udpSender.send(buffer, broadcast);
 			System.out.println("ChatNI :Goodbye envoyé");
-			
+
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	@Override
 	public void sendSend(String msg,int id,User remote){
 		try {
@@ -118,32 +118,32 @@ public class ChatNI implements ToRemote,FromRemote{
 			InetAddress adress=remote.getAddress();
 			udpSender.send(buffer, adress);
 			System.out.println("ChatNI :Send envoyé");
-			
+
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 	@Override
 	public void sendHelloACK(User remoteUser,User localUser) {
 		try{
 			HelloAck helloack=new HelloAck(localUser.getName());
-			
+
 			byte[] buffer=objectToByteArray(helloack);
-			
+
 			udpSender.send(buffer, remoteUser.getAddress());
 			System.out.println("ChatNI :Hello ACK envoyé");
-			
-			
-			
+
+
+
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		
-		
+
+
 	}
 
 
@@ -155,24 +155,24 @@ public class ChatNI implements ToRemote,FromRemote{
 			byte[] buffer=objectToByteArray(sendack);
 			udpSender.send(buffer, InetAddress.getLocalHost());
 			System.out.println("Chat  NI : SendSendAck envoyÃ©");
-			
-			
-			
+
+
+
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		
-		
+
+
 	}
-	
+
 
 	//FromRemote Methods
-	
-	
+
+
 	public void startReception(){
 		udpReceiver.start();
 	}
-	
+
 	@Override
 	public void onHelloReceived(User u) {
 		controller.processHello(u);
@@ -183,15 +183,15 @@ public class ChatNI implements ToRemote,FromRemote{
 	@Override
 	public void onHelloAckReceived(User u) {
 		controller.processHelloAck(u);
-		
+
 	}
-	
+
 	@Override
 	public void onGoodbyeReceived(User u){
 		controller.processGoodbye(u);
 	}
-	
-	
+
+
 	@Override
 	public void onSendReceived(User u,String message, int id) {
 		controller.processSend(u, id, message);
@@ -200,10 +200,10 @@ public class ChatNI implements ToRemote,FromRemote{
 	@Override
 	public void onSendAckReceived(User u, int id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
+
 	//private Methods
 	private byte[] objectToByteArray(Object o){
 		try{
@@ -217,32 +217,49 @@ public class ChatNI implements ToRemote,FromRemote{
 		}
 		return null;
 	}
-	
-	
+
+
 	private InetAddress getBroadcastAdress(){
-			InetAddress localHost;
+		InetAddress localHost;
+
+		String OS=System.getProperty("os.name");
+
+		if (OS.equals("Windows 7")){
+			try {
+				return InetAddress.getByAddress(BROADCAST);
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+			
+		}else {
 			try {
 				localHost = InetAddress.getLocalHost();
 				NetworkInterface networkInterface = NetworkInterface.getByInetAddress(localHost);
-				
+
 				for (InterfaceAddress address : networkInterface.getInterfaceAddresses()) {
 					if (address.getBroadcast()!=null) return address.getBroadcast();
-					
+					System.out.println(address);
 				}
-				
-				
+
+
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
+		}
 		
 		return null;
 	}
 
+	public User whoIsIt(InetAddress address){
+		return controller.getUserFromIp(address);
+	}
+
 
 	public static void main(String[] args) {
-		
+
 		ChatNI ni=new ChatNI();
+		String OS=System.getProperty("os.name");
+		System.out.println(OS);
 		InetAddress address=ni.getBroadcastAdress();
 		System.out.println(address);
 
