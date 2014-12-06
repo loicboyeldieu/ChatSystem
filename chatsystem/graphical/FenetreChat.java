@@ -7,6 +7,8 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -156,20 +158,20 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 
 
 
-		//		byte [] bytes1={(byte)192,(byte)2,(byte)10,(byte)1};
-		//
-		//		// TEST SCROLL LIST
-		//		int i=0;
-		//		for (i=0; i<50;i++){
-		//			User A=null;
-		//			try {
-		//				A = new User("toto"+i,InetAddress.getByAddress(bytes1));
-		//			} catch (UnknownHostException e) {
-		//				// TODO Auto-generated catch block
-		//				e.printStackTrace();
-		//			}
-		//			this.addtoList(A);
-		//		}
+				byte [] bytes1={(byte)192,(byte)2,(byte)10,(byte)1};
+		
+				// TEST SCROLL LIST
+				int i=0;
+				for (i=0; i<50;i++){
+					User A=null;
+					try {
+						A = new User("toto"+i,InetAddress.getByAddress(bytes1));
+					} catch (UnknownHostException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					this.addtoList(A);
+				}
 
 
 
@@ -260,6 +262,13 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 
 	public void addMessage(MessageDisplay messageDisplay){
 		this.modelConversation.addElement(messageDisplay);
+		int lastIndex = conversation.getModel().getSize() - 1;
+
+		if (lastIndex >= 0) {
+
+			conversation.ensureIndexIsVisible(lastIndex);
+
+		}
 	}
 
 	public void addMessage(Notification notification){

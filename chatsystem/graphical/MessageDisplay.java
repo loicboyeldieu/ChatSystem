@@ -4,7 +4,7 @@ import chatsystem.User;
 
 /*This class was made to be a graphical representation of the messages received/sent 
  * 
- * @author Aurélien Tamas-Leloup
+ * @author Aurï¿½lien Tamas-Leloup
  */
 
 public class MessageDisplay {
@@ -24,7 +24,7 @@ public class MessageDisplay {
 	
 	
 	public String toString(){
-		return (fromUser+"->"+toUser+" : "+content);
+		return ("<html><p>FROM <span style='color:rgb(230, 126, 34)'> "+fromUser+" </span> TO <span style='color:rgb(52, 152, 219)'> "+toUser+" </span> : "+content+"</p></html>");
 	}
 	
 	
