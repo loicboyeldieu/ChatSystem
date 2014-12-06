@@ -54,8 +54,9 @@ public class ChatGUI implements FromUser{
 	}
 	
 	@Override
-	public void sendFile(String name) {
-		controller.performFileRequest(name);
+	public void sendFile(File file) {
+		controller.performFileRequest(file.getName());
+		controller.setFiletoSend(file);
 	}
 	
 	

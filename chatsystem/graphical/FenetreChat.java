@@ -215,7 +215,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 						File file = fc.getSelectedFile();
 						System.out.println("Fichier choisi : "+file);
 						System.out.println(file.getName());
-						FenetreChat.this.gui.sendFile(file.getName());
+						FenetreChat.this.gui.sendFile(file);
 					}
 				} catch (Exception e){
 					e.printStackTrace();
