@@ -1,5 +1,7 @@
 package chatsystem.network;
 
+import java.io.File;
+
 import chatsystem.User;
 
 public interface ToRemote {
@@ -17,5 +19,7 @@ public interface ToRemote {
 	public void sendFileRequest(User remote,String name);
 	
 	public void sendFileResponse(User remote,String name,boolean response);
+	
+	public void sendFile(File file,User remote);
 
 }

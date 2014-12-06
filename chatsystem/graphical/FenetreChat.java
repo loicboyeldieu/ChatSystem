@@ -158,20 +158,20 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 
 
 
-				byte [] bytes1={(byte)192,(byte)2,(byte)10,(byte)1};
-		
-				// TEST SCROLL LIST
-				int i=0;
-				for (i=0; i<50;i++){
-					User A=null;
-					try {
-						A = new User("toto"+i,InetAddress.getByAddress(bytes1));
-					} catch (UnknownHostException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					this.addtoList(A);
-				}
+		byte [] bytes1={(byte)192,(byte)2,(byte)10,(byte)1};
+
+		// TEST SCROLL LIST
+		//				int i=0;
+		//				for (i=0; i<50;i++){
+		//					User A=null;
+		//					try {
+		//						A = new User("toto"+i,InetAddress.getByAddress(bytes1));
+		//					} catch (UnknownHostException e) {
+		//						// TODO Auto-generated catch block
+		//						e.printStackTrace();
+		//					}
+		//					this.addtoList(A);
+		//				}
 
 
 
@@ -277,7 +277,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 
 	public void displayDialog(String username,String name){
 		Object[] options = {"Yes","No"};
-		
+
 		int n = JOptionPane.showOptionDialog(this,
 				"Would you like to receive : "+name+" from "+username+"?",
 				"A file is coming",
@@ -288,7 +288,16 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 				options[0]); //default button title
 
 		if(n==0){
-			gui.acceptFile(name);
+
+			fc.setCurrentDirectory(new java.io.File("."));
+			fc.setDialogTitle("Save...");
+			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			fc.setAcceptAllFileFilterUsed(false);
+			if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) { 
+				File file=fc.getSelectedFile();
+				gui.acceptFile(name,file);
+			}
+			
 		} else{
 			gui.declineFile(name);
 		}

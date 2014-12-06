@@ -1,6 +1,7 @@
 package chatsystem.network;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
@@ -28,6 +29,8 @@ public class ChatNI implements ToRemote,FromRemote{
 	//Fields
 	private UDPReceiver udpReceiver;
 	private UDPSender udpSender;
+
+	
 	private ChatController controller;
 
 
@@ -164,7 +167,7 @@ public class ChatNI implements ToRemote,FromRemote{
 		FileRequest fileRequest=new FileRequest(name);
 		byte[] buffer=objectToByteArray(fileRequest);
 		
-		//udpSender.send(buffer, remote.getAddress());
+		udpSender.send(buffer, remote.getAddress());
 		try {
 			udpSender.send(buffer, InetAddress.getLocalHost());
 		} catch (Exception e){
@@ -177,18 +180,18 @@ public class ChatNI implements ToRemote,FromRemote{
 	public void sendFileResponse(User remote, String name, boolean response) {
 		FileResponse fileResponse=new FileResponse(response, name);
 		byte[] buffer=objectToByteArray(fileResponse);
-		//udpSender.send(buffer, remote.getAddress());
-		try {
-			udpSender.send(buffer, InetAddress.getLocalHost());
-		} catch (Exception e){
-			e.printStackTrace();
-		}
+		udpSender.send(buffer, remote.getAddress());
+
 	}
 	
+	@Override
+	public void sendFile(File file,User remote) {
+		new TCPClient(remote.getAddress(), file);
+	}
 	
-
-
 	//FromRemote Methods
+
+
 
 
 
@@ -240,6 +243,11 @@ public class ChatNI implements ToRemote,FromRemote{
 	public void onFileAccepted(User u) {
 		controller.processFileAccepted(u);
 	}
+	
+	public void prepareTCPServer(File location){
+		new TCPServer(location).start();
+	}
+	
 
 	//private Methods
 	private byte[] objectToByteArray(Object o){

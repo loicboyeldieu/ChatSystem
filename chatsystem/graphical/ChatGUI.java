@@ -2,8 +2,6 @@ package chatsystem.graphical;
 
 import java.io.File;
 
-import javax.swing.JOptionPane;
-
 import chatsystem.ChatController;
 import chatsystem.User;
 
@@ -64,8 +62,9 @@ public class ChatGUI implements FromUser{
 	
 	
 	@Override
-	public void acceptFile(String name) {
+	public void acceptFile(String name,File file) {
 		controller.performResponse(name,true);
+		controller.performReceivingFile(file);
 	}
 
 	@Override

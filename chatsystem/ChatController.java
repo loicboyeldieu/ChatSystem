@@ -84,7 +84,7 @@ public class ChatController {
 	}
 	
 	public void processFileAccepted(User u){
-		System.out.println("coucou");
+		ni.sendFile(filetoSend,u);
 	}
 	
 	
@@ -134,6 +134,14 @@ public class ChatController {
 	
 	public void performResponse(String name,boolean response){
 		ni.sendFileResponse(waitingUser,name,response);
+	}
+	
+	public void performSendFile(){
+		
+	}
+	
+	public void performReceivingFile(File location){
+		ni.prepareTCPServer(location);
 	}
 	
 	
