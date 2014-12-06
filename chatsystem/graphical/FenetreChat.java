@@ -188,6 +188,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String message =messageTextArea.getText();
+				messageTextArea.setText("");
 				FenetreChat.this.gui.sendMessage(message);
 				
 			}

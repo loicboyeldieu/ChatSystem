@@ -102,6 +102,7 @@ public class ChatController {
 	
 	public void performSend(String message){
 		this.ni.sendSend(message, id, remoteUser);
+		this.gui.displayMessage(localUser, remoteUser, message);
 	}
 	
 	
