@@ -185,6 +185,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 				FenetreChat.this.gui.disconnect();
 				FenetreChat.this.dispose();
 				new FenetreConnect().setGui(FenetreChat.this.gui);
+				
 
 			}
 		});

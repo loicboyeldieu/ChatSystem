@@ -110,7 +110,7 @@ public class ChatController {
 	
 	public void processDisconnect() {
 		this.ni.sendGoodbye(this.localUser.getName());
-		
+		this.ni.stopReception();
 	}
 	
 	

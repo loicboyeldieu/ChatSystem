@@ -79,7 +79,7 @@ public class UDPReceiver extends Thread {
 		super.run();
 		System.out.println("La réception des messages a commencé");
 		
-		while(true)
+		while(!isInterrupted())
 		{
 			try{
 				this.socketReceiver.receive(this.packetReceiver);
@@ -91,6 +91,10 @@ public class UDPReceiver extends Thread {
 			}
 			
 		}
+	}
+	
+	public void stopSocket(){
+		this.socketReceiver.close();
 	}
 
 	

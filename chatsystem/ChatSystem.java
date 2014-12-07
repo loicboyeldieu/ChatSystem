@@ -37,7 +37,7 @@ public class ChatSystem {
 		byte [] bytes2={(byte)193,(byte)3,(byte)10,(byte)1};
 		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 		try{
-			ChatNI ni= new ChatNI(new UDPReceiver(packet), new UDPSender(new DatagramSocket()));
+			ChatNI ni= new ChatNI(new UDPSender(new DatagramSocket()));
 			ChatGUI gui= new ChatGUI(new FenetreConnect());
 			ChatController controller=new ChatController(ni,gui);
 			
@@ -50,7 +50,6 @@ public class ChatSystem {
 			Scanner sc = new Scanner(System.in);
 			sc.nextLine();
 			
-
 		
 			
 		} catch (Exception e){

@@ -3,6 +3,7 @@ package chatsystem.network;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.ObjectOutputStream;
+import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
@@ -27,7 +28,7 @@ public class ChatNI implements ToRemote,FromRemote{
 
 
 	//Fields
-	private UDPReceiver udpReceiver;
+	private UDPReceiver receiver;
 	private UDPSender udpSender;
 
 	
@@ -36,9 +37,15 @@ public class ChatNI implements ToRemote,FromRemote{
 
 	//Constructors
 	public ChatNI(UDPReceiver udpReceiver, UDPSender udpSender) {
-		this.udpReceiver = udpReceiver;
+		this.receiver = udpReceiver;
 		this.udpSender = udpSender;
-		this.udpReceiver.setNi(this);
+		this.receiver.setNi(this);
+		this.udpSender.setNi(this);
+	}
+	
+	
+	public ChatNI(UDPSender udpSender){
+		this.udpSender=udpSender;
 		this.udpSender.setNi(this);
 	}
 
@@ -50,12 +57,12 @@ public class ChatNI implements ToRemote,FromRemote{
 	//Getters and Setters
 
 	public UDPReceiver getUdpReceiver() {
-		return udpReceiver;
+		return receiver;
 	}
 
 
 	public void setUdpReceiver(UDPReceiver udpReceiver) {
-		this.udpReceiver = udpReceiver;
+		this.receiver = udpReceiver;
 	}
 
 
@@ -193,7 +200,20 @@ public class ChatNI implements ToRemote,FromRemote{
 
 
 	public void startReception(){
-		udpReceiver.start();
+		//udpReceiver.start();
+		byte[] buffer = new byte[ChatNI.MAX_SIZE_BUFFER];
+		DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+		receiver=new UDPReceiver(packet);
+		receiver.setNi(this);
+		receiver.start();
+	}
+	
+	
+	public void stopReception(){
+		receiver.interrupt();
+		receiver.stopSocket();
+		
+		receiver=null;
 	}
 
 	@Override
