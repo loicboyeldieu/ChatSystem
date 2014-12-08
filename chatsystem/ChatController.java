@@ -96,20 +96,19 @@ public class ChatController {
 	public void processConnect(String nickname){
 		
 		try {
-			this.localUser=new User(nickname, InetAddress.getLocalHost());
+			localUser=new User(nickname, InetAddress.getLocalHost());
 		} catch (UnknownHostException e) {
-			this.localUser=new User(nickname, null);
+			localUser=new User(nickname, null);
 		} finally {
 			System.out.println("Bienvenue  "+localUser);
 		}
 		
-		
-		this.ni.sendHello(nickname);
 		this.ni.startReception();
+		this.ni.sendHello(nickname);
 	}
 	
 	public void processDisconnect() {
-		this.ni.sendGoodbye(this.localUser.getName());
+		this.ni.sendGoodbye(ChatController.localUser.getName());
 		this.ni.stopReception();
 	}
 	

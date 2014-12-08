@@ -117,8 +117,8 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		paneCenter.setPreferredSize(new Dimension(900,700));
 		paneCenter.setLayout(new BorderLayout());
 		pane.add(paneCenter, BorderLayout.CENTER);
-
-		nomUser = new JLabel("<html><p style='color:white; font-family:Calibri; font-size : 14px; margin-left:30px;'>Welcome " + gui.whoAmI().getName() + " to chat System<p></html>");
+		//gui.whoAmI().getName() +
+		nomUser = new JLabel("<html><p style='color:white; font-family:Calibri; font-size : 14px; margin-left:30px;'>Welcome " +  " to chat System<p></html>");
 		nomUser.setPreferredSize(new Dimension(250,40));
 		paneCenter.add(nomUser, BorderLayout.NORTH);
 

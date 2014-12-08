@@ -98,7 +98,7 @@ public class ChatNI implements ToRemote,FromRemote{
 			InetAddress broadcast=this.getBroadcastAdress();
 			udpSender.send(buffer, broadcast);
 
-			System.out.println("ChatNI :Hello envoyé");
+			System.out.println("ChatNI :Hello envoyï¿½");
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -114,7 +114,7 @@ public class ChatNI implements ToRemote,FromRemote{
 			//InetAddress broadcast=InetAddress.getByAddress(BROADCAST);
 			InetAddress broadcast=this.getBroadcastAdress();
 			udpSender.send(buffer, broadcast);
-			System.out.println("ChatNI :Goodbye envoyé");
+			System.out.println("ChatNI :Goodbye envoyï¿½");
 
 		} catch (Exception e){
 			e.printStackTrace();
@@ -129,7 +129,7 @@ public class ChatNI implements ToRemote,FromRemote{
 			byte[] buffer=objectToByteArray(send);
 			InetAddress adress=remote.getAddress();
 			udpSender.send(buffer, adress);
-			System.out.println("ChatNI :Send envoyé");
+			System.out.println("ChatNI :Send envoyï¿½");
 
 		} catch (Exception e){
 			e.printStackTrace();
@@ -145,12 +145,8 @@ public class ChatNI implements ToRemote,FromRemote{
 			HelloAck helloack=new HelloAck(localUser.getName());
 
 			byte[] buffer=objectToByteArray(helloack);
-
 			udpSender.send(buffer, remoteUser.getAddress());
-			System.out.println("ChatNI :Hello ACK envoyé");
-
-
-
+			System.out.println("ChatNI :Hello ACK envoyï¿½");
 		}catch (Exception e){
 			e.printStackTrace();
 		}

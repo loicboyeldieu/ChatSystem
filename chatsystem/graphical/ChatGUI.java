@@ -47,8 +47,10 @@ public class ChatGUI implements FromUser{
 		System.out.println("Gui :connect");
 		String nickname=FenetreConnect.getNickname();
 		if (nickname.compareTo("")==0) nickname="anonymous";
-		this.controller.processConnect(nickname);
 		this.fenetreChat=new FenetreChat(this);
+		
+		this.controller.processConnect(nickname);
+		
 
 		
 	}
@@ -81,6 +83,10 @@ public class ChatGUI implements FromUser{
 	}
 
 	public void addToConnectedUserList(User u){
+		if (fenetreChat==null){
+			System.out.println("pd");
+		}
+		
 		this.fenetreChat.addtoList(u);
 	}
 	

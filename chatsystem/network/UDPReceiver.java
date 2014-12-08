@@ -77,13 +77,12 @@ public class UDPReceiver extends Thread {
 	@Override
 	public void run() {
 		super.run();
-		System.out.println("La réception des messages a commencé");
+		System.out.println("La rï¿½ception des messages a commencï¿½");
 		
 		while(!isInterrupted())
 		{
 			try{
 				this.socketReceiver.receive(this.packetReceiver);
-				
 				new MessageHandler(this.packetReceiver,this.ni).handle();
 			}catch(Exception e){
 				e.printStackTrace();
