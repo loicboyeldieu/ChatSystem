@@ -68,6 +68,7 @@ public class ChatGUI implements FromUser{
 	public void acceptFile(String name,File file) {
 		controller.performResponse(name,true);
 		controller.performReceivingFile(file,name);
+		this.displayFileNotificationTransfer(false);
 	}
 
 	@Override

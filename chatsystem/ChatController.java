@@ -86,7 +86,7 @@ public class ChatController {
 	public void processFileAccepted(User u){
 		ni.sendFile(filetoSend,u);
 		this.gui.displayStatusFile(true, u);
-		
+		this.gui.displayFileNotificationTransfer(false);
 	}
 	
 	public void processFileRefused(User u){
