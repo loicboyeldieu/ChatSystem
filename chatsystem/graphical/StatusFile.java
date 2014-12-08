@@ -1,5 +1,7 @@
 package chatsystem.graphical;
 
+import java.util.Date;
+
 import chatsystem.User;
 
 public class StatusFile {
@@ -15,12 +17,13 @@ public class StatusFile {
 	
 	@Override
 	public String toString(){
+		Date date = new Date();
 		// status=true -> acceptation 
 		if (status){
-			return "<html><p style='color:#20cc0a'>" + concernedUser + " accepted to receive your file</p></html>";
+			return "<html><p style='color:#20cc0a'>["+date.toString().subSequence(11, 16)+"] " + concernedUser + " accepted to receive your file</p></html>";
 		}
 		else{
-			return "<html><p style='color:#e32232;'>" + concernedUser + " refused to receive your file</p></html>";
+			return "<html><p style='color:#e32232;'>["+date.toString().subSequence(11, 16)+"] " + concernedUser + " refused to receive your file</p></html>";
 		}
 	}
 	
