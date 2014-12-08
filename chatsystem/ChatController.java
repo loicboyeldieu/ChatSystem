@@ -85,6 +85,8 @@ public class ChatController {
 	
 	public void processFileAccepted(User u){
 		ni.sendFile(filetoSend,u);
+		this.gui.displayStatusFile(true, u);
+		
 	}
 	
 	
@@ -136,6 +138,7 @@ public class ChatController {
 	
 	public void performResponse(String name,boolean response){
 		ni.sendFileResponse(waitingUser,name,response);
+		
 	}
 	
 	public void performSendFile(){

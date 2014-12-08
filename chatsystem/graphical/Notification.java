@@ -17,7 +17,7 @@ public class Notification {
 		if (goodbye){
 			return concernedUser+" has just left the ChatSystem";
 		} else{
-			return concernedUser+"has just joined the ChatSystem";
+			return concernedUser+" has just joined the ChatSystem";
 		}
 	}
 	

@@ -104,6 +104,14 @@ public class ChatGUI implements FromUser{
 		fenetreChat.addMessage(new Notification(user, goodbye));
 	}
 	
+	public void displayStatusFile(boolean status, User user){
+		fenetreChat.addMessage(new StatusFile(status, user));
+	}
+	
+	public void displayFileNotificationTransfer(boolean endTransfer){
+		fenetreChat.addMessage(new FileNotifications(endTransfer));
+	}
+	
 	public void displayFileRequest(User u,String name){
 		
 		if (u==null){

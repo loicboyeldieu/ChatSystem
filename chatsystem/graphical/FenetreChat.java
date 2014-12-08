@@ -161,17 +161,17 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		byte [] bytes1={(byte)192,(byte)2,(byte)10,(byte)1};
 
 		// TEST SCROLL LIST
-		//				int i=0;
-		//				for (i=0; i<50;i++){
-		//					User A=null;
-		//					try {
-		//						A = new User("toto"+i,InetAddress.getByAddress(bytes1));
-		//					} catch (UnknownHostException e) {
-		//						// TODO Auto-generated catch block
-		//						e.printStackTrace();
-		//					}
-		//					this.addtoList(A);
-		//				}
+						int i=0;
+						for (i=0; i<50;i++){
+							User A=null;
+							try {
+								A = new User("toto"+i,InetAddress.getByAddress(bytes1));
+							} catch (UnknownHostException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							this.addtoList(A);
+						}
 
 
 
@@ -274,6 +274,14 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 
 	public void addMessage(Notification notification){
 		this.modelConversation.addElement(notification);
+	}
+	
+	public void addMessage(StatusFile statusFile){
+		this.modelConversation.addElement(statusFile);
+	}
+	
+	public void addMessage(FileNotifications fileNotification){
+		this.modelConversation.addElement(fileNotification);
 	}
 
 	public void displayDialog(String username,String name){
