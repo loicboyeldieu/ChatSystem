@@ -1,5 +1,7 @@
 package chatsystem.graphical;
 
+import java.util.Date;
+
 import chatsystem.User;
 
 public class Notification {
@@ -14,10 +16,11 @@ public class Notification {
 	}
 	
 	public String toString(){
+		Date date = new Date();
 		if (goodbye){
-			return concernedUser+" has just left the ChatSystem";
+			return "["+date+"]"+concernedUser+" has just left the ChatSystem";
 		} else{
-			return concernedUser+" has just joined the ChatSystem";
+			return "["+date+"]"+concernedUser+" has just joined the ChatSystem";
 		}
 	}
 	
