@@ -89,6 +89,11 @@ public class ChatController {
 		
 	}
 	
+	public void processFileRefused(User u){
+		this.gui.displayStatusFile(false, u);
+	}
+	
+	
 	
 	//from GUI
 	
