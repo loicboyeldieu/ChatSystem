@@ -67,9 +67,14 @@ public class MessageHandler {
 				ni.onFileRequestReceived(u,fileRequest.getName());
 			} else if (messageReceived instanceof FileResponse){
 				FileResponse fileResponse=(FileResponse)messageReceived;
+				u=ni.whoIsIt(address);
 				if (fileResponse.getResponse()){
-					ni.onFileAccepted(u=ni.whoIsIt(address));
+					ni.onFileAccepted(u);
 				}
+				else{	
+					ni.onFileRefused(u);
+				}
+				
 			}
 
 			

@@ -256,6 +256,11 @@ public class ChatNI implements ToRemote,FromRemote{
 		controller.processFileAccepted(u);
 	}
 	
+	@Override
+	public void onFileRefused(User u){
+		controller.processFileRefused(u);
+	}
+	
 	public void prepareTCPServer(File location,String name){
 		new TCPServer(location,name).start();
 	}

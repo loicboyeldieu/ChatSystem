@@ -18,5 +18,7 @@ public interface FromRemote {
 	
 	public void onFileAccepted(User u);
 	
+	public void onFileRefused(User u);
+	
 
 }
