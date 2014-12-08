@@ -1,5 +1,7 @@
 package chatsystem.graphical;
 
+import java.util.Date;
+
 import chatsystem.User;
 
 /*This class was made to be a graphical representation of the messages received/sent 
@@ -24,7 +26,8 @@ public class MessageDisplay {
 	
 	
 	public String toString(){
-		return ("<html><p>FROM <span style='color:rgb(230, 126, 34)'> "+fromUser+" </span> TO <span style='color:rgb(52, 152, 219)'> "+toUser+" </span> : "+content+"</p></html>");
+		Date date = new Date();
+		return ("<html><p>["+date.toString().subSequence(11, 15)+"] FROM <span style='color:rgb(230, 126, 34)'> "+fromUser+" </span> TO <span style='color:rgb(52, 152, 219)'> "+toUser+" </span> : "+content+"</p></html>");
 	}
 	
 	

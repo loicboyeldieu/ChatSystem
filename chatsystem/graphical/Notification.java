@@ -18,9 +18,9 @@ public class Notification {
 	public String toString(){
 		Date date = new Date();
 		if (goodbye){
-			return "["+date+"]"+concernedUser+" has just left the ChatSystem";
+			return "["+date.toString().subSequence(11, 15)+"] "+concernedUser+" has just left the ChatSystem";
 		} else{
-			return "["+date+"]"+concernedUser+" has just joined the ChatSystem";
+			return "["+date.toString().subSequence(11, 15)+"] "+concernedUser+" has just joined the ChatSystem";
 		}
 	}
 	
