@@ -27,7 +27,7 @@ public class MessageDisplay {
 	
 	public String toString(){
 		Date date = new Date();
-		return ("<html><p>["+date.toString().subSequence(11, 15)+"] FROM <span style='color:rgb(230, 126, 34)'> "+fromUser+" </span> TO <span style='color:rgb(52, 152, 219)'> "+toUser+" </span> : "+content+"</p></html>");
+		return ("<html><p>["+date.toString().subSequence(11, 16)+"] <span style='color:rgb(230, 126, 34)'> "+fromUser+" </span> -> <span style='color:rgb(52, 152, 219)'> "+toUser+" </span> : "+content+"</p></html>");
 	}
 	
 	
