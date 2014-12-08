@@ -94,7 +94,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 
 
 		//Label de la liste
-		this.labelListe = new JLabel("<html><p style='color:white; font-family:Calibri, Arial; font-size : 12px; margin-left:30px;'>List of connected users<p></html>");
+		this.labelListe = new JLabel("<html><p style='color:white; font-family:Arial; font-size : 12px; margin-left:10px;'>List of connected users<p></html>");
 		labelListe.setPreferredSize(new Dimension(250,40));
 		paneGauche.add(labelListe, BorderLayout.NORTH);
 
@@ -106,7 +106,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		paneGauche.add(scrollPaneList, BorderLayout.CENTER);
 
 		// Button deconnexion
-		deconnexionButton = new JButton("<html><p style='color:black; font-family:Calibri, Arial; font-size : 12px;'>Disconnect<p></html>");
+		deconnexionButton = new JButton("<html><p style='color:black; font-family:Arial; font-size : 12px;'>Disconnect<p></html>");
 		deconnexionButton.setPreferredSize(new Dimension(200,40));
 		paneGauche.add(deconnexionButton, BorderLayout.SOUTH);
 
@@ -118,7 +118,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		paneCenter.setLayout(new BorderLayout());
 		pane.add(paneCenter, BorderLayout.CENTER);
 		//gui.whoAmI().getName() +
-		nomUser = new JLabel("<html><p style='color:white; font-family:Calibri, Arial; font-size : 14px; margin-left:30px;'>Welcome " +  " to chat System<p></html>");
+		nomUser = new JLabel("<html><p style='color:white; font-family:Arial; font-size : 14px; margin-left:10px;'>Welcome " +  " to chat System<p></html>");
 		nomUser.setPreferredSize(new Dimension(250,40));
 		paneCenter.add(nomUser, BorderLayout.NORTH);
 
@@ -149,11 +149,11 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		sendPane.setBackground(new Color(236, 240, 241));
 		bottomPane.add(sendPane, BorderLayout.EAST);
 
-		sendButton = new JButton("<html><p style='color:black; font-family:Calibri, Arial; font-size : 12px;'>Send<p></html>");
+		sendButton = new JButton("<html><p style='color:black; font-family:Arial; font-size : 12px;'>Send<p></html>");
 		sendButton.setPreferredSize(new Dimension(100,40));
 		sendPane.add(sendButton, BorderLayout.CENTER);
 
-		sendFileButton = new JButton("<html><p style='color:black; font-family:Calibri, Arial; font-size : 12px;'>Send File<p></html>");
+		sendFileButton = new JButton("<html><p style='color:black; font-family:Arial; font-size : 12px;'>Send File<p></html>");
 		sendPane.add(sendFileButton, BorderLayout.NORTH);
 
 
