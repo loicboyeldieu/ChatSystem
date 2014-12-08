@@ -17,10 +17,10 @@ public class StatusFile {
 	public String toString(){
 		// status=true -> acceptation 
 		if (status){
-			return concernedUser + " accepted to receive your file";
+			return "<html><p style='color:#14ec26;'>" + concernedUser + " accepted to receive your file</p></html>";
 		}
 		else{
-			return concernedUser + " refused to receive your file";
+			return "<html><p style='color:#e32232;'>" + concernedUser + " refused to receive your file</p></html>";
 		}
 	}
 	

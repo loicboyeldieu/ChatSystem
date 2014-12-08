@@ -16,10 +16,10 @@ public class FileNotifications {
 	@Override
 	public String toString(){
 		if (endTransfer){
-			return "File transfer complete";
+			return "<html><p style='color:#14ec26;'> File transfer complete</p></html>";
 		}
 		else{
-			return "File transfer begin";
+			return "<html><p style='color:#14ec26;'> File transfer begin </p></html>";
 		}
 		
 	}
