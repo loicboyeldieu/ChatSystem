@@ -31,6 +31,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	private UDPReceiver receiver;
 	private UDPSender udpSender;
 
+	private boolean tcpBusy;
 	
 	private ChatController controller;
 
@@ -41,15 +42,18 @@ public class ChatNI implements ToRemote,FromRemote{
 		this.udpSender = udpSender;
 		this.receiver.setNi(this);
 		this.udpSender.setNi(this);
+		this.tcpBusy=false;
 	}
 	
 	
 	public ChatNI(UDPSender udpSender){
 		this.udpSender=udpSender;
 		this.udpSender.setNi(this);
+		this.tcpBusy=false;
 	}
 
 	public ChatNI(){
+		this.tcpBusy=false;
 
 	}
 
@@ -185,7 +189,12 @@ public class ChatNI implements ToRemote,FromRemote{
 	
 	@Override
 	public void sendFile(File file,User remote) {
-		new TCPClient(remote.getAddress(), file).start();
+		if (!tcpBusy){
+			tcpBusy=true;
+			new TCPClient(remote.getAddress(), file).start();
+			tcpBusy=false;
+		}
+		
 	}
 	
 	//FromRemote Methods
@@ -262,7 +271,12 @@ public class ChatNI implements ToRemote,FromRemote{
 	}
 	
 	public void prepareTCPServer(File location,String name){
-		new TCPServer(location,name).start();
+		if (!tcpBusy){
+			tcpBusy=true;
+			new TCPServer(location,name).start();
+			tcpBusy=false;
+		}
+		
 	}
 	
 
