@@ -191,7 +191,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	public void sendFile(File file,User remote) {
 		if (!tcpBusy){
 			tcpBusy=true;
-			new TCPClient(remote.getAddress(), file).start();
+			new TCPClient(remote.getAddress(), file,this).start();
 			tcpBusy=false;
 		}
 		
@@ -273,12 +273,16 @@ public class ChatNI implements ToRemote,FromRemote{
 	public void prepareTCPServer(File location,String name){
 		if (!tcpBusy){
 			tcpBusy=true;
-			new TCPServer(location,name).start();
+			new TCPServer(location,name,this).start();
 			tcpBusy=false;
 		}
 		
 	}
 	
+	
+	public void onFileCompleted(){
+		controller.processFileCompleted();
+	}
 
 	//private Methods
 	private byte[] objectToByteArray(Object o){

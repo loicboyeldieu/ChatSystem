@@ -93,6 +93,9 @@ public class ChatController {
 		this.gui.displayStatusFile(false, u);
 	}
 	
+	public void processFileCompleted(){
+		gui.displayFileNotificationTransfer(true);
+	}
 	
 	
 	//from GUI

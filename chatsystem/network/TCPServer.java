@@ -14,10 +14,12 @@ public class TCPServer extends Thread{
 	private String name;
 
 	private File location;
+	private ChatNI ni;
 	
-	public TCPServer(File location,String name){
+	public TCPServer(File location,String name,ChatNI ni){
 		this.location=location;
 		this.name=name;
+		this.ni=ni;
 		try{
 			listenSocket = new ServerSocket(ChatNI.NUM_PORT);
 		}catch (Exception e){
@@ -38,7 +40,7 @@ public class TCPServer extends Thread{
 	    	while (clientSocket==null){
 	    		clientSocket = listenSocket.accept();
 	    	}
-	    	System.out.println("Après acceptation");
+	    	System.out.println("Aprï¿½s acceptation");
 		    is = clientSocket.getInputStream();
 	        bufferSize = clientSocket.getReceiveBufferSize();
 	        //fos = new FileOutputStream("D:/GROS DESIGN/resultat");
@@ -59,7 +61,7 @@ public class TCPServer extends Thread{
 	        is.close();
 	        clientSocket.close();
 	        listenSocket.close();
-	        System.out.println("Server :On a fini");
+	        ni.onFileCompleted();
 	    }catch (Exception e){
 			e.printStackTrace();
 		}
@@ -68,15 +70,15 @@ public class TCPServer extends Thread{
 	}
 	
 	public static void main(String[] args) {
-		try {
-			TCPServer tcpServer = new TCPServer(new File("D:/"),"cle.txt");
-			tcpServer.start();
-			System.out.println("Thread principal : server démarré");
-			TCPClient tcpClient = new TCPClient(InetAddress.getLocalHost(), new File("D:/cléssha1.txt"));
-			tcpClient.start();
-		}catch (Exception e){
-			e.printStackTrace();
-		}
+//		try {
+//			TCPServer tcpServer = new TCPServer(new File("D:/"),"cle.txt");
+//			tcpServer.start();
+//			System.out.println("Thread principal : server dï¿½marrï¿½");
+//			TCPClient tcpClient = new TCPClient(InetAddress.getLocalHost(), new File("D:/clï¿½ssha1.txt"));
+//			tcpClient.start();
+//		}catch (Exception e){
+//			e.printStackTrace();
+//		}
 
 	}
 

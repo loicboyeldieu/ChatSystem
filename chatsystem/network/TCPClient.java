@@ -10,8 +10,11 @@ import java.net.Socket;
 public class TCPClient extends Thread {
 	private Socket socket;
 	private File file;
+	private ChatNI ni;
 	
-	public TCPClient(InetAddress adress,File file){
+	public TCPClient(InetAddress adress,File file,ChatNI ni){
+		this.ni=ni;
+		
 		try{
 			socket=new Socket(adress, ChatNI.NUM_PORT);
 			this.file=file;
@@ -45,6 +48,7 @@ public class TCPClient extends Thread {
 		        fis.close();
 		        bis.close();
 		        socket.close();
+		        ni.onFileCompleted();
 		    }
 		} catch (Exception e){
 			e.printStackTrace();
