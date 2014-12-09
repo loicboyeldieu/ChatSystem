@@ -4,6 +4,10 @@ import java.io.File;
 
 import chatsystem.ChatController;
 import chatsystem.User;
+import chatsystem.graphical.notification.FileNotifications;
+import chatsystem.graphical.notification.MessageDisplay;
+import chatsystem.graphical.notification.Notification;
+import chatsystem.graphical.notification.StatusFile;
 
 public class ChatGUI implements FromUser{
 	

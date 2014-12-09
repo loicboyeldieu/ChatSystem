@@ -1,10 +1,10 @@
-package chatsystem.graphical;
+package chatsystem.graphical.notification;
 
 import java.util.Date;
 
 import chatsystem.User;
 
-public class StatusFile {
+public class StatusFile extends NotificationDisplay{
 	
 	private boolean status;
 	private User concernedUser;
@@ -17,8 +17,6 @@ public class StatusFile {
 	
 	@Override
 	public String toString(){
-		Date date = new Date();
-		CharSequence currentDate = date.toString().subSequence(11, 16);
 		// status=true -> acceptation 
 		if (status){
 			return "<html><p style='color:#20cc0a'>["+date.toString().subSequence(11, 16)+"] " + concernedUser + " accepted to receive your file</p></html>";

@@ -1,4 +1,4 @@
-package chatsystem.graphical;
+package chatsystem.graphical.notification;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import chatsystem.User;
  * @author Aur�lien Tamas-Leloup
  */
 
-public class MessageDisplay {
+public class MessageDisplay extends NotificationDisplay{
 	
 	
 	private User fromUser;
@@ -26,7 +26,6 @@ public class MessageDisplay {
 	
 	
 	public String toString(){
-		Date date = new Date();
 		return ("<html><p>["+date.toString().subSequence(11, 16)+"] <span style='color:rgb(230, 126, 34)'> "+fromUser+" </span> -> <span style='color:rgb(52, 152, 219)'> "+toUser+" </span> : "+content+"</p></html>");
 	}
 	

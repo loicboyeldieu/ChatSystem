@@ -1,4 +1,4 @@
-package chatsystem.graphical;
+package chatsystem.graphical.notification;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import java.util.Date;
  * @author Loïc Boyeldieu
  */
 
-public class FileNotifications {
+public class FileNotifications extends NotificationDisplay{
 
 	private boolean endTransfer;
 	
@@ -17,7 +17,6 @@ public class FileNotifications {
 	
 	@Override
 	public String toString(){
-		Date date = new Date();
 		if (endTransfer){
 			return "<html><p style='color:#20cc0a;'>["+date.toString().subSequence(11, 16)+"] File transfer complete</p></html>";
 		}
