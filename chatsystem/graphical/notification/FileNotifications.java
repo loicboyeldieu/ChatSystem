@@ -12,6 +12,7 @@ public class FileNotifications extends NotificationDisplay{
 	private boolean endTransfer;
 	
 	public FileNotifications(boolean endTransfer){
+		super();
 		this.endTransfer=endTransfer;
 	}
 	

@@ -1,7 +1,5 @@
 package chatsystem.graphical.notification;
 
-import java.util.Date;
-
 import chatsystem.User;
 
 public class StatusFile extends NotificationDisplay{

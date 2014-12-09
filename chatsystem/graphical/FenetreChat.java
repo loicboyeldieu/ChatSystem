@@ -7,8 +7,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -31,6 +29,7 @@ import chatsystem.User;
 import chatsystem.graphical.notification.FileNotifications;
 import chatsystem.graphical.notification.MessageDisplay;
 import chatsystem.graphical.notification.Notification;
+import chatsystem.graphical.notification.NotificationDisplay;
 import chatsystem.graphical.notification.StatusFile;
 
 public class FenetreChat extends JFrame implements ListSelectionListener{
@@ -42,7 +41,8 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 
 	private JButton deconnexionButton,sendButton, sendFileButton;
 	private JTextArea messageTextArea;
-	private JList liste,conversation;
+	private JList <User>liste;
+	private JList <NotificationDisplay>conversation;
 	private JLabel labelListe,nomUser;
 
 	final JFileChooser fc = new JFileChooser();
@@ -53,9 +53,9 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 
 	final JDialog dialog=new JDialog();
 
-	final DefaultListModel model=new DefaultListModel();
+	final DefaultListModel<User> model=new DefaultListModel<User>();
 
-	final DefaultListModel modelConversation=new DefaultListModel();
+	final DefaultListModel<NotificationDisplay> modelConversation=new DefaultListModel<NotificationDisplay>();
 
 	private ChatGUI gui;
 
@@ -103,7 +103,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		paneGauche.add(labelListe, BorderLayout.NORTH);
 
 		// création de la liste
-		liste = new JList(model);
+		liste = new JList<User>(model);
 		JScrollPane scrollPaneList = new JScrollPane(liste);
 		liste.setBackground(new Color(52, 152, 219));
 		liste.addListSelectionListener(this);
@@ -128,7 +128,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 
 
 		//conversation
-		conversation = new JList(modelConversation);
+		conversation = new JList<NotificationDisplay>(modelConversation);
 		JScrollPane scrollPaneConversation = new JScrollPane(conversation);
 		conversation.setBackground(new Color(236, 240, 241));
 		conversation.setEnabled(false);
@@ -162,7 +162,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 
 
 
-		byte [] bytes1={(byte)192,(byte)2,(byte)10,(byte)1};
+		//byte [] bytes1={(byte)192,(byte)2,(byte)10,(byte)1};
 
 		// TEST SCROLL LIST
 //						int i=0;

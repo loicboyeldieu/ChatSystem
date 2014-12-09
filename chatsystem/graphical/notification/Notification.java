@@ -16,6 +16,7 @@ public class Notification extends NotificationDisplay{
 		this.goodbye = goodbye;
 	}
 	
+	@Override
 	public String toString(){
 		
 		if (goodbye){
