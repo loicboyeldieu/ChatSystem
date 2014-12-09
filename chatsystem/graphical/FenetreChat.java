@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -131,8 +132,16 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		conversation = new JList<NotificationDisplay>(modelConversation);
 		JScrollPane scrollPaneConversation = new JScrollPane(conversation);
 		conversation.setBackground(new Color(236, 240, 241));
-		conversation.setEnabled(false);
-		UIManager.put("Label.disabledForeground", Color.BLACK);
+		//conversation.setEnabled(false);
+		conversation.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				conversation.clearSelection();
+				conversation.removeSelectionInterval(0, 100);
+			}
+		});
+		//UIManager.put("Label.disabledForeground", Color.BLACK);
 		paneCenter.add(scrollPaneConversation, BorderLayout.CENTER);
 
 		//BottomPanel est contenu dans Right Panel et comporte le textfield et le bouton Send
