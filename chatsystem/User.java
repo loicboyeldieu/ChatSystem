@@ -4,7 +4,7 @@ import java.net.InetAddress;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class User.
+ * The User class maps  an IP address to a nickname
  */
 public class User {
 
@@ -19,8 +19,8 @@ public class User {
 	/**
 	 * Instantiates a new user.
 	 *
-	 * @param name the name
-	 * @param address the address
+	 * @param name the nickname of the user
+	 * @param address the IP address of a User
 	 */
 	public User(String name, InetAddress address) {
 		super();
@@ -95,8 +95,8 @@ public class User {
 	/**
 	 * Equals.
 	 *
-	 * @param u the u
-	 * @return true, if successful
+	 * @param u another user
+	 * @return true, if IP address are the same
 	 */
 	public boolean equals(User u) {
 		return this.address.equals(u.getAddress());

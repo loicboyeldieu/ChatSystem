@@ -15,7 +15,7 @@ import chatsystemTDa2.Message;
 
 
 /**
- * The Class UDPReceiver.
+ * The Class UDPReceiver receives message
  */
 public class UDPReceiver extends Thread {
 	

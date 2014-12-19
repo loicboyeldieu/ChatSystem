@@ -11,7 +11,7 @@ import chatsystem.graphical.notification.StatusFile;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ChatGUI.
+ * The Class ChatGUI is the Facade for all the GUI related components
  */
 public class ChatGUI implements FromUser{
 	
@@ -28,7 +28,7 @@ public class ChatGUI implements FromUser{
 	/**
 	 * Instantiates a new chat gui.
 	 *
-	 * @param connexion the connexion
+	 * @param connexion the connexion window
 	 */
 	public ChatGUI(FenetreConnect connexion){
 		fenetreConnect=connexion;
@@ -135,7 +135,7 @@ public class ChatGUI implements FromUser{
 	}
 
 	/**
-	 * Adds the to connected user list.
+	 * Adds the User to the connected user list.
 	 *
 	 * @param u the u
 	 */
@@ -148,9 +148,9 @@ public class ChatGUI implements FromUser{
 	}
 	
 	/**
-	 * Removes the user.
+	 * Removes the user u from the list 
 	 *
-	 * @param u the u
+	 * @param u the user
 	 */
 	public void removeUser(User u){
 		this.fenetreChat.removefromList(u);
@@ -160,8 +160,8 @@ public class ChatGUI implements FromUser{
 	/**
 	 * Display message.
 	 *
-	 * @param fromUser the from user
-	 * @param toUser the to user
+	 * @param fromUser the user who sent the message
+	 * @param toUser the to user who received the message
 	 * @param message the message
 	 */
 	public void displayMessage(User fromUser, User toUser, String message) {
@@ -172,8 +172,8 @@ public class ChatGUI implements FromUser{
 	/**
 	 * Display notification.
 	 *
-	 * @param user the user
-	 * @param goodbye the goodbye
+	 * @param user the user who just left /came in
+	 * @param goodbye true if he left /false if he came in
 	 */
 	public void displayNotification(User user,boolean goodbye){
 		fenetreChat.addMessage(new Notification(user, goodbye));
@@ -182,8 +182,8 @@ public class ChatGUI implements FromUser{
 	/**
 	 * Display status file.
 	 *
-	 * @param status the status
-	 * @param user the user
+	 * @param status the status 
+	 * @param user the user that sent the file
 	 */
 	public void displayStatusFile(boolean status, User user){
 		fenetreChat.addMessage(new StatusFile(status, user));
@@ -201,7 +201,7 @@ public class ChatGUI implements FromUser{
 	/**
 	 * Display file request.
 	 *
-	 * @param u the u
+	 * @param u the user that sent the file
 	 * @param name the name
 	 */
 	public void displayFileRequest(User u,String name){
@@ -216,7 +216,7 @@ public class ChatGUI implements FromUser{
 	/**
 	 * Who am i.
 	 *
-	 * @return the user
+	 * @return the local user
 	 */
 	public User whoAmI(){
 		return ChatController.getLocalUser();

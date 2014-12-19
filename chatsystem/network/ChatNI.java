@@ -287,7 +287,7 @@ public class ChatNI implements ToRemote,FromRemote{
 
 
 	/**
-	 * Start reception.
+	 * Start the UDP Receiver Thread
 	 */
 	public void startReception(){
 		//udpReceiver.start();
@@ -300,7 +300,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	
 	
 	/**
-	 * Stop reception.
+	 * Stop the UDP Receiver Thread.
 	 */
 	public void stopReception(){
 		receiver.interrupt();
@@ -383,7 +383,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	}
 	
 	/**
-	 * Prepare tcp server.
+	 * Prepare the the tcp server for the incoming file.
 	 *
 	 * @param location the location
 	 * @param name the name
@@ -399,7 +399,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	
 	
 	/**
-	 * On file completed.
+	 * called when the file transfer ends up
 	 */
 	public void onFileCompleted(){
 		controller.processFileCompleted();
@@ -463,7 +463,7 @@ public class ChatNI implements ToRemote,FromRemote{
 	}
 
 	/**
-	 * Who is it.
+	 * Who is it ? 
 	 *
 	 * @param address the address
 	 * @return the user

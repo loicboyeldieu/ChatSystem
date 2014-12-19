@@ -7,14 +7,12 @@ import java.util.Scanner;
 
 import chatsystem.graphical.ChatGUI;
 import chatsystem.graphical.FenetreConnect;
-import chatsystem.graphical.FenetreConnexion;
 import chatsystem.network.ChatNI;
-import chatsystem.network.UDPReceiver;
 import chatsystem.network.UDPSender;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ChatSystem.
+ * The Class ChatSystem is the main class of our project, and the class to launch to run our application
  */
 public class ChatSystem {
 	

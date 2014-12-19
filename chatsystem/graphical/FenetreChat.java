@@ -87,7 +87,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 
 
 	/**
-	 * Instantiates a new fenetre chat.
+	 * Instantiates a new fenetre chat and inits all the components
 	 *
 	 * @param gui the gui
 	 */
@@ -275,9 +275,9 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	}
 
 	/**
-	 * Addto list.
+	 * Add to list.
 	 *
-	 * @param u the u
+	 * @param u the user
 	 */
 	public void addtoList(User u) {
 		this.model.addElement(u);
@@ -285,9 +285,9 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	}
 
 	/**
-	 * Removefrom list.
+	 * Remove from list.
 	 *
-	 * @param u the u
+	 * @param u the user
 	 */
 	public void removefromList(User u){
 		User user;
@@ -303,7 +303,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	/**
 	 * Gets the value.
 	 *
-	 * @return the value
+	 * @return the value of the selected user
 	 */
 	public User getValue(){
 		return this.selectedValue;
@@ -321,7 +321,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 
 
 	/**
-	 * Adds the message.
+	 * Adds the message to the window
 	 *
 	 * @param messageDisplay the message display
 	 */
@@ -364,7 +364,7 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	}
 
 	/**
-	 * Display dialog.
+	 * Display dialog to pop up when a FileRequest has been send
 	 *
 	 * @param username the username
 	 * @param name the name

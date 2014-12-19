@@ -49,7 +49,7 @@ public class FenetreConnect extends JFrame {
 	private ChatGUI gui;
 	
 	/**
-	 * Instantiates a new fenetre connect.
+	 * Instantiates a new fenetre connect and init all the components
 	 */
 	public FenetreConnect(){
 		super(ChatSystem.NOM);

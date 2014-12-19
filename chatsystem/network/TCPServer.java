@@ -10,7 +10,7 @@ import java.net.Socket;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TCPServer.
+ * The Class TCPServer is aimed at receiving files.
  */
 public class TCPServer extends Thread{
 	

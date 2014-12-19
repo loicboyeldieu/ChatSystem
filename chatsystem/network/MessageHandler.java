@@ -17,7 +17,7 @@ import chatsystemTDa2.SendAck;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class MessageHandler.
+ * The Class MessageHandler is instantiated whenever a message has been received
  */
 public class MessageHandler {
 	
@@ -45,7 +45,7 @@ public class MessageHandler {
 
 
 	/**
-	 * Handle.
+	 * Handle the received message
 	 */
 	public void handle() {
 		try{

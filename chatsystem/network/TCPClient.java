@@ -9,7 +9,7 @@ import java.net.Socket;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TCPClient.
+ * The Class TCPClient is aimed at sending files.
  */
 public class TCPClient extends Thread {
 	

@@ -9,28 +9,28 @@ import chatsystem.User;
 public interface FromRemote {
 
 	/**
-	 * On hello received.
+	 * On Hello received.
 	 *
 	 * @param u the u
 	 */
 	public void onHelloReceived(User u);
 	
 	/**
-	 * On hello ack received.
+	 * On Hello ack received.
 	 *
 	 * @param u the u
 	 */
 	public void onHelloAckReceived(User u);
 	
 	/**
-	 * On goodbye received.
+	 * On Goodbye received.
 	 *
 	 * @param u the u
 	 */
 	public void onGoodbyeReceived(User u);
 	
 	/**
-	 * On send received.
+	 * On Send received.
 	 *
 	 * @param u the u
 	 * @param message the message
@@ -39,7 +39,7 @@ public interface FromRemote {
 	public void onSendReceived(User u,String message,int id);
 	
 	/**
-	 * On send ack received.
+	 * On SendAck received.
 	 *
 	 * @param u the u
 	 * @param id the id
@@ -47,7 +47,7 @@ public interface FromRemote {
 	public void onSendAckReceived(User u,int id);
 	
 	/**
-	 * On file request received.
+	 * On FileRequest received.
 	 *
 	 * @param u the u
 	 * @param name the name
@@ -55,14 +55,14 @@ public interface FromRemote {
 	public void onFileRequestReceived(User u, String name);
 	
 	/**
-	 * On file accepted.
+	 * On FileAccepted.
 	 *
 	 * @param u the u
 	 */
 	public void onFileAccepted(User u);
 	
 	/**
-	 * On file refused.
+	 * On FileRefused.
 	 *
 	 * @param u the u
 	 */

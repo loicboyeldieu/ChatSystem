@@ -11,21 +11,21 @@ import chatsystem.User;
 public interface ToRemote {
 	
 	/**
-	 * Send hello.
+	 * Send Hello.
 	 *
 	 * @param nickname the nickname
 	 */
 	public void sendHello(String nickname);
 	
 	/**
-	 * Send goodbye.
+	 * Send Goodbye.
 	 *
 	 * @param nickname the nickname
 	 */
 	public void sendGoodbye(String nickname);
 	
 	/**
-	 * Send hello ack.
+	 * Send HelloAck.
 	 *
 	 * @param remote the remote
 	 * @param local the local
@@ -33,7 +33,7 @@ public interface ToRemote {
 	public void sendHelloACK(User remote,User local);
 	
 	/**
-	 * Send send.
+	 * Send Send.
 	 *
 	 * @param msg the msg
 	 * @param id the id
@@ -42,7 +42,7 @@ public interface ToRemote {
 	public void sendSend(String msg,int id,User remote);
 	
 	/**
-	 * Send send ack.
+	 * Send SendAck.
 	 *
 	 * @param id the id
 	 * @param remote the remote
@@ -50,7 +50,7 @@ public interface ToRemote {
 	public void sendSendAck(int id,User remote);
 	
 	/**
-	 * Send file request.
+	 * Send FileRequest.
 	 *
 	 * @param remote the remote
 	 * @param name the name
@@ -58,7 +58,7 @@ public interface ToRemote {
 	public void sendFileRequest(User remote,String name);
 	
 	/**
-	 * Send file response.
+	 * Send FileResponse.
 	 *
 	 * @param remote the remote
 	 * @param name the name
@@ -67,7 +67,7 @@ public interface ToRemote {
 	public void sendFileResponse(User remote,String name,boolean response);
 	
 	/**
-	 * Send file.
+	 * Send File.
 	 *
 	 * @param file the file
 	 * @param remote the remote
