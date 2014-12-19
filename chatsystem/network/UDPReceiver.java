@@ -11,7 +11,6 @@ import chatsystemTDa2.Message;
 
 
 // TODO: Auto-generated Javadoc
-// j.B : Je le baiserai mon MAC 14:30 2/12/14
 
 
 /**
