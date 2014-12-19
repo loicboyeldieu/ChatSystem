@@ -10,7 +10,7 @@ import chatsystem.network.ChatNI;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ChatController.
+ * The Class ChatController represents the Presenter of our system in the MVP design pattern
  */
 public class ChatController {
 
@@ -57,7 +57,8 @@ public class ChatController {
 	}
 	
 	/**
-	 * Instantiates a new chat controller.
+	 * Debug constructor
+	 * 
 	 */
 	public ChatController(){
 		this.userList = new ArrayList<User>();
@@ -68,7 +69,7 @@ public class ChatController {
 
 	//from NI
 	/**
-	 * Process hello ack.
+	 * This method is invoked when a HelloAck is received
 	 *
 	 * @param u the u
 	 */
@@ -78,7 +79,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * Process hello.
+	 * This method is invoked when a Hello is received
 	 *
 	 * @param u the u
 	 */
@@ -94,7 +95,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * Process goodbye.
+	 * This method is invoked when a Goodbye is received
 	 *
 	 * @param u the u
 	 */
@@ -109,7 +110,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * Process send.
+	 * This method is invoked when a Send is received
 	 *
 	 * @param u the u
 	 * @param id the id
@@ -124,7 +125,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * Process file request.
+	 * This method is invoked when a FileRequest is received
 	 *
 	 * @param u the u
 	 * @param name the name
@@ -135,7 +136,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * Process file accepted.
+	 * This method is invoked when a FileResponse is received with a true response.
 	 *
 	 * @param u the u
 	 */
@@ -146,7 +147,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * Process file refused.
+	 * This method is invoked when a FileResponse is received with a false response.
 	 *
 	 * @param u the u
 	 */
@@ -155,7 +156,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * Process file completed.
+	 * This method is invoked when a the file transfer is done
 	 */
 	public void processFileCompleted(){
 		gui.displayFileNotificationTransfer(true);
@@ -168,7 +169,7 @@ public class ChatController {
 
 
 	/**
-	 * Process connect.
+	 * This method is invoked when the User calls Connect 
 	 *
 	 * @param nickname the nickname
 	 */
@@ -187,7 +188,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * Process disconnect.
+	 * This method is invoked when the User calls Disconnect
 	 */
 	public void processDisconnect() {
 		this.ni.sendGoodbye(ChatController.localUser.getName());
@@ -196,7 +197,7 @@ public class ChatController {
 	
 	
 	/**
-	 * On selected user.
+	 * This method retrieves the selected User from the ChatGUI and is invoked whenever a User calls SelectUser
 	 *
 	 * @param u the u
 	 */
@@ -207,9 +208,9 @@ public class ChatController {
 	
 	
 	/**
-	 * Perform send.
+	 * This method is invoked when a User wants to send a message
 	 *
-	 * @param message the message
+	 * @param message the message to be sent
 	 */
 	public void performSend(String message){
 		if (remoteUser!=null){
@@ -220,9 +221,9 @@ public class ChatController {
 	}
 	
 	/**
-	 * Perform file request.
+	 * This method is invoked when a User wants to send a file
 	 *
-	 * @param name the name
+	 * @param name the name of the file to send
 	 */
 	public void performFileRequest(String name){
 		if (remoteUser!=null){
@@ -232,10 +233,10 @@ public class ChatController {
 	}
 	
 	/**
-	 * Perform response.
+	 * This method is invoked when a User respond to a FileRequest
 	 *
-	 * @param name the name
-	 * @param response the response
+	 * @param name the name of the file
+	 * @param response the response to the request, can be yes or no.
 	 */
 	public void performResponse(String name,boolean response){
 		ni.sendFileResponse(waitingUser,name,response);
@@ -250,10 +251,11 @@ public class ChatController {
 	}
 	
 	/**
-	 * Perform receiving file.
+	 * This method is invoked when a User respond Yes to a FileRequest
 	 *
-	 * @param location the location
-	 * @param name the name
+	 *
+	 * @param location a File Object that represents the folder to store the File
+	 * @param name the name of the file
 	 */
 	public void performReceivingFile(File location,String name){
 		ni.prepareTCPServer(location,name);
@@ -319,10 +321,10 @@ public class ChatController {
 	}
 	
 	/**
-	 * Gets the user from ip.
+	 * Gets the user from his ip adress.
 	 *
 	 * @param address the address
-	 * @return the user from ip
+	 * @return the user 
 	 */
 	public User getUserFromIp(InetAddress address){
 		for (User u:userList){
