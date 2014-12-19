@@ -2,17 +2,33 @@ package chatsystem.graphical.notification;
 
 import chatsystem.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StatusFile.
+ */
 public class StatusFile extends NotificationDisplay{
 	
+	/** The status. */
 	private boolean status;
+	
+	/** The concerned user. */
 	private User concernedUser;
 	
+	/**
+	 * Instantiates a new status file.
+	 *
+	 * @param status the status
+	 * @param u the u
+	 */
 	public StatusFile(boolean status, User u){
 		super();
 		this.status = status;
 		this.concernedUser = u;
 	}
 	
+	/* (non-Javadoc)
+	 * @see chatsystem.graphical.notification.NotificationDisplay#toString()
+	 */
 	@Override
 	public String toString(){
 		// status=true -> acceptation 

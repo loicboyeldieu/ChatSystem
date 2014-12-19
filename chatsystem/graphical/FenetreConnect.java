@@ -17,21 +17,40 @@ import javax.swing.SpringLayout;
 
 import chatsystem.ChatSystem;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FenetreConnect.
+ */
 public class FenetreConnect extends JFrame {
 
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 6780578387145020970L;
 	
+	/** The Constant WIDTH. */
 	public static final int WIDTH=400;
+	
+	/** The Constant HEIGHT. */
 	public static final int HEIGHT=100;
 
+	/** The connexion label. */
 	private JLabel welcomeLabel, connexionLabel;
+	
+	/** The connexion area. */
 	private JTextField connexionArea;
+	
+	/** The connexion button. */
 	private JButton connexionButton;
 	
+	/** The valeur. */
 	private static String valeur;
+	
+	/** The gui. */
 	private ChatGUI gui;
 	
+	/**
+	 * Instantiates a new fenetre connect.
+	 */
 	public FenetreConnect(){
 		super(ChatSystem.NOM);
 		
@@ -94,26 +113,49 @@ public class FenetreConnect extends JFrame {
 	
 	}
 	
+	/**
+	 * Close windows.
+	 */
 	public void closeWindows(){
 		FenetreConnect.this.dispose();
 	}
 	
+	/**
+	 * Gets the nickname.
+	 *
+	 * @return the nickname
+	 */
 	public static String getNickname(){
 		return valeur;
 	}
 	
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		new FenetreConnect();
 
 	}
 
 
+	/**
+	 * Gets the gui.
+	 *
+	 * @return the gui
+	 */
 	public ChatGUI getGui() {
 		return gui;
 	}
 
 
+	/**
+	 * Sets the gui.
+	 *
+	 * @param gui the new gui
+	 */
 	public void setGui(ChatGUI gui) {
 		this.gui = gui;
 	}

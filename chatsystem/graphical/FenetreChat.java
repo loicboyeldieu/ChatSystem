@@ -33,36 +33,64 @@ import chatsystem.graphical.notification.Notification;
 import chatsystem.graphical.notification.NotificationDisplay;
 import chatsystem.graphical.notification.StatusFile;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FenetreChat.
+ */
 public class FenetreChat extends JFrame implements ListSelectionListener{
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1574189318933480883L;
 
+	/** The Constant WIDTH. */
 	public static final int WIDTH=1000;
+	
+	/** The Constant HEIGHT. */
 	public static final int HEIGHT=600;
 
+	/** The send file button. */
 	private JButton deconnexionButton,sendButton, sendFileButton;
+	
+	/** The message text area. */
 	private JTextArea messageTextArea;
+	
+	/** The liste. */
 	private JList <User>liste;
+	
+	/** The conversation. */
 	private JList <NotificationDisplay>conversation;
+	
+	/** The nom user. */
 	private JLabel labelListe,nomUser;
 
+	/** The fc. */
 	final JFileChooser fc = new JFileChooser();
 
 
 
+	/** The selected value. */
 	private User selectedValue;
 
+	/** The dialog. */
 	final JDialog dialog=new JDialog();
 
+	/** The model. */
 	final DefaultListModel<User> model=new DefaultListModel<User>();
 
+	/** The model conversation. */
 	final DefaultListModel<NotificationDisplay> modelConversation=new DefaultListModel<NotificationDisplay>();
 
+	/** The gui. */
 	private ChatGUI gui;
 
 
 
 
+	/**
+	 * Instantiates a new fenetre chat.
+	 *
+	 * @param gui the gui
+	 */
 	public FenetreChat(ChatGUI gui) {
 		super(ChatSystem.NOM);
 		this.gui=gui;
@@ -246,11 +274,21 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 
 	}
 
+	/**
+	 * Addto list.
+	 *
+	 * @param u the u
+	 */
 	public void addtoList(User u) {
 		this.model.addElement(u);
 		System.out.println(this.model.toString());
 	}
 
+	/**
+	 * Removefrom list.
+	 *
+	 * @param u the u
+	 */
 	public void removefromList(User u){
 		User user;
 		for (int i=0;i<model.getSize();i++){
@@ -262,11 +300,19 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	}
 
 
+	/**
+	 * Gets the value.
+	 *
+	 * @return the value
+	 */
 	public User getValue(){
 		return this.selectedValue;
 	}
 
 
+	/* (non-Javadoc)
+	 * @see javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.ListSelectionEvent)
+	 */
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		this.selectedValue=(User)liste.getSelectedValue();
@@ -274,6 +320,11 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	}
 
 
+	/**
+	 * Adds the message.
+	 *
+	 * @param messageDisplay the message display
+	 */
 	public void addMessage(MessageDisplay messageDisplay){
 		this.modelConversation.addElement(messageDisplay);
 		int lastIndex = conversation.getModel().getSize() - 1;
@@ -285,18 +336,39 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 		}
 	}
 
+	/**
+	 * Adds the message.
+	 *
+	 * @param notification the notification
+	 */
 	public void addMessage(Notification notification){
 		this.modelConversation.addElement(notification);
 	}
 	
+	/**
+	 * Adds the message.
+	 *
+	 * @param statusFile the status file
+	 */
 	public void addMessage(StatusFile statusFile){
 		this.modelConversation.addElement(statusFile);
 	}
 	
+	/**
+	 * Adds the message.
+	 *
+	 * @param fileNotification the file notification
+	 */
 	public void addMessage(FileNotifications fileNotification){
 		this.modelConversation.addElement(fileNotification);
 	}
 
+	/**
+	 * Display dialog.
+	 *
+	 * @param username the username
+	 * @param name the name
+	 */
 	public void displayDialog(String username,String name){
 		Object[] options = {"Yes","No"};
 
@@ -327,6 +399,11 @@ public class FenetreChat extends JFrame implements ListSelectionListener{
 	}
 
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		try{
 

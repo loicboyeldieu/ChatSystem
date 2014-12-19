@@ -18,25 +18,45 @@ import chatsystemTDa2.HelloAck;
 import chatsystemTDa2.Send;
 import chatsystemTDa2.SendAck;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChatNI.
+ */
 public class ChatNI implements ToRemote,FromRemote{
 
 	// Constant relatives to the network
+	/** The Constant MAX_SIZE_BUFFER. */
 	public static final int MAX_SIZE_BUFFER=512;
+	
+	/** The Constant NUM_PORT. */
 	public static final int NUM_PORT = 16050;
+	
+	/** The Constant BROADCAST. */
 	public static final byte[] BROADCAST =new byte[] {(byte)255,(byte)255,(byte)255,(byte)255};
 
 
 
 	//Fields
+	/** The receiver. */
 	private UDPReceiver receiver;
+	
+	/** The udp sender. */
 	private UDPSender udpSender;
 
+	/** The tcp busy. */
 	private boolean tcpBusy;
 	
+	/** The controller. */
 	private ChatController controller;
 
 
 	//Constructors
+	/**
+	 * Instantiates a new chat ni.
+	 *
+	 * @param udpReceiver the udp receiver
+	 * @param udpSender the udp sender
+	 */
 	public ChatNI(UDPReceiver udpReceiver, UDPSender udpSender) {
 		this.receiver = udpReceiver;
 		this.udpSender = udpSender;
@@ -46,12 +66,20 @@ public class ChatNI implements ToRemote,FromRemote{
 	}
 	
 	
+	/**
+	 * Instantiates a new chat ni.
+	 *
+	 * @param udpSender the udp sender
+	 */
 	public ChatNI(UDPSender udpSender){
 		this.udpSender=udpSender;
 		this.udpSender.setNi(this);
 		this.tcpBusy=false;
 	}
 
+	/**
+	 * Instantiates a new chat ni.
+	 */
 	public ChatNI(){
 		this.tcpBusy=false;
 
@@ -60,30 +88,60 @@ public class ChatNI implements ToRemote,FromRemote{
 
 	//Getters and Setters
 
+	/**
+	 * Gets the udp receiver.
+	 *
+	 * @return the udp receiver
+	 */
 	public UDPReceiver getUdpReceiver() {
 		return receiver;
 	}
 
 
+	/**
+	 * Sets the udp receiver.
+	 *
+	 * @param udpReceiver the new udp receiver
+	 */
 	public void setUdpReceiver(UDPReceiver udpReceiver) {
 		this.receiver = udpReceiver;
 	}
 
 
+	/**
+	 * Gets the udp sender.
+	 *
+	 * @return the udp sender
+	 */
 	public UDPSender getUdpSender() {
 		return udpSender;
 	}
 
 
+	/**
+	 * Sets the udp sender.
+	 *
+	 * @param udpSender the new udp sender
+	 */
 	public void setUdpSender(UDPSender udpSender) {
 		this.udpSender = udpSender;
 	}
 
+	/**
+	 * Gets the controller.
+	 *
+	 * @return the controller
+	 */
 	public ChatController getController() {
 		return controller;
 	}
 
 
+	/**
+	 * Sets the controller.
+	 *
+	 * @param controller the new controller
+	 */
 	public void setController(ChatController controller) {
 		this.controller = controller;
 	}
@@ -93,6 +151,9 @@ public class ChatNI implements ToRemote,FromRemote{
 
 
 	//ToRemote Methods
+	/* (non-Javadoc)
+	 * @see chatsystem.network.ToRemote#sendHello(java.lang.String)
+	 */
 	@Override
 	public void sendHello(String nickname){
 		try {
@@ -110,6 +171,9 @@ public class ChatNI implements ToRemote,FromRemote{
 	}
 
 
+	/* (non-Javadoc)
+	 * @see chatsystem.network.ToRemote#sendGoodbye(java.lang.String)
+	 */
 	@Override
 	public void sendGoodbye(String nickname){
 		try {
@@ -126,6 +190,9 @@ public class ChatNI implements ToRemote,FromRemote{
 
 	}
 
+	/* (non-Javadoc)
+	 * @see chatsystem.network.ToRemote#sendSend(java.lang.String, int, chatsystem.User)
+	 */
 	@Override
 	public void sendSend(String msg,int id,User remote){
 		try {
@@ -143,6 +210,9 @@ public class ChatNI implements ToRemote,FromRemote{
 	}
 
 
+	/* (non-Javadoc)
+	 * @see chatsystem.network.ToRemote#sendHelloACK(chatsystem.User, chatsystem.User)
+	 */
 	@Override
 	public void sendHelloACK(User remoteUser,User localUser) {
 		try{
@@ -160,6 +230,9 @@ public class ChatNI implements ToRemote,FromRemote{
 
 
 
+	/* (non-Javadoc)
+	 * @see chatsystem.network.ToRemote#sendSendAck(int, chatsystem.User)
+	 */
 	@Override
 	public void sendSendAck(int id,User remote) {
 		
@@ -169,6 +242,9 @@ public class ChatNI implements ToRemote,FromRemote{
 			System.out.println("Chat  NI : SendSendAck envoyé");
 	}
 	
+	/* (non-Javadoc)
+	 * @see chatsystem.network.ToRemote#sendFileRequest(chatsystem.User, java.lang.String)
+	 */
 	@Override
 	public void sendFileRequest(User remote, String name) {
 		FileRequest fileRequest=new FileRequest(name);
@@ -179,6 +255,9 @@ public class ChatNI implements ToRemote,FromRemote{
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see chatsystem.network.ToRemote#sendFileResponse(chatsystem.User, java.lang.String, boolean)
+	 */
 	@Override
 	public void sendFileResponse(User remote, String name, boolean response) {
 		FileResponse fileResponse=new FileResponse(response, name);
@@ -187,6 +266,9 @@ public class ChatNI implements ToRemote,FromRemote{
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see chatsystem.network.ToRemote#sendFile(java.io.File, chatsystem.User)
+	 */
 	@Override
 	public void sendFile(File file,User remote) {
 		if (!tcpBusy){
@@ -204,6 +286,9 @@ public class ChatNI implements ToRemote,FromRemote{
 
 
 
+	/**
+	 * Start reception.
+	 */
 	public void startReception(){
 		//udpReceiver.start();
 		byte[] buffer = new byte[ChatNI.MAX_SIZE_BUFFER];
@@ -214,6 +299,9 @@ public class ChatNI implements ToRemote,FromRemote{
 	}
 	
 	
+	/**
+	 * Stop reception.
+	 */
 	public void stopReception(){
 		receiver.interrupt();
 		receiver.stopSocket();
@@ -221,6 +309,9 @@ public class ChatNI implements ToRemote,FromRemote{
 		receiver=null;
 	}
 
+	/* (non-Javadoc)
+	 * @see chatsystem.network.FromRemote#onHelloReceived(chatsystem.User)
+	 */
 	@Override
 	public void onHelloReceived(User u) {
 		controller.processHello(u);
@@ -228,23 +319,35 @@ public class ChatNI implements ToRemote,FromRemote{
 
 
 
+	/* (non-Javadoc)
+	 * @see chatsystem.network.FromRemote#onHelloAckReceived(chatsystem.User)
+	 */
 	@Override
 	public void onHelloAckReceived(User u) {
 		controller.processHelloAck(u);
 
 	}
 
+	/* (non-Javadoc)
+	 * @see chatsystem.network.FromRemote#onGoodbyeReceived(chatsystem.User)
+	 */
 	@Override
 	public void onGoodbyeReceived(User u){
 		controller.processGoodbye(u);
 	}
 
 
+	/* (non-Javadoc)
+	 * @see chatsystem.network.FromRemote#onSendReceived(chatsystem.User, java.lang.String, int)
+	 */
 	@Override
 	public void onSendReceived(User u,String message, int id) {
 		controller.processSend(u, id, message);
 	}
 
+	/* (non-Javadoc)
+	 * @see chatsystem.network.FromRemote#onSendAckReceived(chatsystem.User, int)
+	 */
 	@Override
 	public void onSendAckReceived(User u, int id) {
 		// TODO Auto-generated method stub
@@ -252,6 +355,9 @@ public class ChatNI implements ToRemote,FromRemote{
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see chatsystem.network.FromRemote#onFileRequestReceived(chatsystem.User, java.lang.String)
+	 */
 	@Override
 	public void onFileRequestReceived(User u, String name) {
 		controller.processFileRequest(u,name);
@@ -260,16 +366,28 @@ public class ChatNI implements ToRemote,FromRemote{
 	
 	
 
+	/* (non-Javadoc)
+	 * @see chatsystem.network.FromRemote#onFileAccepted(chatsystem.User)
+	 */
 	@Override
 	public void onFileAccepted(User u) {
 		controller.processFileAccepted(u);
 	}
 	
+	/* (non-Javadoc)
+	 * @see chatsystem.network.FromRemote#onFileRefused(chatsystem.User)
+	 */
 	@Override
 	public void onFileRefused(User u){
 		controller.processFileRefused(u);
 	}
 	
+	/**
+	 * Prepare tcp server.
+	 *
+	 * @param location the location
+	 * @param name the name
+	 */
 	public void prepareTCPServer(File location,String name){
 		if (!tcpBusy){
 			tcpBusy=true;
@@ -280,11 +398,20 @@ public class ChatNI implements ToRemote,FromRemote{
 	}
 	
 	
+	/**
+	 * On file completed.
+	 */
 	public void onFileCompleted(){
 		controller.processFileCompleted();
 	}
 
 	//private Methods
+	/**
+	 * Object to byte array.
+	 *
+	 * @param o the o
+	 * @return the byte[]
+	 */
 	private byte[] objectToByteArray(Object o){
 		try{
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -299,6 +426,11 @@ public class ChatNI implements ToRemote,FromRemote{
 	}
 
 
+	/**
+	 * Gets the broadcast adress.
+	 *
+	 * @return the broadcast adress
+	 */
 	private InetAddress getBroadcastAdress(){
 		InetAddress localHost;
 
@@ -330,11 +462,22 @@ public class ChatNI implements ToRemote,FromRemote{
 		return null;
 	}
 
+	/**
+	 * Who is it.
+	 *
+	 * @param address the address
+	 * @return the user
+	 */
 	public User whoIsIt(InetAddress address){
 		return controller.getUserFromIp(address);
 	}
 
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 
 		ChatNI ni=new ChatNI();

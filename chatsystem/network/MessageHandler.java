@@ -15,14 +15,26 @@ import chatsystemTDa2.Message;
 import chatsystemTDa2.Send;
 import chatsystemTDa2.SendAck;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MessageHandler.
+ */
 public class MessageHandler {
 	
+	/** The ni. */
 	private ChatNI ni;
 	
+	/** The packet receiver. */
 	private DatagramPacket packetReceiver;
 	
 	
 	
+	/**
+	 * Instantiates a new message handler.
+	 *
+	 * @param packetReceiver the packet receiver
+	 * @param ni the ni
+	 */
 	public MessageHandler(DatagramPacket packetReceiver,ChatNI ni) {
 		this.packetReceiver = packetReceiver;
 		this.ni=ni;
@@ -32,6 +44,9 @@ public class MessageHandler {
 	
 
 
+	/**
+	 * Handle.
+	 */
 	public void handle() {
 		try{
 			ByteArrayInputStream bais = new ByteArrayInputStream(this.packetReceiver.getData());
@@ -88,11 +103,21 @@ public class MessageHandler {
 	}
 
 
+	/**
+	 * Gets the ni.
+	 *
+	 * @return the ni
+	 */
 	public ChatNI getNi() {
 		return ni;
 	}
 
 
+	/**
+	 * Sets the ni.
+	 *
+	 * @param ni the new ni
+	 */
 	public void setNi(ChatNI ni) {
 		this.ni = ni;
 	}

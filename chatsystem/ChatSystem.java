@@ -12,17 +12,35 @@ import chatsystem.network.ChatNI;
 import chatsystem.network.UDPReceiver;
 import chatsystem.network.UDPSender;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChatSystem.
+ */
 public class ChatSystem {
 	
+	/** The Constant NOM. */
 	public static final String NOM="Chat System";
 	
+	/** The ni. */
 	private ChatNI ni;
+	
+	/** The controller. */
 	private ChatController controller;
+	
+	/** The gui. */
 	private ChatGUI gui;
 	
 	
+	/** The number. */
 	public static int NUMBER=0;
 	
+	/**
+	 * Instantiates a new chat system.
+	 *
+	 * @param ni the ni
+	 * @param controller the controller
+	 * @param gui the gui
+	 */
 	public ChatSystem(ChatNI ni,ChatController controller,ChatGUI gui){
 		this.ni=ni;
 		this.controller=controller;
@@ -30,6 +48,11 @@ public class ChatSystem {
 	}
 	
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		
 		byte[] buffer = new byte[ChatNI.MAX_SIZE_BUFFER];

@@ -2,20 +2,33 @@ package chatsystem.graphical.notification;
 
 import java.util.Date;
 
+// TODO: Auto-generated Javadoc
 /*This class was made to be a graphical representation of the notifications when sending files 
  * 
  * @author Loïc Boyeldieu
  */
 
+/**
+ * The Class FileNotifications.
+ */
 public class FileNotifications extends NotificationDisplay{
 
+	/** The end transfer. */
 	private boolean endTransfer;
 	
+	/**
+	 * Instantiates a new file notifications.
+	 *
+	 * @param endTransfer the end transfer
+	 */
 	public FileNotifications(boolean endTransfer){
 		super();
 		this.endTransfer=endTransfer;
 	}
 	
+	/* (non-Javadoc)
+	 * @see chatsystem.graphical.notification.NotificationDisplay#toString()
+	 */
 	@Override
 	public String toString(){
 		if (endTransfer){

@@ -7,11 +7,28 @@ import java.io.FileInputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TCPClient.
+ */
 public class TCPClient extends Thread {
+	
+	/** The socket. */
 	private Socket socket;
+	
+	/** The file. */
 	private File file;
+	
+	/** The ni. */
 	private ChatNI ni;
 	
+	/**
+	 * Instantiates a new TCP client.
+	 *
+	 * @param adress the adress
+	 * @param file the file
+	 * @param ni the ni
+	 */
 	public TCPClient(InetAddress adress,File file,ChatNI ni){
 		this.ni=ni;
 		
@@ -24,6 +41,9 @@ public class TCPClient extends Thread {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	@Override
 	public void run() {
 		try {

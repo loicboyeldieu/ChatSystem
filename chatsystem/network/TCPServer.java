@@ -8,14 +8,31 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TCPServer.
+ */
 public class TCPServer extends Thread{
 	
+	/** The listen socket. */
 	private ServerSocket listenSocket;
+	
+	/** The name. */
 	private String name;
 
+	/** The location. */
 	private File location;
+	
+	/** The ni. */
 	private ChatNI ni;
 	
+	/**
+	 * Instantiates a new TCP server.
+	 *
+	 * @param location the location
+	 * @param name the name
+	 * @param ni the ni
+	 */
 	public TCPServer(File location,String name,ChatNI ni){
 		this.location=location;
 		this.name=name;
@@ -27,6 +44,9 @@ public class TCPServer extends Thread{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	@Override
 	public void run() {
 		super.run();
@@ -69,6 +89,11 @@ public class TCPServer extends Thread{
 
 	}
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 //		try {
 //			TCPServer tcpServer = new TCPServer(new File("D:/"),"cle.txt");
